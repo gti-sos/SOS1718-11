@@ -1,0 +1,22 @@
+{
+  "name": "sos1718-11",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gti-sos/SOS1718-11.git"
+  },
+  "author": "antlopsou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gti-sos/SOS1718-11/issues"
+  },
+  "homepage": "https://github.com/gti-sos/SOS1718-11#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
