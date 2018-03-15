@@ -4,10 +4,13 @@ var app = express();
 var path = require("path");
 var port = (process.env.PORT || 16778);
 var BASE_API_PATH="/api/v1";
+var DataStore= require("nedb")
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname,"public")));
 
+
 //-------------------------------------------------------------//
+var dbluciano= __dirname+"/football-stats.db";
 var footballstats= [
     {
         "stadium": "barcelona",
