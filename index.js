@@ -109,6 +109,11 @@ var baseballstats= [
     }
     ];
 
+//var db1 = new DataStore({
+  //  filename: dbFileName, 
+//    autoload: true
+//});
+
 
 
 //------------------------------------------------------------//
@@ -196,7 +201,7 @@ app.put(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
 //-------------------baseball-stats----------------------------//
 app.get(BASE_API_PATH+"/baseball-stats",(req,res)=>{
     console.log(Date(), " - GET /baseballstats")
-    res.send(JSON.stringify(baseballstats));
+    res.send(baseballstats);
 });
 
 app.post(BASE_API_PATH+"/baseball-stats",(req,res)=>{
