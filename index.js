@@ -8,8 +8,15 @@ var DataStore= require("nedb");
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname,"public")));
 
+h
 
 
+//-------------------football-stats-DATABASE-VARIABLES----------------------------//
+var dbFootball = __dirname+"/football-stats.db" 
+var dbfootballstats = new DataStore({
+    filename: dbFootball, 
+    autoload: true
+});
 
 //-------------------basketball-stats-DATABASE-VARIABLES----------------------------//
 var dbBasketball = __dirname+"/basketball-stats.db" 
@@ -27,23 +34,48 @@ var dbbaseballstats = new DataStore({
 
 
 //-------------------------------------------------------------//
-var dbluciano= __dirname+"/football-stats.db";
-var footballstats= [
+var initialfootballstats= [
     {
         "stadium": "barcelona",
-        "date": 2018-27-02,
+        "date": "2018-02-27",
         "mm-goal": 11,
         "mm-corner":15,
         "mm-fault":13
     },
     {
         "stadium": "florencia",
-        "date": 2018-28-01,
+        "date":"2018-03-01",
         "mm-goal": 3,
         "mm-corner":16,
         "mm-fault":14
+    },{
+        "stadium": "barcelona",
+        "date": "2018-03-11",
+        "mm-goal": 3,
+        "mm-corner":16,
+        "mm-fault":16
+    },
+    {
+        "stadium": "glasgow",
+        "date": "2018-03-09",
+        "mm-goal": 2,
+        "mm-corner":5,
+        "mm-fault":15
+    },,
+    {
+        "stadium": "florencia",
+        "date": "2018-03-11",
+        "mm-goal": 9,
+        "mm-corner":26,
+        "mm-fault":11
     }
     ];
+    
+    
+//app.get(BASE_API_PATH+"/football-help", (req,res)=>{
+ //res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
+    
+//});
     
 var initialBasketballstats = [
         { 
@@ -145,83 +177,204 @@ app.get("/hello", (req,res) =>{
 });
 
 //-------------------football-stats----------------------------//
+//-------------------football-stats----------------------------//
+
+
+//Inicializa base de datos vacia
+app.get(BASE_API_PATH+"/loadInitialfootballStats",(req,res)=>{
+
+    dbfootballstats.insert(initialfootballstats, function (err, newDoc){
+        if(err){ 
+            console.log("Error accesing ");
+            process.exit(1);
+            return;
+        }else{
+            res.sendStatus(201);
+            console.log("DB initialized with: "+ initialfootballstats.length + " partidos");
+        }
+});
+
+});
+
+
+
+//GET a ruta base
 app.get(BASE_API_PATH+"/football-stats",(req,res)=>{
-    console.log(Date()+" - GET /football-stats");
-    
+    console.log(Date(), " - GET /football-stats");
+    dbfootballstats.find({},(err,footballstats)=>{
+    if(err){
+       console.error("Error accesing DB");
+       res.sendStatus(500);
+      return;
+     }
    
-
+   res.send(footballstats);
+   
+});
 });
 
+
+//POST a ruta base
 app.post(BASE_API_PATH+"/football-stats",(req,res)=>{
-    console.log(Date()+" - POST /football-stats");
-    var footballstat= req.body;
-    footballstats.push(footballstat);
+    console.log(Date() + " - POST /football-stats");
+    var footballstat=req.body;
+    
+    dbfootballstats.insert(footballstat, (err,newDoc)=>{
+     
+     if(err){
+         console.log("Conflicto");
+         res.sendStatus(409);
+     }   
+    
     res.sendStatus(201);
+    });
 });
 
-app.put(BASE_API_PATH+"/football-stats",(req,res)=>{
+
+
+
+//PUT a ruta base (Error)
+app.put(BASE_API_PATH+"/football-stats", (req,res)=>{
     console.log(Date() + " - PUT /football-stats");
     res.sendStatus(405);
 });
 
-app.delete(BASE_API_PATH+"/football-stats",(req,res)=>{
+
+//DELETE a ruta base
+app.delete(BASE_API_PATH+"/football-stats", (req,res)=>{
     console.log(Date() + " - DELETE /football-stats");
-    footballstats = [];
-    res.sendStatus(200);
+
+    dbfootballstats.remove({}, {multi : true}, (err, numRemoved)=>{
+        if(err){
+            console.log("Error accesing data base");
+            res.sendStatus(500);
+        }else{
+        console.log("Removed: " + numRemoved);
+        res.sendStatus(200);
+
+        }
+        });
 });
 
 
+//GET a un conjunto de recursos concreto
 app.get(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
-    console.log(Date() + " - GET /football-stats/"+stadium);
     
-    res.send(footballstats.filter((c)=>{
-        return (c.stadium == stadium);
-    })[0]);
+    console.log(Date(), "- GET /football-stats/" + stadium);
+    
+     dbfootballstats.find({"stadium" : stadium},(err,stadium)=>{
+    if(err){
+       console.error("Error accesing DB");
+       res.sendStatus(500);
+      return;
+     }
+     
+     res.send(stadium);
+    });
 });
 
+
+//GET a un recurso concreto
+app.get(BASE_API_PATH+"/football-stats/:stadium/:date",(req,res)=>{
+    var stadium = req.params.stadium;
+    var date =req.params.date;
+    
+   
+    dbfootballstats.find({"stadium" : stadium, "date" : date},(err,footballstats)=>{
+    if(err){
+       console.error("Error accesing DB");
+       res.sendStatus(500);
+      return;
+     }else if(footballstats.length==0){
+            res.sendStatus(404);
+            return;
+        }
+      console.log(Date(), "- GET /football-stats/" + stadium+ date);
+     res.send(footballstats);
+    });
+});
+
+
+//DELETE a un conjunto de recursos concreto
 app.delete(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
+    
     console.log(Date() + " - DELETE /football-stats/"+stadium);
     
-    footballstats = footballstats.filter((c)=>{
-        return (c.stadium != stadium);
+     dbfootballstats.remove({"stadium" : stadium },{multi:true}, (err, numRemoved)=>{
+        if(err){
+            console.log("Error accesing DB");
+            res.sendStatus(500);
+            return;
+        }else{
+        console.log("Removed: " + numRemoved);
+        res.sendStatus(200);
+        }
     });
-    
-    res.sendStatus(200);
 });
 
+
+//DELETE a un recurso concreto
+app.delete(BASE_API_PATH+"/football-stats/:stadium/:date",(req,res)=>{
+    var stadium = req.params.stadium;
+    var date = req.params.date; 
+    console.log(Date() + " - DELETE /football-stats/"+stadium + date);
+    
+     dbfootballstats.remove({"stadium" : stadium , "date": date}, (err, numRemoved)=>{
+        if(err){
+            console.log("Error remove");
+            res.sendStatus(500);
+            return;
+        }else{
+        console.log("Removed: " + numRemoved);
+        res.sendStatus(200);
+        }
+        });
+});
+
+//POST a un recurso concreto (Error)
 app.post(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
     console.log(Date() + " - POST /football-stats/"+stadium);
     res.sendStatus(405);
+    return;
 });
 
-app.put(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
+//PUT a conjunto recursos (Error)
+app.put(BASE_API_PATH+"/football-stats/:stadium", (req,res)=>{
+    var stadium= req.params.stadium;
+    console.log(Date() + " - PUT /football-stats/"+ stadium);
+    console.log("Error 405");
+    res.sendStatus(405);
+    return;
+});
+
+
+//PUT a un recurso concreto
+app.put(BASE_API_PATH+"/football-stats/:stadium/:date",(req,res)=>{
     var stadium = req.params.stadium;
-    var stats = req.body;
+    var date = req.params.date;
+    var footballstat = req.body;
     
-    console.log(Date() + " - PUT /football-stats/"+stadium);
+    console.log(Date() + " - PUT /football-stats/"+stadium+date);
     
-    if(stadium != stats.stadium){
-        res.sendStatus(409);
-        console.warn(Date()+" - Hacking attempt!");
-        return;
-    }
-    
-    footballstats = footballstats.map((c)=>{
-        if(c.stadium == stats.stadium)
-            return stats;
-        else
-            return c;
+    dbfootballstats.update({"stadium" : footballstat.stadium}, footballstat,(err, numUpdated)=>{
+        if(err){
+            console.log("Error accesing data base");
+            res.sendStatus(500);
+            return;
+      }else if(numUpdated == 0){
+      
+          console.log("error");
+          res.sendStatus(404);
+          return;
+      }else{
+        console.log("Updated: " + numUpdated);
+        res.sendStatus(200);
+        }
     });
-    
-    res.sendStatus(200);
 });
-
-
-
-
 //-------------------baseball-stats----------------------------//
 
 
