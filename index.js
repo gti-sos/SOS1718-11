@@ -68,6 +68,12 @@ var initialfootballstats= [
     }
     ];
     
+    
+//app.get(BASE_API_PATH+"/football-help", (req,res)=>{
+ //res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
+    
+//});
+    
 var initialBasketballstats = [
         { 
         "stadium": "boston", 
