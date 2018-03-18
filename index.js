@@ -605,10 +605,9 @@ app.delete(BASE_API_PATH+"/basketball-stats",(req,res)=>{
 });
 
 
-app.get(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
-    var stadium = req.params.stadium;
-
-    dbbasketball.find({"stadium":stadium},(err,basketballstats)=>{
+app.get(BASE_API_PATH+"/basketball-stats/:param",(req,res)=>{
+    var param = req.params.param;
+    dbbasketball.find({"stadium":param, "date":param},(err,basketballstats)=>{
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -617,7 +616,7 @@ app.get(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
             res.sendStatus(404);
             return;
         };
-        console.log(Date() + " - GET /basketball-stats "+ stadium );
+        console.log(Date() + " - GET /basketball-stats "+ param );
         res.send(basketballstats);
     });
 });

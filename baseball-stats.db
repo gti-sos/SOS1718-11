@@ -1,8 +1,5 @@
 {"stadium":"goodyear","date":"2018-03-09","mm-run":5,"mm-hit":11,"mm-error":0,"_id":"4XHWZxZcb04qjDwZ"}
-{"stadium":"new-york","date":"2018-02-27","mm-run":6,"mm-hit":25,"mm-error":21,"_id":"Ic7hqbfy70ZjYPHu"}
 {"stadium":"seattle","date":"2018-03-09","mm-run":5,"mm-hit":10,"mm-error":0,"_id":"ed4vfpzill86uPG8"}
-{"stadium":"new-york","date":"2018-03-09","mm-run":7,"mm-hit":9,"mm-error":0,"_id":"iW9bRi8cJdMMtoGU"}
 {"stadium":"seattle","date":"2018-02-27","mm-run":8,"mm-hit":14,"mm-error":1,"_id":"lY4CF2mc4SdpVSCT"}
 {"stadium":"los-angeles","date":"2018-03-18","mm-run":6,"mm-hit":18,"mm-error":0,"_id":"xMvJoyflvs3C7DYB"}
-{"$$deleted":true,"_id":"Ic7hqbfy70ZjYPHu"}
-{"$$deleted":true,"_id":"iW9bRi8cJdMMtoGU"}
+{"stadium":"new-york","date":"2018-03-18","mm-run":6,"mm-hit":17,"mm-error":0,"_id":"jI76R0jKeBraFr02"}
