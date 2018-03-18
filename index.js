@@ -44,7 +44,7 @@ var footballstats= [
 var initialBasketballstats = [
         { 
         "stadium": "boston", 
-        "date": 2018-02-27 , 
+        "date": "2018-02-27" , 
         "mm-first-c" : 49, 
         "mm-second-c": 15, 
         "mm-third-c" : 36, 
@@ -52,7 +52,7 @@ var initialBasketballstats = [
         },
         {
         "stadium": "charlote", 
-        "date": 2018-03-09 , 
+        "date": "2018-03-09" , 
         "mm-first-c" : 64, 
         "mm-second-c": 60, 
         "mm-third-c" : 57, 
@@ -60,7 +60,7 @@ var initialBasketballstats = [
         },
         {
         "stadium": "miami", 
-        "date": 2018-03-09 , 
+        "date": "2018-03-09", 
         "mm-first-c" : 57, 
         "mm-second-c": 45, 
         "mm-third-c" : 45, 
@@ -68,7 +68,7 @@ var initialBasketballstats = [
         },
         {
         "stadium": "toronto", 
-        "date": 2018-03-09 , 
+        "date": "2018-03-09" , 
         "mm-first-c" : 63, 
         "mm-second-c": 43, 
         "mm-third-c" :54, 
@@ -76,7 +76,7 @@ var initialBasketballstats = [
         },
         {
         "stadium": "ocklahoma", 
-        "date": 2018-03-09 , 
+        "date": "2018-03-09" , 
         "mm-first-c" : 54, 
         "mm-second-c": 38, 
         "mm-third-c" : 68, 
@@ -275,8 +275,12 @@ app.post(BASE_API_PATH+"/baseball-stats",(req,res)=>{
      }   
     
     res.sendStatus(201);
+<<<<<<< HEAD
     });
 });
+=======
+})
+>>>>>>> 5256156ceff528095f45264319ee8317b708676f
 
 
 
@@ -538,7 +542,7 @@ app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=>
         
         });
         res.sendStatus(200);
-        console.log("Insertados  " + initialBasketballstats.length + " stats");
+        console.log("INSERTED "+initialBasketballstats.length);
 });
 
 app.get(BASE_API_PATH+"/basketball-help",(req,res)=>{
@@ -571,6 +575,8 @@ app.post(BASE_API_PATH+"/basketball-stats",(req,res)=>{
             return;
         };
         res.sendStatus(200);
+        console.log("INSERTED "+initialBasketballstats.length);
+
     });
 });
 
@@ -590,7 +596,7 @@ app.delete(BASE_API_PATH+"/basketball-stats",(req,res)=>{
             res.sendStatus(500);
             return;
         };
-        console.log("DELETE "+numRemoved);
+        console.log("DELETED "+numRemoved);
         res.sendStatus(200);
     });
 });
@@ -613,13 +619,30 @@ app.get(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
     });
 });
 
+app.get(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
+    var stadium = req.params.stadium;
+    var date =req.params.date;
+    dbbasketball.find({"stadium":stadium, "date":date},(err,basketballstats)=>{
+        if(err){
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+            return;
+        }else if(basketballstats.length==0){
+            res.sendStatus(404);
+            return;
+        };
+        console.log(Date() + " - GET /basketball-stats "+ stadium+ "/"+date );
+        res.send(basketballstats);
+    });
+});
+
 
 app.delete(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
     
     console.log(Date() + " - DELETE /basketball-stats/"+stadium);
 
-    dbbasketball.remove({ "stadium": stadium }, function (err, numRemoved) {
+    dbbasketball.remove({ "stadium": stadium },{ multi: true }, function (err, numRemoved) {
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -628,7 +651,28 @@ app.delete(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
             res.sendStatus(404);
             return;
         };
-        console.log("DELETE "+numRemoved);
+        console.log("DELETED "+numRemoved);
+        res.sendStatus(200);
+  
+    });
+});
+
+
+app.delete(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
+    var stadium = req.params.stadium;
+    var date = req.params.date;
+    console.log(Date() + " - DELETE /basketball-stats/"+stadium+"/"+date);
+
+    dbbasketball.remove({ "stadium": stadium, "date": date }, function (err, numRemoved) {
+        if(err){
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+            return;
+        }else if(numRemoved==0){
+            res.sendStatus(404);
+            return;
+        };
+        console.log("DELETED "+numRemoved);
         res.sendStatus(200);
   
     });
@@ -642,18 +686,25 @@ app.post(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
     res.sendStatus(405);
 });
 
-
+/*
 app.put(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
     
     var stadium = req.params.stadium;
     var basketballstat = req.body;
     
     console.log(Date() + " - PUT /basketball-stats/"+stadium);
+    
+    if(stadium!=basketballstat.stadium){
+        res.sendStatus(409);
+        return; 
+    }else{
     dbbasketball.update({"stadium": stadium}, basketballstat,(err,numUpdated)=>{
+        
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
             return;
+        
         }else if(numUpdated==0){
             res.sendStatus(404);
             return;
@@ -661,7 +712,43 @@ app.put(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
         console.log("UPDATED "+numUpdated);
         res.sendStatus(200);
     });
-});    
+    }
+}); 
+*/
+
+
+app.put(BASE_API_PATH+"/basketball-stats",(req,res)=>{
+    var stadium = req.params.stadium;
+    console.log(Date() + " - POST /basketball-stats/"+stadium);
+    res.sendStatus(405);
+    
+}); 
+app.put(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
+    
+    var stadium = req.params.stadium;
+    var date = req.params.date;
+    var basketballstat = req.body;
+    console.log(Date() + " - PUT /basketball-stats/"+stadium);
+    
+    if(stadium!=basketballstat.stadium||date!=basketballstat.date){
+        res.sendStatus(409);
+        return;  
+        
+    }
+    dbbasketball.update({"stadium": stadium, "date":date}, basketballstat,(err,numUpdated)=>{
+        if(err){
+            console.error("Error accesing DB");
+            res.sendStatus(500);
+            return;
+        
+        }else if(numUpdated==0){
+            res.sendStatus(404);
+            return;
+        };
+        console.log("UPDATED "+numUpdated);
+        res.sendStatus(200);
+    });
+}); 
 
 
 /*
