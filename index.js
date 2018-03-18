@@ -3,20 +3,16 @@ var bodyParser = require("body-parser");
 var app = express();
 var path = require("path");
 var port = (process.env.PORT || 16778);
-<<<<<<< HEAD
+
+
 var BASE_API_PATH = "/api/v1";
 var DataStore = require("nedb");
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname, "public")));
-=======
-var BASE_API_PATH="/api/v1";
-var DataStore= require("nedb");
+
+//-------------------baseball-stats-DATABASE-VARIABLES----------------------------//
 var dbBaseball= __dirname+"/baseball-stats.db"
 
-
-app.use(bodyParser.json());
-app.use("/", express.static(path.join(__dirname,"public")));
-var DataStore = require("nedb");
 
 
 
@@ -26,11 +22,16 @@ var dbbasketball = new DataStore({
     filename: dbBasketball, 
     autoload: true
 });
->>>>>>> 9f80921ac4cb03bc2cd51d6c75a90a1fb0ee4cb3
+//-------------------basketball-stats-DATABASE-VARIABLES----------------------------//
+var dbFilefootball = __dirname + "/football-stats.db";
 
+var dbfootball = new DataStore({
+    filename: dbfootball,
+    autoload: true
+});
 
 //-------------------------------------------------------------//
-var dbFilefootball = __dirname + "/football-stats.db";
+
 var initialfootballstats = [{
         "stadium": "barcelona",
         "date": 2018 - 27 - 02,
@@ -44,16 +45,13 @@ var initialfootballstats = [{
         "mm-goal": 3,
         "mm-corner": 16,
         "mm-fault": 14
-    }
-];
+    }];
+    
 app.get(BASE_API_PATH + "/footballhelp", (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYDKSG");
 });
 
-var dbfootball = new DataStore({
-    filename: dbFilefootball,
-    autoload: true
-});
+
 
 dbfootball.find({}, (err, footballstats)=>{
     if(err){
@@ -65,7 +63,7 @@ dbfootball.find({}, (err, footballstats)=>{
     }else{
         console.log("DB initialized with "+footballstats.length+" footballstats")
     }
-<<<<<<< HEAD
+
     
 });
 
@@ -290,7 +288,7 @@ app.get(BASE_API_PATH+"/football-stats",(req,res)=>{
     
    
 
->>>>>>> 9f80921ac4cb03bc2cd51d6c75a90a1fb0ee4cb3
+
 });
 
 app.post(BASE_API_PATH + "/football-stats", (req, res) => {
