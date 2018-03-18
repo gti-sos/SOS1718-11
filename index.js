@@ -8,7 +8,7 @@ var DataStore= require("nedb");
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname,"public")));
 
-h
+
 
 
 //-------------------football-stats-DATABASE-VARIABLES----------------------------//
@@ -72,10 +72,10 @@ var initialfootballstats= [
     ];
     
     
-//app.get(BASE_API_PATH+"/football-help", (req,res)=>{
- //res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
+app.get(BASE_API_PATH+"/football-help", (req,res)=>{
+    res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYDKSG");
     
-//});
+});
     
 var initialBasketballstats = [
         { 
@@ -160,8 +160,6 @@ var initialbaseballstats= [
     ];
 
     
-
-
 
 
 app.get(BASE_API_PATH+"/baseball-help", (req,res)=>{
