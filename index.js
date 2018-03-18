@@ -5,12 +5,9 @@ var path = require("path");
 var port = (process.env.PORT || 16778);
 var BASE_API_PATH="/api/v1";
 var DataStore= require("nedb");
-var dbBaseball= __dirname+"/baseball-stats.db"
-
-
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname,"public")));
-var DataStore = require("nedb");
+
 
 
 
@@ -18,6 +15,13 @@ var DataStore = require("nedb");
 var dbBasketball = __dirname+"/basketball-stats.db" 
 var dbbasketball = new DataStore({
     filename: dbBasketball, 
+    autoload: true
+});
+
+//-------------------baseball-stats-DATABASE-VARIABLES----------------------------//
+var dbBaseball= __dirname+"/baseball-stats.db"
+var dbbaseballstats = new DataStore({
+   filename: dbBaseball, 
     autoload: true
 });
 
@@ -132,13 +136,6 @@ app.get(BASE_API_PATH+"/baseball-help", (req,res)=>{
  res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
     
 });
-
-
-var dbbaseballstats = new DataStore({
-   filename: dbBaseball, 
-    autoload: true
-});
-
 
 
 //------------------------------------------------------------//
