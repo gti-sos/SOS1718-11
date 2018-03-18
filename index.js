@@ -275,12 +275,9 @@ app.post(BASE_API_PATH+"/baseball-stats",(req,res)=>{
      }   
     
     res.sendStatus(201);
-<<<<<<< HEAD
     });
 });
-=======
-})
->>>>>>> 5256156ceff528095f45264319ee8317b708676f
+
 
 
 
@@ -355,13 +352,14 @@ app.delete(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     
      dbbaseballstats.remove({"stadium" : stadium },{multi:true}, (err, numRemoved)=>{
         if(err){
-            console.log("Error remove");
+            console.log("Error accesing DB");
             res.sendStatus(500);
+            return;
         }else{
         console.log("Removed: " + numRemoved);
         res.sendStatus(200);
         }
-        });
+    });
 });
 
 
@@ -375,6 +373,7 @@ app.delete(BASE_API_PATH+"/baseball-stats/:stadium/:date",(req,res)=>{
         if(err){
             console.log("Error remove");
             res.sendStatus(500);
+            return;
         }else{
         console.log("Removed: " + numRemoved);
         res.sendStatus(200);
@@ -387,6 +386,7 @@ app.post(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
     console.log(Date() + " - POST /baseball-stats/"+stadium);
     res.sendStatus(405);
+    return;
 });
 
 //PUT a conjunto recursos (Error)
@@ -395,6 +395,7 @@ app.put(BASE_API_PATH+"/baseball-stats/:stadium", (req,res)=>{
     console.log(Date() + " - PUT /baseball-stats/"+ stadium);
     console.log("Error 405");
     res.sendStatus(405);
+    return;
 });
 
 
@@ -410,10 +411,12 @@ app.put(BASE_API_PATH+"/baseball-stats/:stadium/:date",(req,res)=>{
         if(err){
             console.log("Error accesing data base");
             res.sendStatus(500);
+            return;
       }else if(numUpdated == 0){
       
           console.log("error");
           res.sendStatus(404);
+          return;
       }else{
         console.log("Updated: " + numUpdated);
         res.sendStatus(200);
