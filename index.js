@@ -9,12 +9,18 @@ var dbBaseball= __dirname+"/baseball-stats.db"
 
 
 
+=======
+>>>>>>> 0e0af88e31289b87a5b2bc63491e9d909e067f46
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname,"public")));
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e0af88e31289b87a5b2bc63491e9d909e067f46
 //-------------------------------------------------------------//
+var dbluciano= __dirname+"/football-stats.db";
 var footballstats= [
     {
         "stadium": "barcelona",
@@ -231,7 +237,21 @@ app.put(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
 
 
 //-------------------baseball-stats----------------------------//
+app.get(BASE_API_PATH+"/loadInitialBaseballStats",(req,res)=>{
 
+    dbbaseballstats.find({},(err,baseballstats)=>{
+        if(err){ 
+            console.log("Error accesing ");
+            process.exit(1);
+        } 
+        
+        if(baseballstats.length == 0){
+            console.log("Empty database");
+            dbbaseballstats.insert(initialbaseballstats);
+        }else{
+            console.log("DB initialized with: "+ initialbaseballstats.length + " partidos");
+        }
+});
 
 
 app.get(BASE_API_PATH+"/baseball-stats",(req,res)=>{
@@ -277,11 +297,23 @@ app.delete(BASE_API_PATH+"/baseball-stats", (req,res)=>{
 
 app.get(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
      var stadium = req.params.stadium;
+    
     console.log(Date(), "- GET /baseball-stats/" + stadium);
     
     res.send(baseballstats.filter((c)=>{
         return (c.stadium == stadium);
     })[0]);
+    
+     dbbaseballstats.find({"stadium" : stadium},(err,stadium)=>{
+    if(err){
+       console.error("Error accesing DB");
+       res.sendStatus(500);
+      return;
+     }
+     
+     
+         
+         
 });
 
 
@@ -294,6 +326,7 @@ app.delete(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
      dbbaseballstats.remove({"stadium" : baseballstat.stadium }, (err, numRemoved)=>{
         if(err){
             console.log("Error remove");
+            res.sendStatus(500);
         }else{
         console.log("Removed: " + numRemoved);
     
@@ -310,6 +343,11 @@ app.delete(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
 app.post(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
     console.log(Date() + " - POST /baseball-stats/"+stadium);
+    dbbaseballstats.insert({},()=>{
+        
+        
+        
+    });
     res.sendStatus(405);
 });
 
@@ -323,6 +361,11 @@ app.put(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     dbbaseballstats.update({"stadium" : baseballstat.stadium}, baseballstat,(err, numUpdated)=>{
         if(err){
             console.log("Error update");
+<<<<<<<<< saved version
+    
+=========
+            res.sendStatus(409);
+>>>>>>>>> local version
         }else{
         console.log("Updated: " + numUpdated);
     
