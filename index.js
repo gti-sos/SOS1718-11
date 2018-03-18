@@ -550,7 +550,7 @@ app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=>
 
 
 app.get(BASE_API_PATH+"/basketball-help",(req,res)=>{
-    res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnYDKSF")
+    res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnZgxZ6")
 });
 
 
@@ -720,6 +720,12 @@ app.put(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
 }); 
 */
 
+app.put(BASE_API_PATH+"/basketball-stats/:parametro",(req,res)=>{
+    var parametro = req.params.parametro;
+    console.log(Date() + " - POST /basketball-stats/"+parametro);
+    res.sendStatus(405);
+    
+});
 
 app.put(BASE_API_PATH+"/basketball-stats",(req,res)=>{
     var stadium = req.params.stadium;
