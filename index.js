@@ -13,7 +13,7 @@ app.use("/", express.static(path.join(__dirname,"public")));
 
 //-------------------basketball-stats-DATABASE-VARIABLES----------------------------//
 var dbBasketball = __dirname+"/basketball-stats.db" 
-var dbbasketball = new DataStore({
+var dbbasketballstats = new DataStore({
     filename: dbBasketball, 
     autoload: true
 });
@@ -515,14 +515,14 @@ app.put(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
 //-------------------basketball-stats----------------------------//
 
 /*
-    dbbasketball.find({}, (err, basketballstats) => {
+    dbbasketballstats.find({}, (err, basketballstats) => {
         if(err){
             console.error("Error accessing DB");
             process.exit(1);
         }
         if (basketballstats.length == 0){
             console.log("Empty DB");
-            dbbasketball.insert(initialBasketballstats);
+            dbbasketballstats.insert(initialBasketballstats);
         }
         else{
             console.log("DB initialized with " + basketballstats.length + " stats");
@@ -533,7 +533,7 @@ app.put(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
 // Inicializa DB
 app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=> {
         
-        dbbasketball.insert(initialBasketballstats, function (err, newDoc) {
+        dbbasketballstats.insert(initialBasketballstats, function (err, newDoc) {
             if(err){
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -547,13 +547,13 @@ app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=>
 
 
 app.get(BASE_API_PATH+"/basketball-help",(req,res)=>{
-    res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnZgxZ6")
+    res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnZgxdQ")
 });
 
 
 app.get(BASE_API_PATH+"/basketball-stats",(req,res)=>{
 
-    dbbasketball.find({},(err,basketballstats)=>{
+    dbbasketballstats.find({},(err,basketballstats)=>{
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -569,7 +569,7 @@ app.post(BASE_API_PATH+"/basketball-stats",(req,res)=>{
     console.log(Date() + " - POST /basketball-stats");
     var basketballstat = req.body;
     
-    dbbasketball.insert(basketballstat, function (err, newDoc) {
+    dbbasketballstats.insert(basketballstat, function (err, newDoc) {
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -591,7 +591,7 @@ app.delete(BASE_API_PATH+"/basketball-stats",(req,res)=>{
     
     console.log(Date() + " - DELETE /basketball-stats");
 
-    dbbasketball.remove({}, { multi: true }, function (err, numRemoved) {
+    dbbasketballstats.remove({}, { multi: true }, function (err, numRemoved) {
             if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -606,7 +606,7 @@ app.delete(BASE_API_PATH+"/basketball-stats",(req,res)=>{
 app.get(BASE_API_PATH+"/basketball-stats/:parametro",(req,res)=>{
     var parametro = req.params.parametro;
 
-    dbbasketball.find({$or:[{"stadium":parametro}, {"date":parametro}]},(err,basketballstats)=>{
+    dbbasketballstats.find({$or:[{"stadium":parametro}, {"date":parametro}]},(err,basketballstats)=>{
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -623,7 +623,7 @@ app.get(BASE_API_PATH+"/basketball-stats/:parametro",(req,res)=>{
 app.get(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
     var stadium = req.params.stadium;
     var date =req.params.date;
-    dbbasketball.find({"stadium":stadium, "date":date},(err,basketballstats)=>{
+    dbbasketballstats.find({"stadium":stadium, "date":date},(err,basketballstats)=>{
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -643,7 +643,7 @@ app.delete(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
     
     console.log(Date() + " - DELETE /basketball-stats/"+stadium);
 
-    dbbasketball.remove({ "stadium": stadium },{ multi: true }, function (err, numRemoved) {
+    dbbasketballstats.remove({ "stadium": stadium },{ multi: true }, function (err, numRemoved) {
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -664,7 +664,7 @@ app.delete(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
     var date = req.params.date;
     console.log(Date() + " - DELETE /basketball-stats/"+stadium+"/"+date);
 
-    dbbasketball.remove({ "stadium": stadium, "date": date }, function (err, numRemoved) {
+    dbbasketballstats.remove({ "stadium": stadium, "date": date }, function (err, numRemoved) {
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -699,7 +699,7 @@ app.put(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
         res.sendStatus(409);
         return; 
     }else{
-    dbbasketball.update({"stadium": stadium}, basketballstat,(err,numUpdated)=>{
+    dbbasketballstats.update({"stadium": stadium}, basketballstat,(err,numUpdated)=>{
         
         if(err){
             console.error("Error accesing DB");
@@ -742,7 +742,7 @@ app.put(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
         return;  
         
     }
-    dbbasketball.update({"stadium": stadium, "date":date}, basketballstat,(err,numUpdated)=>{
+    dbbasketballstats.update({"stadium": stadium, "date":date}, basketballstat,(err,numUpdated)=>{
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
