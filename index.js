@@ -7,11 +7,9 @@ var BASE_API_PATH="/api/v1";
 var DataStore= require("nedb");
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname,"public")));
-<<<<<<< HEAD
-=======
 
+h
 
->>>>>>> 3966f4e158a4289dc5588016c6daa7000901d634
 
 //-------------------football-stats-DATABASE-VARIABLES----------------------------//
 var dbFootball = __dirname+"/football-stats.db" 
