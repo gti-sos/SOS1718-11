@@ -4,8 +4,15 @@ var app = express();
 var path = require("path");
 var port = (process.env.PORT || 16778);
 var BASE_API_PATH="/api/v1";
+var DataStore= require("nedb");
+var dbBaseball= __dirname+"/baseball-stats.db"
+
+
+
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname,"public")));
+
+
 
 //-------------------------------------------------------------//
 var footballstats= [
@@ -68,7 +75,22 @@ var basketballstats = [
         }
     ];
     
-    
+var initialbaseballstats= [
+    {
+    "stadium": "new-york", 
+    "date": 2018-02-27,
+    "mm-run" : 6, 
+    "mm-hit": 25, 
+    "mm-error" : 21
+    },
+    { 
+    "stadium": "goodyear",
+    "date": 2018-03-09 ,
+    "mm-run" : 5,
+    "mm-hit": 11,
+    "mm-error" : 0
+    }
+    ];
     
 var baseballstats= [
     {
@@ -109,10 +131,18 @@ var baseballstats= [
     }
     ];
 
-//var db1 = new DataStore({
-  //  filename: dbFileName, 
-//    autoload: true
-//});
+app.get(BASE_API_PATH+"baseball-help", (req,res)=>{
+ res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
+    
+});
+
+
+var dbbaseballstats = new DataStore({
+   filename: dbBaseball, 
+    autoload: true
+});
+
+
 
 
 
@@ -125,7 +155,9 @@ app.get("/hello", (req,res) =>{
 //-------------------football-stats----------------------------//
 app.get(BASE_API_PATH+"/football-stats",(req,res)=>{
     console.log(Date()+" - GET /football-stats");
-    res.send(footballstats);
+    
+   
+
 });
 
 app.post(BASE_API_PATH+"/football-stats",(req,res)=>{
@@ -199,9 +231,21 @@ app.put(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
 
 
 //-------------------baseball-stats----------------------------//
+
+
+
 app.get(BASE_API_PATH+"/baseball-stats",(req,res)=>{
     console.log(Date(), " - GET /baseballstats")
-    res.send(baseballstats);
+    dbbaseballstats.find({},(err,baseballstats)=>{
+    if(err){
+       console.error("Error accesing DB");
+       res.sendStatus(500);
+      return;
+     }
+   
+   res.send(baseballstats);
+   
+});
 });
 
 app.post(BASE_API_PATH+"/baseball-stats",(req,res)=>{
@@ -212,13 +256,22 @@ app.post(BASE_API_PATH+"/baseball-stats",(req,res)=>{
 });
 
 app.put(BASE_API_PATH+"/baseball-stats", (req,res)=>{
-    console.log(Date() + " - PUT /baseball-stats")
+    console.log(Date() + " - PUT /baseball-stats");
     res.sendStatus(405);
 });
 
 app.delete(BASE_API_PATH+"/baseball-stats", (req,res)=>{
     console.log(Date() + " - DELETE /baseball-stats");
     baseballstats=[];
+    
+    dbbaseballstats.remove({}, (err, numRemoved)=>{
+        if(err){
+            console.log("Error remove");
+        }else{
+        console.log("Removed: " + numRemoved);
+    
+        }
+        });
     res.sendStatus(200);
 });
 
@@ -234,7 +287,18 @@ app.get(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
 
 app.delete(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
+    var baseballstat = req.body;
+    
     console.log(Date() + " - DELETE /baseball-stats/"+stadium);
+    
+     dbbaseballstats.remove({"stadium" : baseballstat.stadium }, (err, numRemoved)=>{
+        if(err){
+            console.log("Error remove");
+        }else{
+        console.log("Removed: " + numRemoved);
+    
+        }
+        });
     
     baseballstats = baseballstats.filter((c)=>{
         return (c.stadium != stadium);
@@ -251,19 +315,29 @@ app.post(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
 
 app.put(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
-    var contact = req.body;
+    var baseballstat = req.body;
     
     console.log(Date() + " - PUT /baseball-stats/"+stadium);
     
-    if(stadium != contact.stadium){
+    
+    dbbaseballstats.update({"stadium" : baseballstat.stadium}, baseballstat,(err, numUpdated)=>{
+        if(err){
+            console.log("Error update");
+        }else{
+        console.log("Updated: " + numUpdated);
+    
+        }
+        });
+    
+    if(stadium != baseballstat.stadium){
         res.sendStatus(409);
         console.warn(Date()+" - Hacking attempt!");
         return;
     }
     
    baseballstats = baseballstats.map((c)=>{
-        if(c.stadium == contact.stadium)
-            return contact;
+        if(c.stadium == baseballstat.stadium)
+            return baseballstat;
         else
             return c;
     });
