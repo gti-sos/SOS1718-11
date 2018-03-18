@@ -533,7 +533,7 @@ app.put(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     });
 */
 
-
+// Inicializa DB
 app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=> {
         
         dbbasketball.insert(initialBasketballstats, function (err, newDoc) {
@@ -547,6 +547,7 @@ app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=>
         res.sendStatus(200);
         console.log("INSERTED "+initialBasketballstats.length);
 });
+
 
 app.get(BASE_API_PATH+"/basketball-help",(req,res)=>{
     res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnYDKSF")
@@ -605,9 +606,16 @@ app.delete(BASE_API_PATH+"/basketball-stats",(req,res)=>{
 });
 
 
+<<<<<<< HEAD
 app.get(BASE_API_PATH+"/basketball-stats/:param",(req,res)=>{
     var param = req.params.param;
     dbbasketball.find({"stadium":param, "date":param},(err,basketballstats)=>{
+=======
+app.get(BASE_API_PATH+"/basketball-stats/:parametro",(req,res)=>{
+    var parametro = req.params.parametro;
+
+    dbbasketball.find({$or:[{"stadium":parametro}, {"date":parametro}]},(err,basketballstats)=>{
+>>>>>>> 9f80921ac4cb03bc2cd51d6c75a90a1fb0ee4cb3
         if(err){
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -616,7 +624,11 @@ app.get(BASE_API_PATH+"/basketball-stats/:param",(req,res)=>{
             res.sendStatus(404);
             return;
         };
+<<<<<<< HEAD
         console.log(Date() + " - GET /basketball-stats "+ param );
+=======
+        console.log(Date() + " - GET /basketball-stats "+ parametro );
+>>>>>>> 9f80921ac4cb03bc2cd51d6c75a90a1fb0ee4cb3
         res.send(basketballstats);
     });
 });
