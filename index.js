@@ -698,7 +698,7 @@ app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=>
 
 
 app.get(BASE_API_PATH+"/basketball-help",(req,res)=>{
-    res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnZgxZ6")
+    res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnZgxdQ")
 });
 
 
