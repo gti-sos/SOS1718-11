@@ -273,7 +273,7 @@ app.delete(BASE_API_PATH+"/football-stats", (req,res)=>{
 
 
 //GET a un conjunto de recursos concreto
-app.get(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
+/*app.get(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
 
         }else{
@@ -282,7 +282,7 @@ app.get(BASE_API_PATH+"/football-stats/:stadium",(req,res)=>{
         }
 });
 
-});
+});*/
 
 
 
@@ -901,7 +901,7 @@ app.put(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
 
 
 
-
+/*
 
 
 //-------------------basketball-stats----------------------------//
@@ -1077,7 +1077,7 @@ app.delete(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
             console.log("DB initialized with " + basketballstats.length + " stats");
         }
     });
-*/
+
 
 // Inicializa DB
 app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=> {
@@ -1319,7 +1319,6 @@ app.put(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
 }); 
 
 
-/*
 app.get(BASE_API_PATH+"/basketball-stats",(req,res)=>{
     console.log(Date() + " - GET /basketball-stats");
     res.send(basketballstats);
@@ -1364,7 +1363,6 @@ app.delete(BASE_API_PATH+"/basketball-stats",(req,res)=>{
     basketballstats = [];
     res.sendStatus(200);
 });
-*/
 
 
 
