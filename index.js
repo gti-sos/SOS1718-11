@@ -728,7 +728,7 @@ app.post(BASE_API_PATH+"/basketball-stats",(req,res)=>{
             res.sendStatus(500);
             return;
         };
-        res.sendStatus(200);
+        res.sendStatus(201);
         console.log("INSERTED "+initialBasketballstats.length);
 
     });
