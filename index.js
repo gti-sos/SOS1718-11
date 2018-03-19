@@ -72,10 +72,7 @@ var initialfootballstats= [
     ];
     
     
-//app.get(BASE_API_PATH+"/football-help", (req,res)=>{
- //res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
-    
-//});
+
     
 var initialBasketballstats = [
         { 
@@ -170,6 +167,10 @@ app.get("/hello", (req,res) =>{
 
 //-------------------football-stats----------------------------//
 
+app.get(BASE_API_PATH+"/football-help", (req,res)=>{
+ res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYDKSG");
+    
+});
 
 //Inicializa base de datos vacia
 app.get(BASE_API_PATH+"/loadInitialfootballStats",(req,res)=>{
