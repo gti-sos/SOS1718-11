@@ -72,10 +72,10 @@ var initialfootballstats= [
     ];
     
     
-app.get(BASE_API_PATH+"/football-help", (req,res)=>{
-    res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYDKSG");
+//app.get(BASE_API_PATH+"/football-help", (req,res)=>{
+ //res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
     
-});
+//});
     
 var initialBasketballstats = [
         { 
@@ -159,13 +159,7 @@ var initialbaseballstats= [
     }
     ];
 
-    
 
-
-app.get(BASE_API_PATH+"/baseball-help", (req,res)=>{
- res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
-    
-});
 
 
 //------------------------------------------------------------//
@@ -174,7 +168,6 @@ app.get("/hello", (req,res) =>{
     res.send("Hello world!");
 });
 
-//-------------------football-stats----------------------------//
 //-------------------football-stats----------------------------//
 
 
@@ -374,6 +367,13 @@ app.put(BASE_API_PATH+"/football-stats/:stadium/:date",(req,res)=>{
     });
 });
 //-------------------baseball-stats----------------------------//
+
+
+
+app.get(BASE_API_PATH+"/baseball-help", (req,res)=>{
+ res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
+    
+});
 
 
 //Inicializa base de datos vacia
