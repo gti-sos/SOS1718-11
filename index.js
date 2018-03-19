@@ -786,7 +786,7 @@ app.get(BASE_API_PATH+"/basketball-stats/:stadium/:date",(req,res)=>{
             return;
         };
         console.log(Date() + " - GET /basketball-stats "+ stadium+ "/"+date );
-        res.send(basketballstats);
+        res.send(basketballstats[0]);
     });
 });
 
