@@ -173,7 +173,7 @@ app.get(BASE_API_PATH+"/football-help", (req,res)=>{
 });
 
 //Inicializa base de datos vacia
-app.get(BASE_API_PATH+"/loadInitialfootballStats",(req,res)=>{
+app.get(BASE_API_PATH+"football-stats/loadInitialfootballStats",(req,res)=>{
 
     dbfootballstats.insert(initialfootballstats, function (err, newDoc){
         if(err){ 
@@ -379,7 +379,7 @@ app.get(BASE_API_PATH+"/baseball-help", (req,res)=>{
 
 
 //Inicializa base de datos vacia
-app.get(BASE_API_PATH+"/loadInitialBaseballStats",(req,res)=>{
+app.get(BASE_API_PATH+"baseball-stats/loadInitialData",(req,res)=>{
 
     dbbaseballstats.insert(initialbaseballstats, function (err, newDoc){
         if(err){ 
@@ -684,7 +684,7 @@ app.put(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
 */
 
 // Inicializa DB
-app.get(BASE_API_PATH+"/basketball-stats/loadInitialBasketballstats",(req,res)=> {
+app.get(BASE_API_PATH+"/basketball-stats/loadInitialData",(req,res)=> {
         
         dbbasketballstats.insert(initialBasketballstats, function (err, newDoc) {
             if(err){
