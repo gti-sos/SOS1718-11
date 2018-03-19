@@ -580,17 +580,12 @@ app.get(BASE_API_PATH+"/baseball-stats",(req,res)=>{
        res.send(baseballstats);
 });
 });
-
-
 app.post(BASE_API_PATH+"/baseball-stats",(req,res)=>{
     console.log(Date() + " - POST /baseball-stats");
     var baseballstat=req.body;
     baseballstats.push(baseballstat);
     res.sendStatus(201);
 });
-
-
-
 app.get(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
      var stadium = req.params.stadium;
     
@@ -601,18 +596,15 @@ app.get(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     })[0]);
     
 });    
-
 app.put(BASE_API_PATH+"/baseball-stats", (req,res)=>{
     console.log(Date() + " - PUT /baseball-stats");
     res.sendStatus(405);
 });
-
 app.delete(BASE_API_PATH+"/baseball-stats",(req,res)=>{
     console.log(Date() + " - DELETE /baseball-stats/"+stadium);
     baseballstats=[];
     res.sendStatus(200);
  });
-
 app.delete(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
     
@@ -622,21 +614,16 @@ app.delete(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     });
     res.sendStatus(200);
  });
-
-
 app.post(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
     console.log("Error 409");
     res.sendStatus(409);
 )};
-
-
 app.put(BASE_API_PATH+"/baseball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
     var baseballstat = req.body;
     
         console.log(Date() + " - PUT /baseball-stats/"+stadium);
-
     
       if(stadium != baseballstat.stadium){
         res.sendStatus(409);
@@ -916,8 +903,6 @@ app.get(BASE_API_PATH+"/basketball-stats",(req,res)=>{
     console.log(Date() + " - GET /basketball-stats");
     res.send(basketballstats);
 });
-
-
 app.get(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
     var stadium = req.params.stadium;
    console.log(Date() + " - GET /basketball-stats/"+stadium);
@@ -926,20 +911,15 @@ app.get(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
         return (c.stadium == stadium);
     })[0]);
 });
-
-
 app.post(BASE_API_PATH+"/basketball-stats",(req,res)=>{
     basketballstats.push(stat);
     res.sendStatus(201);
 });
-
-
 app.put(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{    
     if(stadium != stat.stadium){
          res.sendStatus(409);
         console.warn(Date()+" - Hacking attempt!");
         return;
-
     basketballstats = basketballstats.map((c)=>{
       if(c.stadium == stat.stadium)
       return stat;
@@ -949,8 +929,6 @@ app.put(BASE_API_PATH+"/basketball-stats/:stadium",(req,res)=>{
     
     res.sendStatus(200);
 });
-
-
 app.delete(BASE_API_PATH+"/basketball-stats",(req,res)=>{
     console.log(Date() + " - DELETE /basketball-stats");
     basketballstats = [];
