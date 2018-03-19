@@ -173,7 +173,7 @@ app.get(BASE_API_PATH+"/football-help", (req,res)=>{
 });
 
 //Inicializa base de datos vacia
-app.get(BASE_API_PATH+"football-stats/loadInitialfootballStats",(req,res)=>{
+app.get(BASE_API_PATH+"/football-stats/loadInitialData",(req,res)=>{
 
     dbfootballstats.insert(initialfootballstats, function (err, newDoc){
         if(err){ 
@@ -379,7 +379,7 @@ app.get(BASE_API_PATH+"/baseball-help", (req,res)=>{
 
 
 //Inicializa base de datos vacia
-app.get(BASE_API_PATH+"baseball-stats/loadInitialData",(req,res)=>{
+app.get(BASE_API_PATH+"/baseball-stats/loadInitialData",(req,res)=>{
 
     dbbaseballstats.insert(initialbaseballstats, function (err, newDoc){
         if(err){ 
@@ -700,7 +700,7 @@ app.get(BASE_API_PATH+"/basketball-stats/loadInitialData",(req,res)=> {
 
 
 app.get(BASE_API_PATH+"/basketball-help",(req,res)=>{
-    res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnZgxdQ")
+    res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnZhJZt")
 });
 
 
