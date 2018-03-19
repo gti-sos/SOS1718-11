@@ -489,7 +489,7 @@ app.get(BASE_API_PATH+"/baseball-stats/:stadium/:date",(req,res)=>{
             return;
         }
       console.log(Date(), "- GET /baseball-stats/" + stadium+ date);
-     res.send(baseballstats);
+     res.send(baseballstats[0]);
     });
 });
 
