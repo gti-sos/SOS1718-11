@@ -168,7 +168,7 @@ app.get("/hello", (req,res) =>{
 //-------------------football-stats----------------------------//
 
 app.get(BASE_API_PATH+"/football-help", (req,res)=>{
- res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYDKSG");
+ res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYgit DKSG");
     
 });
 
