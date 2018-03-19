@@ -61,7 +61,7 @@ var initialfootballstats= [
         "mm-goal": 2,
         "mm-corner":5,
         "mm-fault":15
-    },,
+    },
     {
         "stadium": "florencia",
         "date": "2018-03-11",

@@ -1,4 +1,6 @@
-{"stadium":"florencia","date":2018,"mm-goal":3,"mm-corner":16,"mm-fault":14,"_id":"syMCo1evLkdOnpom"}
-{"$$deleted":true,"_id":"syMCo1evLkdOnpom"}
-{"stadium":"florencia","date":2018,"mm-goal":3,"mm-corner":16,"mm-fault":14,"_id":"7kwF6alRGEJfsvcx"}
-{"stadium":"florencia","date":2018,"mm-goal":93,"mm-corner":16,"mm-fault":14,"_id":"7kwF6alRGEJfsvcx"}
+{"stadium":"florencia","date":"2018-03-01","mm-goal":3,"mm-corner":1.111111111111111e+38,"mm-fault":14,"_id":"1bjcRG349ruK5DL2"}
+{"stadium":"barcelona","date":"2018-02-27","mm-goal":11,"mm-corner":15,"mm-fault":13,"_id":"2d364h46gCR2NQ8I"}
+{"stadium":"Almeria","date":2018,"mm-goal":13,"mm-corner":6,"mm-fault":14,"_id":"7gSuiPISz11wQ38y"}
+{"stadium":"florencia","date":"2018-03-11","mm-goal":9,"mm-corner":26,"mm-fault":11,"_id":"Xg46MuObpQvaojZw"}
+{"stadium":"barcelona","date":"2018-03-11","mm-goal":3,"mm-corner":16,"mm-fault":16,"_id":"ZST1VRzPd0eHcLHA"}
+{"stadium":"glasgow","date":"2018-03-09","mm-goal":2,"mm-corner":5,"mm-fault":15,"_id":"cwz8fyHuDsELHks1"}
