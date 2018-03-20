@@ -71,13 +71,13 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
 
 
     app.get(BASE_API_PATH + "/basketball-help", (req, res) => {
-        res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnZhJZt")
+        res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnbAxHt")
     });
 
 
     app.get(BASE_API_PATH + "/basketball-stats", (req, res) => {
 
-        dbbasketballstats.find({}, (err, basketballstats) => {
+        dbbasketballstats.find({}).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -130,7 +130,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     app.get(BASE_API_PATH + "/basketball-stats/:parametro", (req, res) => {
         var parametro = req.params.parametro;
 
-        dbbasketballstats.find({ $or: [{ "stadium": parametro }, { "date": parametro }] }, (err, basketballstats) => {
+        dbbasketballstats.find({ $or: [{ "stadium": parametro }, { "date": parametro }] }).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -148,7 +148,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     app.get(BASE_API_PATH + "/basketball-stats/:stadium/:date", (req, res) => {
         var stadium = req.params.stadium;
         var date = req.params.date;
-        dbbasketballstats.find({ "stadium": stadium, "date": date }, (err, basketballstats) => {
+        dbbasketballstats.find({ "stadium": stadium, "date": date }).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
