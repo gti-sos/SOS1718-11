@@ -4,6 +4,7 @@ var app = express();
 var path = require("path");
 var port = (process.env.PORT || 16778);
 var BASE_API_PATH = "/api/v1";
+var MongoClient = require("mongodb").MongoClient;
 var DataStore = require("nedb");
 
 app.use(bodyParser.json());
@@ -27,10 +28,7 @@ var dbbasketballstats = new DataStore({
 
 
 
-var MongoClient = require("mongodb").MongoClient;
 var dbbasketballstatsURL = "mongodb://antlopsou:12345@ds119049.mlab.com:19049/sos1718-als-sandbox";
-
-
 
 MongoClient.connect(dbbasketballstatsURL, { native_parser: true }, (err, mlabs) => {
 
@@ -50,8 +48,6 @@ MongoClient.connect(dbbasketballstatsURL, { native_parser: true }, (err, mlabs) 
 
 
 var dbbaseballstatsURL = "mongodb://marlopsou:12345@ds213118.mlab.com:13118/baseball-stats";
-
-
 
 MongoClient.connect(dbbaseballstatsURL, { native_parser: true }, (err, mlabs) => {
 
@@ -330,3 +326,8 @@ app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
     });
 });
 
+app.listen(port, () => {
+    console.log("Server ready on port" + port + "!");
+}).on("error", (e) => {
+    console.log("Server NOT READY:" + e);
+});
