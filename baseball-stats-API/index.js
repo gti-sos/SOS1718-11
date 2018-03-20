@@ -47,6 +47,8 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
     //-------------------baseball-stats----------------------------//
 
  console.log("Registering routes for Baseball Stats API...");
+ 
+ 
 
     app.get(BASE_API_PATH + "/baseball-help", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
@@ -76,14 +78,15 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
     //GET a ruta base
     app.get(BASE_API_PATH + "/baseball-stats", (req, res) => {
         console.log(Date(), " - GET /baseball-stats");
-        dbbaseballstats.find({}, (err, baseballstats) => {
+        dbbaseballstats.find({}).toArray((err, baseballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
             }
-
+            
             res.send(baseballstats);
+            console.log(baseballstats);
 
         });
     });
@@ -139,13 +142,14 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
 
         console.log(Date(), "- GET /baseball-stats/" + stadium);
 
-        dbbaseballstats.find({ "stadium": stadium }, (err, stadium) => {
+        dbbaseballstats.find({ "stadium": stadium }).toArray((err, stadium) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
             }
-
+            
+            console.log(stadium);
             res.send(stadium);
         });
     });
@@ -157,7 +161,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
         var date = req.params.date;
 
 
-        dbbaseballstats.find({ "stadium": stadium, "date": date }, (err, baseballstats) => {
+        dbbaseballstats.find({ "stadium": stadium, "date": date }).toArray((err, baseballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -168,6 +172,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
                 return;
             }
             console.log(Date(), "- GET /baseball-stats/" + stadium + date);
+            console.log(baseballstats);
             res.send(baseballstats[0]);
         });
     });

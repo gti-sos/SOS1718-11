@@ -65,11 +65,11 @@ MongoClient.connect(dbbaseballstatsURL, { native_parser: true }, (err, mlabs) =>
 
 
 //-------------------baseball-stats-DATABASE-VARIABLES----------------------------//
-/*var dbBaseball = __dirname + "/baseball-stats.db"
+var dbBaseball = __dirname + "/baseball-stats.db"
 var dbbaseballstats = new DataStore({
     filename: dbBaseball,
     autoload: true
-});*/
+})
 
 
 //-------------------------------------------------------------//
