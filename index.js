@@ -4,6 +4,7 @@ var app = express();
 var path = require("path");
 var port = (process.env.PORT || 16778);
 var BASE_API_PATH = "/api/v1";
+var MongoClient = require("mongodb").MongoClient;
 var DataStore = require("nedb");
 
 app.use(bodyParser.json());
@@ -27,10 +28,7 @@ var dbbasketballstats = new DataStore({
 
 
 
-var MongoClient = require("mongodb").MongoClient;
 var dbbasketballstatsURL = "mongodb://antlopsou:12345@ds119049.mlab.com:19049/sos1718-als-sandbox";
-
-
 
 MongoClient.connect(dbbasketballstatsURL, { native_parser: true }, (err, mlabs) => {
 
