@@ -49,8 +49,6 @@ MongoClient.connect(dbbasketballstatsURL, { native_parser: true }, (err, mlabs) 
 
 var dbbaseballstatsURL = "mongodb://marlopsou:12345@ds213118.mlab.com:13118/baseball-stats";
 
-
-
 MongoClient.connect(dbbaseballstatsURL, { native_parser: true }, (err, mlabs) => {
 
     if (err) {
@@ -328,3 +326,8 @@ app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
     });
 });
 
+app.listen(port, () => {
+    console.log("Server ready on port" + port + "!");
+}).on("error", (e) => {
+    console.log("Server NOT READY:" + e);
+});
