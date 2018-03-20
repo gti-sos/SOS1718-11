@@ -76,7 +76,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
     //GET a ruta base
     app.get(BASE_API_PATH + "/baseball-stats", (req, res) => {
         console.log(Date(), " - GET /baseball-stats");
-        dbbaseballstats.find({}, (err, baseballstats) => {
+        dbbaseballstats.find({}).toArray((err, baseballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
