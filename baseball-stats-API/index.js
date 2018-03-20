@@ -46,7 +46,7 @@ var initialbaseballstats = [{
 baseballstatsAPI.register = function(app, dbbaseballstats) {
     //-------------------baseball-stats----------------------------//
 
-
+ console.log("Registering routes for Baseball Stats API...");
 
     app.get(BASE_API_PATH + "/baseball-help", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3883703/collection/RVnYDKMz");
