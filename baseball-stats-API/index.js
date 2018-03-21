@@ -66,6 +66,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
                 return;
             }
             else {
+                console.log("Created");
                 res.sendStatus(201);
                 console.log("DB initialized with: " + initialbaseballstats.length + " partidos");
             }
@@ -85,7 +86,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
                 return;
             }
             
-            console.log(baseballstats);
+            
             res.send(baseballstats);
             
 
@@ -104,7 +105,6 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
                 console.log("Conflicto");
                 res.sendStatus(409);
             }
-
             res.sendStatus(201);
         });
     });
@@ -115,6 +115,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
     //PUT a ruta base (Error)
     app.put(BASE_API_PATH + "/baseball-stats", (req, res) => {
         console.log(Date() + " - PUT /baseball-stats");
+        console.log("Method not allowed");
         res.sendStatus(405);
     });
 
@@ -125,11 +126,14 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
 
         dbbaseballstats.remove({}, { multi: true }, (err, numRemoved) => {
             if (err) {
-                console.log("Error accesing data base");
+                console.log("Error accesing DB");
                 res.sendStatus(500);
             }
-            else {
-                console.log("Removed: " + numRemoved);
+            else if(numRemoved.result.n == 0){
+                console.log("Not found");
+                res.sendStatus(404);
+            }else{
+                console.log("Removed: " + numRemoved.result.n);
                 res.sendStatus(200);
 
             }
@@ -138,19 +142,17 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
 
 
     //GET a un conjunto de recursos concreto
-    app.get(BASE_API_PATH + "/baseball-stats/:stadium", (req, res) => {
-        var stadium = req.params.stadium;
+    app.get(BASE_API_PATH + "/baseball-stats/:parametro", (req, res) => {
+        var parametro = req.params.parametro;
 
-        console.log(Date(), "- GET /baseball-stats/" + stadium);
+        console.log(Date(), "- GET /baseball-stats/" + parametro);
 
-        dbbaseballstats.find({ "stadium": stadium }).toArray((err, stadium) => {
+        dbbaseballstats.find({$or: [{ "stadium": parametro}, {"date": parametro}] }).toArray((err, stadium) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
             }
-            
-            console.log(stadium);
             res.send(stadium);
         });
     });
@@ -169,11 +171,11 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
                 return;
             }
             else if (baseballstats.length == 0) {
+                console.log("Not found");
                 res.sendStatus(404);
                 return;
             }
-            console.log(Date(), "- GET /baseball-stats/" + stadium + date);
-            console.log(baseballstats);
+            console.log(Date(), "- GET /baseball-stats/" + stadium + date)
             res.send(baseballstats[0]);
         });
     });
@@ -191,8 +193,11 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
                 res.sendStatus(500);
                 return;
             }
-            else {
-                console.log("Removed: " + numRemoved);
+            else if (numRemoved.result.n ==0){
+                console.log("Not found");
+                res.sendStatus(404);
+            }else{
+                console.log("Removed: " + numRemoved.result.n);
                 res.sendStatus(200);
             }
         });
@@ -211,8 +216,12 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
                 res.sendStatus(500);
                 return;
             }
-            else {
-                console.log("Removed: " + numRemoved);
+            else if(numRemoved.result.n == 0){
+                console.log("Not found");
+
+                res.sendStatus(404);
+            }else{
+                console.log("Removed: " + numRemoved.result.n);
                 res.sendStatus(200);
             }
         });
@@ -222,6 +231,8 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
     app.post(BASE_API_PATH + "/baseball-stats/:stadium", (req, res) => {
         var stadium = req.params.stadium;
         console.log(Date() + " - POST /baseball-stats/" + stadium);
+        console.log("Method not allowed");
+
         res.sendStatus(405);
         return;
     });
@@ -244,20 +255,26 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
 
         console.log(Date() + " - PUT /baseball-stats/" + stadium + date);
 
-        dbbaseballstats.update({ "stadium": baseballstat.stadium }, baseballstat, (err, numUpdated) => {
+        if (stadium != baseballstat.stadium || date != baseballstat.date) {
+            console.log("Not found");
+            res.sendStatus(404);
+            return;
+
+        }
+
+        dbbaseballstats.update({ "stadium": stadium, "date": date }, baseballstat, (err, numUpdated) => {
             if (err) {
                 console.log("Error accesing data base");
                 res.sendStatus(500);
                 return;
             }
-            else if (numUpdated == 0) {
-
-                console.log("error");
+            else if (numUpdated.result.n == 0) {
+            console.log("Not found");
                 res.sendStatus(404);
                 return;
             }
             else {
-                console.log("Updated: " + numUpdated);
+                console.log("Updated: " + numUpdated.result.n);
                 res.sendStatus(200);
             }
         });
