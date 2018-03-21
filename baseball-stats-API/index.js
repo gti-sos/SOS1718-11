@@ -85,8 +85,9 @@ baseballstatsAPI.register = function(app, dbbaseballstats) {
                 return;
             }
             
-            res.send(baseballstats);
             console.log(baseballstats);
+            res.send(baseballstats);
+            
 
         });
     });
