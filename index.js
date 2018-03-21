@@ -6,26 +6,9 @@ var port = (process.env.PORT || 16778);
 var BASE_API_PATH = "/api/v1";
 var MongoClient = require("mongodb").MongoClient;
 
-//var DataStore = require("nedb");
-
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname, "public")));
 
-
-//-------------------football-stats-DATABASE-VARIABLES----------------------------//
-/*var dbFootball = __dirname + "/football-stats.db"
-var dbfootballstats = new DataStore({
-    filename: dbFootball,
-    autoload: true
-});*/
-
-//-------------------basketball-stats-DATABASE-VARIABLES----------------------------//
-/*var dbBasketball = __dirname+"/basketball-stats-API/basketball-stats.db" 
-var dbbasketballstats = new DataStore({
-    filename: dbBasketball, 
-    autoload: true
-});
-*/
 var dbfootballstatsURL = "mongodb://lucdelcan:test@ds121309.mlab.com:21309/sandbox";
 
 MongoClient.connect(dbfootballstatsURL, { native_parser: true }, (err, mlabs) => {
@@ -78,27 +61,6 @@ MongoClient.connect(dbbaseballstatsURL, { native_parser: true }, (err, mlabs) =>
     var baseballstatsAPI = require("./baseball-stats-API");
     baseballstatsAPI.register(app, dbbaseballstats);
 });
-
-
-//-------------------baseball-stats-DATABASE-VARIABLES----------------------------//
-/*var dbBaseball = __dirname + "/baseball-stats.db"
-var dbbaseballstats = new DataStore({
-    filename: dbBaseball,
-    autoload: true
-});*/
-
-
-//-------------------------------------------------------------//
-
-
-
-
-
-
-
-
-//-------------------football-stats----------------------------//
-
 
 
 app.listen(port, () => {
