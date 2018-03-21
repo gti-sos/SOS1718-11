@@ -199,11 +199,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
                 return;
 
             }
-            else if (numUpdated == "0") {
+            else if (numUpdated.result.n == 0) {
                 res.sendStatus(404);
                 return;
             };
-            console.log("UPDATED " + numUpdated);
+            console.log("UPDATED " + numUpdated.result.n);
             res.sendStatus(200);
         });
     });
@@ -246,11 +246,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
                 res.sendStatus(500);
                 return;
             }
-            else if (numRemoved == 0) {
+            else if (numRemoved.result.n == 0) {
                 res.sendStatus(404);
                 return;
             };
-            console.log("DELETED " + numRemoved);
+            console.log("DELETED " + numRemoved.result.n);
             res.sendStatus(200);
 
         });
@@ -270,11 +270,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
                 res.sendStatus(500);
                 return;
             }
-            else if (numRemoved == 0) {
+            else if (numRemoved.result.n == 0) {
                 res.sendStatus(404);
                 return;
             };
-            console.log("DELETED " + numRemoved);
+            console.log("DELETED " + numRemoved.result.n);
             res.sendStatus(200);
 
         });
@@ -293,7 +293,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
                 res.sendStatus(500);
                 return;
             };
-            console.log("DELETED " + numRemoved);
+            console.log("DELETED " + numRemoved.result.n);
             res.sendStatus(200);
         });
     });
