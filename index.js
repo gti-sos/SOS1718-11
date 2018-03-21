@@ -20,12 +20,12 @@ var dbfootballstats = new DataStore({
 });
 
 //-------------------basketball-stats-DATABASE-VARIABLES----------------------------//
-/*var dbBasketball = __dirname+"/basketball-stats-API/basketball-stats.db" 
+var dbBasketball = __dirname+"/basketball-stats-API/basketball-stats.db" 
 var dbbasketballstats = new DataStore({
     filename: dbBasketball, 
     autoload: true
 });
-*/
+
 
 
 
@@ -66,11 +66,11 @@ MongoClient.connect(dbbaseballstatsURL, { native_parser: true }, (err, mlabs) =>
 
 
 //-------------------baseball-stats-DATABASE-VARIABLES----------------------------//
-/*var dbBaseball = __dirname + "/baseball-stats.db"
+var dbBaseball = __dirname + "/baseball-stats.db"
 var dbbaseballstats = new DataStore({
     filename: dbBaseball,
     autoload: true
-});*/
+})
 
 
 //-------------------------------------------------------------//
