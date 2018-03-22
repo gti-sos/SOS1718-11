@@ -75,7 +75,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
 
     // GET a basketball-help
 
-    app.get(BASE_API_PATH + "/basketball-help", (req, res) => {
+    app.get(BASE_API_PATH + "/basketball-stats/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnbBxxs")
     });
 
@@ -150,16 +150,26 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     app.post(BASE_API_PATH + "/basketball-stats", (req, res) => {
         console.log(Date() + " - POST /basketball-stats");
         var basketballstat = req.body;
-
-        dbbasketballstats.insert(basketballstat, function(err, newDoc) {
+        
+        dbbasketballstats.find({ "stadium": basketballstat.stadium, "date": basketballstat.date }).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
-            };
+            }else if (basketballstats.length != 0) {
+                res.sendStatus(409);
+                return;
+            }
+            dbbasketballstats.insert(basketballstat, function(err, newDoc) {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                };
             res.sendStatus(201);
             console.log("INSERTED " + initialBasketballstats.length);
-
+            });
+        
         });
     });
 
@@ -188,7 +198,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
         console.log(Date() + " - PUT /basketball-stats/" + stadium);
 
         if (stadium != basketballstat.stadium || date != basketballstat.date) {
-            res.sendStatus(409);
+            res.sendStatus(400);
             return;
 
         }
