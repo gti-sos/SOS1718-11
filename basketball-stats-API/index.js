@@ -52,7 +52,7 @@ var initialBasketballstats = [{
 
 
 
-basketballstatsAPI.register = function(app, dbbasketballstats) {
+basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
 
     console.log("Registering routes for Basketball Stats API...");
 
@@ -60,7 +60,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // Inicializa DB
 
     app.get(BASE_API_PATH + "/basketball-stats/loadInitialData", (req, res) => {
-
+        if(!checkApiKey(req,res)) return;
         dbbasketballstats.insert(initialBasketballstats, function(err, newDoc) {
             if (err) {
                 console.error("Error accesing DB");
@@ -75,7 +75,8 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
 
     // GET a basketball-help
 
-    app.get(BASE_API_PATH + "/basketball-help", (req, res) => {
+    app.get(BASE_API_PATH + "/basketball-stats/docs", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnbBxxs")
     });
 
@@ -87,7 +88,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // GET a recurso base
 
     app.get(BASE_API_PATH + "/basketball-stats", (req, res) => {
-
+        if(!checkApiKey(req,res)) return;
         dbbasketballstats.find({}).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -103,8 +104,8 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // GET a recurso concreto 1 parámetro
 
     app.get(BASE_API_PATH + "/basketball-stats/:parametro", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var parametro = req.params.parametro;
-
         dbbasketballstats.find({ $or: [{ "stadium": parametro }, { "date": parametro }] }).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -124,6 +125,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // GET a recurso concreto 2 parámetros
 
     app.get(BASE_API_PATH + "/basketball-stats/:stadium/:date", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         dbbasketballstats.find({ "stadium": stadium, "date": date }).toArray((err, basketballstats) => {
@@ -148,18 +150,29 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // POST a recurso base
 
     app.post(BASE_API_PATH + "/basketball-stats", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         console.log(Date() + " - POST /basketball-stats");
         var basketballstat = req.body;
-
-        dbbasketballstats.insert(basketballstat, function(err, newDoc) {
+        
+        dbbasketballstats.find({ "stadium": basketballstat.stadium, "date": basketballstat.date }).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
-            };
+            }else if (basketballstats.length != 0) {
+                res.sendStatus(409);
+                return;
+            }
+            dbbasketballstats.insert(basketballstat, function(err, newDoc) {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                };
             res.sendStatus(201);
             console.log("INSERTED " + initialBasketballstats.length);
-
+            });
+        
         });
     });
 
@@ -167,6 +180,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // POST a recurso concreto
 
     app.post(BASE_API_PATH + "/basketball-stats/:stadium", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var stadium = req.params.stadium;
         console.log(Date() + " - POST /basketball-stats/" + stadium);
         res.sendStatus(405);
@@ -181,14 +195,14 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // PUT a recurso concreto 2 parámetros
 
     app.put(BASE_API_PATH + "/basketball-stats/:stadium/:date", (req, res) => {
-
+        if(!checkApiKey(req,res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         var basketballstat = req.body;
         console.log(Date() + " - PUT /basketball-stats/" + stadium);
 
         if (stadium != basketballstat.stadium || date != basketballstat.date) {
-            res.sendStatus(409);
+            res.sendStatus(400);
             return;
 
         }
@@ -212,6 +226,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // PUT a recurso concreto 1 parámetros
 
     app.put(BASE_API_PATH + "/basketball-stats/:parametro", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var parametro = req.params.parametro;
         console.log(Date() + " - POST /basketball-stats/" + parametro);
         res.sendStatus(405);
@@ -222,6 +237,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // PUT a recurso base
 
     app.put(BASE_API_PATH + "/basketball-stats", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         console.log(Date() + " - PUT /basketball-stats");
         res.sendStatus(405);
     });
@@ -236,6 +252,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // DELETE a recurso concreto 1 parámetro
 
     app.delete(BASE_API_PATH + "/basketball-stats/:stadium", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var stadium = req.params.stadium;
 
         console.log(Date() + " - DELETE /basketball-stats/" + stadium);
@@ -260,6 +277,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // DELETE a recurso concreto 2 parámetros
 
     app.delete(BASE_API_PATH + "/basketball-stats/:stadium/:date", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         console.log(Date() + " - DELETE /basketball-stats/" + stadium + "/" + date);
@@ -284,7 +302,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats) {
     // DELETE a recurso base
 
     app.delete(BASE_API_PATH + "/basketball-stats", (req, res) => {
-
+        if(!checkApiKey(req,res)) return;
         console.log(Date() + " - DELETE /basketball-stats");
 
         dbbasketballstats.remove({}, { multi: true },(err, numRemoved) => {

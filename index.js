@@ -40,7 +40,7 @@ MongoClient.connect(dbbasketballstatsURL, { native_parser: true }, (err, mlabs) 
     var dbBasketball = mlabs.db("sos1718-als-sandbox");
     var dbbasketballstats = dbBasketball.collection("basketball-stats");
     var basketballstatsAPI = require("./basketball-stats-API");
-    basketballstatsAPI.register(app, dbbasketballstats);
+    basketballstatsAPI.register(app, dbbasketballstats,checkApiKey);
 });
 
 
@@ -70,7 +70,7 @@ sin apikey se debe devolver el código 401.
 con una apikey inválida se debe devolver el código 403.
 */
 
-var checkApiKeyFunction = function (request,response){
+var checkApiKey = function (request,response){
     if(!request.query.apikey){
         console.error('WARNING: No apikey');
         response.sendStatus(401);
