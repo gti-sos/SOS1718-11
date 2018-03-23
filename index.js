@@ -63,6 +63,23 @@ MongoClient.connect(dbbaseballstatsURL, { native_parser: true }, (err, mlabs) =>
 });
 
 
+var api_key = "scraping";
+
+
+var checkApiKeyFunction = function (request,response){
+    if(!request.query.apikey){
+        console.error('WARNING: No apikey');
+        response.sendStatus(401);
+        return false;
+    }  if (request.query.apikey !== api_key) {
+        console.error('WARNING: Incorrect apikey was used!');
+        response.sendStatus(403);
+        return false;
+    }
+    return true;
+};
+
+
 app.listen(port, () => {
     console.log("Server ready on port" + port + "!");
 }).on("error", (e) => {
