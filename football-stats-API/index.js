@@ -56,7 +56,7 @@ footballstatsAPI.register= function(app, dbfootballstats){
         
     });
     
-    app.get(BASE_API_PATH +"/football-help" , (req,res)=>{
+    app.get(BASE_API_PATH +"/football-stats/docs" , (req,res)=>{
         res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYgit DKSG");
     });
     
@@ -70,7 +70,11 @@ footballstatsAPI.register= function(app, dbfootballstats){
                 return;
             }
             console.log(Date()+ " - GET /football-stats");
-            res.send(footballstats);
+            res.send(footballstats.map((c)=>{
+            delete c._id;
+            return c;
+            
+        }));
         });
     });
     
