@@ -1,6 +1,10 @@
 var BASE_API_PATH = "/api/v1";
 var footballstatsAPI = {};
 module.exports = footballstatsAPI;
+var luc = "/api/vi/football-stats"
+
+
+
 
 var initialfootballstats = [{
         "stadium": "barcelona",
@@ -38,7 +42,7 @@ var initialfootballstats = [{
     }
 ];
 
-footballstatsAPI.register= function(app, dbfootballstats){
+footballstatsAPI.register= function(app, dbfootballstats,luc,checkApiKey){
     console.log("Registering router for Football Stats API...");
     
     // Inicializamos la base de datos

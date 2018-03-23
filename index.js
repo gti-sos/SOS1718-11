@@ -65,6 +65,10 @@ MongoClient.connect(dbbaseballstatsURL, { native_parser: true }, (err, mlabs) =>
 
 var api_key = "scraping";
 
+/*Si se intenta acceder a la API con…
+sin apikey se debe devolver el código 401.
+con una apikey inválida se debe devolver el código 403.
+*/
 
 var checkApiKeyFunction = function (request,response){
     if(!request.query.apikey){
