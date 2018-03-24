@@ -1,9 +1,6 @@
 var BASE_API_PATH = "/api/v1";
 var footballstatsAPI = {};
 module.exports = footballstatsAPI;
-var luc = "/api/vi/football-stats"
-
-
 
 
 var initialfootballstats = [{
@@ -42,12 +39,13 @@ var initialfootballstats = [{
     }
 ];
 
-footballstatsAPI.register= function(app, dbfootballstats,luc,checkApiKey){
+footballstatsAPI.register= function(app, dbfootballstats,checkApiKey){
     console.log("Registering router for Football Stats API...");
     
     // Inicializamos la base de datos
     
     app.get(BASE_API_PATH+"/football-stats/loadInitialData", (req,res)=>{
+        if(!checkApiKey(req,res)) return;
         dbfootballstats.insert(initialfootballstats, function(err, newDoc){
             if (err){
                 console.error("Error accesing DB");
@@ -60,13 +58,17 @@ footballstatsAPI.register= function(app, dbfootballstats,luc,checkApiKey){
         
     });
     
+    //Get docs
+    
     app.get(BASE_API_PATH +"/football-stats/docs" , (req,res)=>{
+        if(!checkApiKey(req,res)) return;
         res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYgit DKSG");
     });
     
     //Get a un recurso base
     
     app.get(BASE_API_PATH+ "/football-stats", (req, res)=>{
+        if(!checkApiKey(req,res)) return;
         dbfootballstats.find({}).toArray((err, footballstats)=>{
             if(err){
                 console.error("Error accesing DB");
@@ -82,9 +84,10 @@ footballstatsAPI.register= function(app, dbfootballstats,luc,checkApiKey){
         });
     });
     
-    //GET a recurso concreto 1 parámetro
+    //GET a recurso concreto 1 dato
     
     app.get(BASE_API_PATH +"/football-stats/:dato", (req, res)=>{
+        if(!checkApiKey(req,res)) return;
     var dato = req.params.dato;
     dbfootballstats.find({ $or: [{"stadium": dato}, {"date": dato}]}).toArray((err,footballstats)=>{
         if (err) {
@@ -108,6 +111,7 @@ footballstatsAPI.register= function(app, dbfootballstats,luc,checkApiKey){
     //GET a un recurso con dos parametros 
     
 app.get(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
+    if(!checkApiKey(req,res)) return;
     var stadium = req.params.stadium;
     var date = req.params.date;
 
@@ -121,42 +125,54 @@ app.get(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
         else if (footballstats.length == 0) {
             res.sendStatus(404);
             return;
-        }
+        };
         console.log(Date(), "- GET /football-stats/" + stadium + "/"+ date);
         res.send(footballstats[0]);
     });
 });
 
 //POST a ruta base
-app.post(BASE_API_PATH + "/football-stats", (req, res) => {
-    console.log(Date() + " - POST /football-stats");
-    var footballstat = req.body;
-
-    dbfootballstats.insert(footballstat, function(err, newDoc) {
-          if (err) {
+ app.post(BASE_API_PATH + "/football-stats", (req, res) => {
+        if(!checkApiKey(req,res)) return;
+        console.log(Date() + " - POST /football-stats");
+        var footballstat = req.body;
+        
+        dbfootballstats.find({ "stadium": footballstat.stadium, "date": footballstat.date }).toArray((err, footballstats) => {
+            if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
-            };
+            }else if (footballstats.length != 0) {
+                res.sendStatus(409);
+                return;
+            }
+            dbfootballstats.insert(footballstat, function(err, newDoc) {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                };
             res.sendStatus(201);
             console.log("INSERTED " + initialfootballstats.length);
-
+            });
+        
         });
     });
 
 
 //POST a un recurso concreto (Error)
 app.post(BASE_API_PATH + "/football-stats/:stadium", (req, res) => {
+    if(!checkApiKey(req,res)) return;
     var stadium = req.params.stadium;
     console.log(Date() + " - POST /football-stats/" + stadium);
     res.sendStatus(405);
-    return;
 });
 
 
 
 //PUT a un recurso concreto
 app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
+    if(!checkApiKey(req,res)) return;
     var stadium = req.params.stadium;
     var date = req.params.date;
     var footballstat = req.body;
@@ -189,6 +205,7 @@ app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
     // PUT a recurso concreto 1 parámetros
 
     app.put(BASE_API_PATH + "/football-stats/:data", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var data = req.params.data;
         console.log(Date() + " - POST /football-stats/" + data);
         res.sendStatus(405);
@@ -199,6 +216,7 @@ app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
     // PUT a recurso base
 
     app.put(BASE_API_PATH + "/football-stats", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         console.log(Date() + " - PUT /football-stats");
         res.sendStatus(405);
     });
@@ -207,6 +225,7 @@ app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
  // DELETE a recurso concreto 1 parámetro
 
     app.delete(BASE_API_PATH + "/football-stats/:stadium", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var stadium = req.params.stadium;
 
         console.log(Date() + " - DELETE /football-stats/" + stadium);
@@ -231,6 +250,7 @@ app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
     // DELETE a recurso concreto 2 parámetros
 
     app.delete(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
+        if(!checkApiKey(req,res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         console.log(Date() + " - DELETE /football-stats/" + stadium + "/" + date);
@@ -255,6 +275,7 @@ app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
     // DELETE a recurso base
 
     app.delete(BASE_API_PATH + "/football-stats", (req, res) => {
+        if(!checkApiKey(req,res)) return;
 
         console.log(Date() + " - DELETE /football-stats");
 

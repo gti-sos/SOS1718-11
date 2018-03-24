@@ -22,7 +22,7 @@ MongoClient.connect(dbfootballstatsURL, { native_parser: true }, (err, mlabs) =>
     var dbFootball = mlabs.db("sandbox");
     var dbfootballstats = dbFootball.collection("football-stats");
     var footballstatsAPI = require("./football-stats-API");
-    footballstatsAPI.register(app, dbfootballstats);
+    footballstatsAPI.register(app, dbfootballstats,checkApiKey);
 });
 
 
@@ -60,6 +60,7 @@ MongoClient.connect(dbbaseballstatsURL, { native_parser: true }, (err, mlabs) =>
     var dbbaseballstats = dbBaseball.collection("baseball-stats");
     var baseballstatsAPI = require("./baseball-stats-API");
     baseballstatsAPI.register(app, dbbaseballstats);
+   
 });
 
 
