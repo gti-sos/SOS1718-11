@@ -137,7 +137,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             // STADIUM + DATE    
             }else if (param_from == undefined && param_to == undefined && param_stadium != undefined && param_date != undefined) {
                 if (param_stadium == stadium && param_date == base[j].date) {
-                        aux_set.push(base[j]);
+                        aux_set.push(base[j]);;
                 } 
             
             // STADIUM   
@@ -174,7 +174,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             };
 
         });
-        res.sendStatus(200);
+        res.sendStatus(201);
         console.log("INSERTED " + initialBasketballstats.length);
     });
 
@@ -227,7 +227,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 /*                            console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux, 2, null));
                             console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(basketballstats, 2, null));
                           console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux2, 2, null));
-*/
+*/                          
                             res.send(aux2);
 
                         }
@@ -258,7 +258,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                     if (from || to || stadium || date) {
                         aux = buscador(basketballstats, aux, from, to, stadium, date);
                         if (aux.length > 0) {
+                            if(stadium!=undefined && date!=undefined){
+                                res.send(aux[0]);
+                            }else{
                             res.send(aux);
+                            }
                         }
                         else {
                             res.sendStatus(404); //No content
