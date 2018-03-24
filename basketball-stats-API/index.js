@@ -155,7 +155,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
         var aux2 = [];
 
 
-        if (limit && offset >= 0) {
+        if (limit || offset >= 0) {
             dbbasketballstats.find({}).skip(offset).limit(limit).toArray(function(err, basketballstats) {
 
                 if (err) {
