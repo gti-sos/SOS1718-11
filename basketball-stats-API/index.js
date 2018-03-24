@@ -58,27 +58,51 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
 
     var buscador = function(base, aux_set, param_from, param_to, param_stadium, param_date) {
-        
-        console.log("Búsqueda con parametros: from = " + param_from + " ,to = " + param_to + ", stadium = " + param_stadium + ", date = " + param_date + "." )
-        
+
+        console.log("Búsqueda con parametros: from = " + param_from + " ,to = " + param_to + ", stadium = " + param_stadium + ", date = " + param_date + ".")
+
+        var f = new Date(param_from);
+        var t = new Date(param_to);
+
         for (var j = 0; j < base.length; j++) {
+
             var date = new Date(base[j].date);
             var stadium = base[j].stadium;
+            if (param_from != undefined && param_to != undefined) {
+                if (f <= date && t >= date && param_stadium == stadium) {
+                        aux_set.push(base[j]);
+                }
+                else if (param_to >= date && param_from <= date) {
+                    aux_set.push(base[j]);
+                }
+            }
+            else if (param_from != undefined && param_to == undefined) {
+                if (f <= date && param_stadium == stadium) {
+                        aux_set.push(base[j]);
+                }
+                else if (param_from <= date) {
+                    aux_set.push(base[j]);
+                }
+            }
+            else if (param_from == undefined && param_to != undefined) {
+                if (t >= date && param_stadium == stadium) {
+                        aux_set.push(base[j]);
+                }
+                else if (t >= date) {
+                    aux_set.push(base[j]);
+                }
+            }else if(param_from == undefined && param_to == undefined && param_stadium == stadium){
+                aux_set.push(base[j]);
+            }
             
-            if (param_to >= date && param_from <= date) {
+            if (date == param_date && stadium == param_stadium) {
                 aux_set.push(base[j]);
             }
-    
-            if(date == param_date && stadium==param_stadium){
+
+            if (date == param_date && param_stadium == undefined) {
                 aux_set.push(base[j]);
             }
-            if(date == param_date && param_stadium==null){
-                aux_set.push(base[j]);
-            }
-            if(stadium==param_stadium && param_date==null){
-                aux_set.push(base[j]);
-            }
-            
+
         }
 
 
@@ -118,84 +142,85 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     // GET a recurso base
 
     app.get(BASE_API_PATH + "/basketball-stats", (req, res) => {
-        
-        if (!checkApiKey(req, res)) return;
-        
-            var limit = parseInt(req.query.limit);
-            var offset = parseInt(req.query.offset);
-            var from = new Date(req.query.fromDate);
-            var to = new Date(req.query.toDate);
-            var stadium = req.query.stadium;
-            var date = req.query.date;
-            var aux = [];
-            var aux2= [];
 
-            
-            if (limit && offset >=0) {
+        if (!checkApiKey(req, res)) return;
+
+        var limit = parseInt(req.query.limit);
+        var offset = parseInt(req.query.offset);
+        var from = req.query.fromDate;
+        var to = req.query.toDate;
+        var stadium = req.query.stadium;
+        var date = req.query.date;
+        var aux = [];
+        var aux2 = [];
+
+
+        if (limit && offset >= 0) {
             dbbasketballstats.find({}).skip(offset).limit(limit).toArray(function(err, basketballstats) {
-                
+
                 if (err) {
                     console.error('WARNING: Error getting data from DB');
-                     res.sendStatus(500); // internal server error
-                } else {
-                     if (basketballstats.length === 0) {
-                            res.sendStatus(404);
-                        }
+                    res.sendStatus(500); // internal server error
+                }
+                else {
+                    if (basketballstats.length === 0) {
+                        res.sendStatus(404);
+                    }
                     console.log("INFO: Sending basketballstats: " + JSON.stringify(basketballstats, 2, null));
-                    
-                    if (from && to || stadium || date) {
 
-                            aux = buscador(basketballstats, aux, from, to, stadium, date);
-                            if (aux.length > 0) {
-                                aux2 = aux.slice(offset, offset+limit);
-                                console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux, 2, null));
-                                console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(basketballstats, 2, null));
-                                console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux2, 2, null));
-                                res.send(aux2);
-                                
-                            }
-                            else {
-                                res.sendStatus(404); // No content 
-                            }
+                    if (from || to || stadium || date) {
+
+                        aux = buscador(basketballstats, aux, from, to, stadium, date);
+                        if (aux.length > 0) {
+                            aux2 = aux.slice(offset, offset + limit);
+                            console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux, 2, null));
+                            console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(basketballstats, 2, null));
+                            console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux2, 2, null));
+                            res.send(aux2);
+
                         }
                         else {
-                            res.send(basketballstats);
+                            res.sendStatus(404); // No content 
                         }
-                }
-            });
-            
-            }
-            else {
-
-                dbbasketballstats.find({}).toArray(function(err, basketballstats) {
-                    if (err) {
-                        console.error('ERROR from database');
-                        res.sendStatus(500); // internal server error
                     }
                     else {
-                        if (basketballstats.length === 0) {
-                            res.sendStatus(204);
-                            return;
-                        }
-                        console.log("INFO: Sending results: " + JSON.stringify(basketballstats, 2, null));
-                        if (from && to|| stadium || date) {
-                            aux = buscador(basketballstats, aux, from, to, stadium, date);
-                            if (aux.length > 0) {
-                                console.log("busqueda");
-                                res.send(aux);
-                            }
-                            else {
-                                res.sendStatus(404); //No content
-                            }
+                        res.send(basketballstats);
+                    }
+                }
+            });
+
+        }
+        else {
+
+            dbbasketballstats.find({}).toArray(function(err, basketballstats) {
+                if (err) {
+                    console.error('ERROR from database');
+                    res.sendStatus(500); // internal server error
+                }
+                else {
+                    if (basketballstats.length === 0) {
+                        res.sendStatus(204);
+                        return;
+                    }
+                    console.log("INFO: Sending results: " + JSON.stringify(basketballstats, 2, null));
+                    if (from && to || stadium || date) {
+                        aux = buscador(basketballstats, aux, from, to, stadium, date);
+                        if (aux.length > 0) {
+                            console.log("busqueda");
+                            res.send(aux);
                         }
                         else {
-                            res.send(basketballstats);
+                            res.sendStatus(404); //No content
                         }
                     }
-                });
-            }
-        
-        
+                    else {
+                        res.send(basketballstats);
+                    }
+                }
+            });
+        }
+
+
         /*
         if (!checkApiKey(req, res)) return;
         dbbasketballstats.find({}).toArray((err, basketballstats) => {
