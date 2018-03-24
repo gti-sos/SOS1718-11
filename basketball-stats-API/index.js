@@ -52,15 +52,45 @@ var initialBasketballstats = [{
 
 
 
-basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
+basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
     console.log("Registering routes for Basketball Stats API...");
+
+
+    var buscador = function(base, aux_set, param_from, param_to, param_stadium, param_date) {
+        
+        console.log("Búsqueda con parametros: from = " + param_from + " ,to = " + param_to + ", stadium = " + param_stadium + ", date = " + param_date + "." )
+        
+        for (var j = 0; j < base.length; j++) {
+            var date = new Date(base[j].date);
+            var stadium = base[j].stadium;
+            
+            if (param_to >= date && param_from <= date) {
+                aux_set.push(base[j]);
+            }
+    
+            if(date == param_date && stadium==param_stadium){
+                aux_set.push(base[j]);
+            }
+            if(date == param_date && param_stadium==null){
+                aux_set.push(base[j]);
+            }
+            if(stadium==param_stadium && param_date==null){
+                aux_set.push(base[j]);
+            }
+            
+        }
+
+
+        return aux_set;
+
+    };
 
 
     // Inicializa DB
 
     app.get(BASE_API_PATH + "/basketball-stats/loadInitialData", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         dbbasketballstats.insert(initialBasketballstats, function(err, newDoc) {
             if (err) {
                 console.error("Error accesing DB");
@@ -76,7 +106,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // GET a basketball-help
 
     app.get(BASE_API_PATH + "/basketball-stats/docs", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnbBxxs")
     });
 
@@ -88,7 +118,86 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // GET a recurso base
 
     app.get(BASE_API_PATH + "/basketball-stats", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        
+        if (!checkApiKey(req, res)) return;
+        
+            var limit = parseInt(req.query.limit);
+            var offset = parseInt(req.query.offset);
+            var from = new Date(req.query.fromDate);
+            var to = new Date(req.query.toDate);
+            var stadium = req.query.stadium;
+            var date = req.query.date;
+            var aux = [];
+            var aux2= [];
+
+            
+            if (limit && offset >=0) {
+            dbbasketballstats.find({}).skip(offset).limit(limit).toArray(function(err, basketballstats) {
+                
+                if (err) {
+                    console.error('WARNING: Error getting data from DB');
+                     res.sendStatus(500); // internal server error
+                } else {
+                     if (basketballstats.length === 0) {
+                            res.sendStatus(404);
+                        }
+                    console.log("INFO: Sending basketballstats: " + JSON.stringify(basketballstats, 2, null));
+                    
+                    if (from && to || stadium || date) {
+
+                            aux = buscador(basketballstats, aux, from, to, stadium, date);
+                            if (aux.length > 0) {
+                                aux2 = aux.slice(offset, offset+limit);
+                                console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux, 2, null));
+                                console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(basketballstats, 2, null));
+                                console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux2, 2, null));
+                                res.send(aux2);
+                                
+                            }
+                            else {
+                                res.sendStatus(404); // No content 
+                            }
+                        }
+                        else {
+                            res.send(basketballstats);
+                        }
+                }
+            });
+            
+            }
+            else {
+
+                dbbasketballstats.find({}).toArray(function(err, basketballstats) {
+                    if (err) {
+                        console.error('ERROR from database');
+                        res.sendStatus(500); // internal server error
+                    }
+                    else {
+                        if (basketballstats.length === 0) {
+                            res.sendStatus(204);
+                            return;
+                        }
+                        console.log("INFO: Sending results: " + JSON.stringify(basketballstats, 2, null));
+                        if (from && to|| stadium || date) {
+                            aux = buscador(basketballstats, aux, from, to, stadium, date);
+                            if (aux.length > 0) {
+                                console.log("busqueda");
+                                res.send(aux);
+                            }
+                            else {
+                                res.sendStatus(404); //No content
+                            }
+                        }
+                        else {
+                            res.send(basketballstats);
+                        }
+                    }
+                });
+            }
+        
+        
+        /*
+        if (!checkApiKey(req, res)) return;
         dbbasketballstats.find({}).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -98,14 +207,16 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
             console.log(Date() + " - GET /basketball-stats");
             res.send(basketballstats);
         });
+        */
     });
 
 
     // GET a recurso concreto 1 parámetro
 
     app.get(BASE_API_PATH + "/basketball-stats/:parametro", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         var parametro = req.params.parametro;
+
         dbbasketballstats.find({ $or: [{ "stadium": parametro }, { "date": parametro }] }).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
@@ -125,7 +236,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // GET a recurso concreto 2 parámetros
 
     app.get(BASE_API_PATH + "/basketball-stats/:stadium/:date", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         dbbasketballstats.find({ "stadium": stadium, "date": date }).toArray((err, basketballstats) => {
@@ -150,16 +261,17 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // POST a recurso base
 
     app.post(BASE_API_PATH + "/basketball-stats", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         console.log(Date() + " - POST /basketball-stats");
         var basketballstat = req.body;
-        
+
         dbbasketballstats.find({ "stadium": basketballstat.stadium, "date": basketballstat.date }).toArray((err, basketballstats) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
-            }else if (basketballstats.length != 0) {
+            }
+            else if (basketballstats.length != 0) {
                 res.sendStatus(409);
                 return;
             }
@@ -169,10 +281,10 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
                     res.sendStatus(500);
                     return;
                 };
-            res.sendStatus(201);
-            console.log("INSERTED " + initialBasketballstats.length);
+                res.sendStatus(201);
+                console.log("INSERTED " + initialBasketballstats.length);
             });
-        
+
         });
     });
 
@@ -180,7 +292,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // POST a recurso concreto
 
     app.post(BASE_API_PATH + "/basketball-stats/:stadium", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
         console.log(Date() + " - POST /basketball-stats/" + stadium);
         res.sendStatus(405);
@@ -195,7 +307,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // PUT a recurso concreto 2 parámetros
 
     app.put(BASE_API_PATH + "/basketball-stats/:stadium/:date", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         var basketballstat = req.body;
@@ -226,7 +338,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // PUT a recurso concreto 1 parámetros
 
     app.put(BASE_API_PATH + "/basketball-stats/:parametro", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         var parametro = req.params.parametro;
         console.log(Date() + " - POST /basketball-stats/" + parametro);
         res.sendStatus(405);
@@ -237,7 +349,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // PUT a recurso base
 
     app.put(BASE_API_PATH + "/basketball-stats", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         console.log(Date() + " - PUT /basketball-stats");
         res.sendStatus(405);
     });
@@ -252,7 +364,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // DELETE a recurso concreto 1 parámetro
 
     app.delete(BASE_API_PATH + "/basketball-stats/:stadium", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
 
         console.log(Date() + " - DELETE /basketball-stats/" + stadium);
@@ -277,12 +389,12 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // DELETE a recurso concreto 2 parámetros
 
     app.delete(BASE_API_PATH + "/basketball-stats/:stadium/:date", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         console.log(Date() + " - DELETE /basketball-stats/" + stadium + "/" + date);
 
-        dbbasketballstats.remove({ "stadium": stadium, "date": date },(err, numRemoved) => {
+        dbbasketballstats.remove({ "stadium": stadium, "date": date }, (err, numRemoved) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
@@ -302,10 +414,10 @@ basketballstatsAPI.register = function(app, dbbasketballstats,checkApiKey) {
     // DELETE a recurso base
 
     app.delete(BASE_API_PATH + "/basketball-stats", (req, res) => {
-        if(!checkApiKey(req,res)) return;
+        if (!checkApiKey(req, res)) return;
         console.log(Date() + " - DELETE /basketball-stats");
 
-        dbbasketballstats.remove({}, { multi: true },(err, numRemoved) => {
+        dbbasketballstats.remove({}, { multi: true }, (err, numRemoved) => {
             if (err) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
