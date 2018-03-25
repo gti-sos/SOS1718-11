@@ -20,19 +20,11 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
     }
 
     console.log("Connected to Football Stats DB");
-    var dbFootball = mlabs.db("sandbox");
+    var dbFootball = mlabs.db("sos1718-als-sandbox");
     var dbfootballstats = dbFootball.collection("football-stats");
     var footballstatsAPI = require("./football-stats-API");
-<<<<<<< HEAD
-    footballstatsAPI.register(app, dbfootballstats,checkApiKey);
-});
+    footballstatsAPI.register(app, dbfootballstats,secure.checkApiKey);
 
-
-
-var dbbasketballstatsURL = "mongodb://antlopsou:12345@ds119049.mlab.com:19049/sos1718-als-sandbox";
-=======
-    footballstatsAPI.register(app, dbfootballstats, secure.checkApiKey);
->>>>>>> 9d2f3ded078992dd72a8358ffa55113571ee0645
 
 
 
@@ -48,14 +40,11 @@ var dbbasketballstatsURL = "mongodb://antlopsou:12345@ds119049.mlab.com:19049/so
     var dbBaseball = mlabs.db("baseball-stats");
     var dbbaseballstats = dbBaseball.collection("baseball-stats");
     var baseballstatsAPI = require("./baseball-stats-API");
-<<<<<<< HEAD
+    baseballstatsAPI.register(app, dbbaseballstats, secure.checkApiKey);
     baseballstatsAPI.register(app, dbbaseballstats);
    
-});
 
-=======
-    baseballstatsAPI.register(app, dbbaseballstats, secure.checkApiKey);
->>>>>>> 9d2f3ded078992dd72a8358ffa55113571ee0645
+
 
 
 /*Si se intenta acceder a la API con…
