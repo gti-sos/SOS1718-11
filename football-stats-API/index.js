@@ -42,29 +42,30 @@ var initialfootballstats = [{
 footballstatsAPI.register= function(app, dbfootballstats,checkApiKey){
     console.log("Registering router for Football Stats API...");
     
-    // SEARCH FUNCTION
+    
+    var buscador = function(db, aux_set, param_from, param_to, param_stadium, param_date, param_goal, param_corner, param_tc, param_fault) {
 
-/*var buscador = function(base, conjuntoauxiliar, desde, hasta, param_stadium, param_date) {
+        console.log("Búsqueda con parametros: from = " + param_from + " ,to = " + param_to + ", stadium = " + param_stadium + ", date = " + param_date + ", goal = " + param_goal, ", corner = " + param_corner, ", fault = " + param_fault,  + ".");
 
-    var from = parseInt(desde);
-    var to = parseInt(hasta);
-
-
-    for (var j = 0; j < base.length; j++) {
+        var from = new Date(param_from);
+        var to = new Date(param_to);
+        var goal = parseInt(param_goal);
+        var corner = parseInt(param_corner);
+        var fault = parseInt(param_fault);
         
-        var date= new Date(base[j].date);
-        var stadium = base[j].stadium;
+if (param_from != undefined || param_to != undefined || param_stadium != undefined || param_date != undefined) {
+    
+    for(var j = 0; j< base.length; j++){
         
-        if (to >= anyo && from <= anyo) {
-
-            conjuntoauxiliar.push(base[j]);
+        var date= new Date(db[j].date);
+        var stadium= db[j].stadium;
+        
+        if(param_from !=undefined && param_to != undefined && param_stadium != undefined && param_date== undefined){
+            if(f <= date && t>= date &&)
         }
     }
-
-    return conjuntoauxiliar;
-
-};*/
     
+   
     // Inicializamos la base de datos
     
     app.get(BASE_API_PATH+"/football-stats/loadInitialData", (req,res)=>{
@@ -89,18 +90,7 @@ footballstatsAPI.register= function(app, dbfootballstats,checkApiKey){
     });
     
     //Get a un recurso base
-      // FUNCION PAGINACIÓN
-  
-var insertar = function(elements,array,limit,offset){
-    var i = offset;
-    var ii = limit;
-    while(ii>0){
-        array.push(elements[i]);
-        ii--;
-        i++;
-    }
-    return elements;
-};
+    
     
     app.get(BASE_API_PATH+ "/football-stats", (req, res)=>{
         if(!checkApiKey(req,res)) return;
