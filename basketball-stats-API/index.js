@@ -288,7 +288,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 }
                 else {
                     if (basketballstats.length === 0) {
-                        res.sendStatus(404);
+                        res.sendStatus(204);
                     }
 
                     if (from || to || stadium || date || fc || sc || tc || frc) {
@@ -421,7 +421,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 }
                 else {
                     if (basketballstats.length == 0) {
-                        res.sendStatus(204);
+                        res.sendStatus(404);
                         return;
                     }
                     if (from || to || date || fc || sc || tc || frc) {
