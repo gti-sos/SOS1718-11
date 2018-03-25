@@ -7,66 +7,66 @@ module.exports = basketballstatsAPI;
 var initialBasketballstats = [{
         "stadium": "boston",
         "date": "2018-02-27",
-        "mm-first-c": 49,
-        "mm-second-c": 15,
-        "mm-third-c": 36,
-        "mm-fourth-c": 42
+        "first": 49,
+        "second": 15,
+        "third": 36,
+        "fourth": 42
     },
     {
         "stadium": "charlote",
         "date": "2018-03-09",
-        "mm-first-c": 64,
-        "mm-second-c": 60,
-        "mm-third-c": 57,
-        "mm-fourth-c": 55
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
     },
     {
         "stadium": "boston",
         "date": "2018-03-09",
-        "mm-first-c": 64,
-        "mm-second-c": 60,
-        "mm-third-c": 57,
-        "mm-fourth-c": 55
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
     },
     {
         "stadium": "miami",
         "date": "2018-03-09",
-        "mm-first-c": 57,
-        "mm-second-c": 45,
-        "mm-third-c": 45,
-        "mm-fourth-c": 66
+        "first": 57,
+        "second": 45,
+        "third": 45,
+        "fourth": 66
     },
-        {
+    {
         "stadium": "boston",
         "date": "2018-04-09",
-        "mm-first-c": 64,
-        "mm-second-c": 60,
-        "mm-third-c": 57,
-        "mm-fourth-c": 55
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
     },
     {
         "stadium": "toronto",
         "date": "2018-03-09",
-        "mm-first-c": 63,
-        "mm-second-c": 43,
-        "mm-third-c": 54,
-        "mm-fourth-c": 47
+        "first": 63,
+        "second": 43,
+        "third": 54,
+        "fourth": 47
     },
     {
         "stadium": "ocklahoma",
         "date": "2018-03-09",
-        "mm-first-c": 54,
-        "mm-second-c": 38,
-        "mm-third-c": 68,
-        "mm-fourth-c": 47
+        "first": 54,
+        "second": 38,
+        "third": 68,
+        "fourth": 47
     },
     {
         "stadium": "toronto",
         "date": "2018-05-09",
-        "mm-first-c": 63,
-        "mm-second-c": 43,
-        "mm-third-c": 54,
-        "mm-fourth-c": 47
+        "first": 63,
+        "second": 43,
+        "third": 54,
+        "fourth": 47
     }
 ];
 
@@ -81,82 +81,150 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     console.log("Registering routes for Basketball Stats API...");
 
 
-    var buscador = function(base, aux_set, param_from, param_to, param_stadium, param_date) {
+    var buscador = function(base, aux_set, param_from, param_to, param_stadium, param_date, param_fc, param_sc, param_tc, param_frc) {
 
-        console.log("Búsqueda con parametros: from = " + param_from + " ,to = " + param_to + ", stadium = " + param_stadium + ", date = " + param_date + ".")
-        
+        console.log("Búsqueda con parametros: from = " + param_from + " ,to = " + param_to + ", stadium = " + param_stadium + ", date = " + param_date + ", first = " + param_fc, ", second = " + param_sc, ", third = " + param_tc, ", fourth = " + param_frc + ".");
+
         var f = new Date(param_from);
         var t = new Date(param_to);
+        var fc = parseInt(param_fc);
+        var sc = parseInt(param_sc);
+        var tc = parseInt(param_tc);
+        var frc = parseInt(param_frc);
 
-        for (var j = 0; j < base.length; j++) {
+        if (param_from != undefined || param_to != undefined || param_stadium != undefined || param_date != undefined) {
 
-            var date = new Date(base[j].date);
-            var stadium = base[j].stadium;
-            
-            // FROM + TO + STADIUM
-            if (param_from != undefined && param_to != undefined && param_stadium != undefined && param_date == undefined) {
-                
-                if (f <= date && t >= date && param_stadium == stadium) {
-                        aux_set.push(base[j]);
-                }
-                
-            // FROM + STADIUM
-            }else if (param_from != undefined && param_to == undefined && param_stadium != undefined && param_date == undefined) {
-                
-                if (f <= date && param_stadium == stadium) {
-                        aux_set.push(base[j]);
-                }
-            
-            // TO + STADIUM
-            }else if (param_from == undefined && param_to != undefined && param_stadium != undefined && param_date == undefined) {
-               
-                if (t >= date && param_stadium == stadium) {
-                        aux_set.push(base[j]);
-                }
-                
-            //FROM + TO
-            }else if (param_from != undefined && param_to != undefined && param_stadium == undefined && param_date == undefined) {
-                
-                if (f <= date && t >= date) {
-                        aux_set.push(base[j]);
-                }
-            
-            // FROM
-            }else if (param_from != undefined && param_to == undefined && param_stadium == undefined && param_date == undefined) {
-               
-                if (f <= date) {
-                        aux_set.push(base[j]);
-                }
-            
-            // TO
-            }else if (param_from == undefined && param_to != undefined && param_stadium == undefined && param_date == undefined) {
-               
-                if (t >= date) {
-                        aux_set.push(base[j]);
-                }    
-            // STADIUM + DATE    
-            }else if (param_from == undefined && param_to == undefined && param_stadium != undefined && param_date != undefined) {
-                if (param_stadium == stadium && param_date == base[j].date) {
-                        aux_set.push(base[j]);;
-                } 
-            
-            // STADIUM   
-            }else if(param_from == undefined && param_to == undefined && param_stadium != undefined && param_date == undefined){
-                
-                if (param_stadium == stadium) {
-                        aux_set.push(base[j]);
-                }
-            
-            // DATE    
-            }else if (param_from == undefined && param_to == undefined && param_stadium == undefined && param_date != undefined) {
+            for (var j = 0; j < base.length; j++) {
 
-                if (param_date == base[j].date) {
+                var date = new Date(base[j].date);
+                var stadium = base[j].stadium;
+
+                // FROM + TO + STADIUM
+                if (param_from != undefined && param_to != undefined && param_stadium != undefined && param_date == undefined) {
+
+                    if (f <= date && t >= date && param_stadium == stadium) {
                         aux_set.push(base[j]);
-                }                
+                    }
+
+                    // FROM + STADIUM
+                }
+                else if (param_from != undefined && param_to == undefined && param_stadium != undefined && param_date == undefined) {
+
+                    if (f <= date && param_stadium == stadium) {
+                        aux_set.push(base[j]);
+                    }
+
+                    // TO + STADIUM
+                }
+                else if (param_from == undefined && param_to != undefined && param_stadium != undefined && param_date == undefined) {
+
+                    if (t >= date && param_stadium == stadium) {
+                        aux_set.push(base[j]);
+                    }
+
+                    //FROM + TO
+                }
+                else if (param_from != undefined && param_to != undefined && param_stadium == undefined && param_date == undefined) {
+
+                    if (f <= date && t >= date) {
+                        aux_set.push(base[j]);
+                    }
+
+                    // FROM
+                }
+                else if (param_from != undefined && param_to == undefined && param_stadium == undefined && param_date == undefined) {
+
+                    if (f <= date) {
+                        aux_set.push(base[j]);
+                    }
+
+                    // TO
+                }
+                else if (param_from == undefined && param_to != undefined && param_stadium == undefined && param_date == undefined) {
+
+                    if (t >= date) {
+                        aux_set.push(base[j]);
+                    }
+                    // STADIUM + DATE    
+                }
+                else if (param_from == undefined && param_to == undefined && param_stadium != undefined && param_date != undefined) {
+                    if (param_stadium == stadium && param_date == base[j].date) {
+                        aux_set.push(base[j]);
+                    }
+
+                    // STADIUM   
+                }
+                else if (param_from == undefined && param_to == undefined && param_stadium != undefined && param_date == undefined) {
+
+                    if (param_stadium == stadium) {
+                        aux_set.push(base[j]);
+                    }
+
+                    // DATE    
+                }
+                else if (param_from == undefined && param_to == undefined && param_stadium == undefined && param_date != undefined) {
+
+                    if (param_date == base[j].date) {
+                        aux_set.push(base[j]);
+                    }
+                }
+
+            }
+            
+            if ((param_fc != undefined || param_sc != undefined || param_tc != undefined || param_frc != undefined) && aux_set.length > 0 ) {  
+                
+                
+                for (var j = 0; j < aux_set.length; j++) {
+                    if (param_fc != undefined && param_sc == undefined && param_tc == undefined && param_frc == undefined && aux_set.length >= 0 ) {
+                        if (aux_set[j].first != param_fc) {
+                            aux_set.splice(j, 1);
+                        }
+                    }
+                    else if (param_fc == undefined && param_sc != undefined && param_tc == undefined && param_frc == undefined && aux_set.length >= 0 ) {
+                        if (aux_set[j].second != param_sc) {
+                            aux_set.splice(j, 1);
+                        }
+                    }
+                    else if (param_fc == undefined && param_sc == undefined && param_tc != undefined && param_frc == undefined && aux_set.length >= 0 ) {
+                        if (aux_set[j].third != param_tc) {
+                            aux_set.splice(j, 1);
+                        }
+                    }
+                    else if (param_fc == undefined && param_sc == undefined && param_tc == undefined && param_frc != undefined && aux_set.length >= 0 ) {
+                        if (aux_set[j].fourth != param_frc) {
+                            aux_set.splice(j, 1);
+                        }
+                    }
+                }
+                
             }
 
         }
+        else if (param_fc != undefined || param_sc != undefined || param_tc != undefined || param_frc != undefined) {
 
+            for (var i = 0; i < base.length; i++) {
+                if (param_fc != undefined && param_sc == undefined && param_tc == undefined && param_frc == undefined) {
+                    if (base[i].first == param_fc) {
+                        aux_set.push(base[i]);
+                    }
+                }
+                else if (param_fc == undefined && param_sc != undefined && param_tc == undefined && param_frc == undefined) {
+                    if (base[i].second == param_sc) {
+                        aux_set.push(base[i]);
+                    }
+                }
+                else if (param_fc == undefined && param_sc == undefined && param_tc != undefined && param_frc == undefined) {
+                    if (base[i].third == param_tc) {
+                        aux_set.push(base[i]);
+                    }
+                }
+                else if (param_fc == undefined && param_sc == undefined && param_tc == undefined && param_frc != undefined) {
+                    if (base[i].fourth == param_frc) {
+                        aux_set.push(base[i]);
+                    }
+                }
+            }
+        }
         return aux_set;
 
     };
@@ -171,7 +239,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
-            };
+            }
 
         });
         res.sendStatus(201);
@@ -182,7 +250,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
     app.get(BASE_API_PATH + "/basketball-stats/docs", (req, res) => {
         if (!checkApiKey(req, res)) return;
-        res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVnbBxxs")
+        res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVtvqYrC");
     });
 
 
@@ -202,6 +270,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
         var to = req.query.toDate;
         var stadium = req.query.stadium;
         var date = req.query.date;
+        var fc = req.query.fc;
+        var sc = req.query.sc;
+        var tc = req.query.tc;
+        var frc = req.query.frc;
+
         var aux = [];
         var aux2 = [];
 
@@ -217,17 +290,12 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                     if (basketballstats.length === 0) {
                         res.sendStatus(404);
                     }
-//                    console.log("INFO: Sending basketballstats: " + JSON.stringify(basketballstats, 2, null));
 
-                    if (from || to || stadium || date) {
+                    if (from || to || stadium || date || fc || sc || tc || frc) {
 
-                        aux = buscador(basketballstats, aux, from, to, stadium, date);
+                        aux = buscador(basketballstats, aux, from, to, stadium, date, fc, sc, tc, frc);
                         if (aux.length > 0) {
                             aux2 = aux.slice(offset, offset + limit);
-/*                            console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux, 2, null));
-                            console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(basketballstats, 2, null));
-                          console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux2, 2, null));
-*/                          
                             res.send(aux2);
 
                         }
@@ -254,14 +322,14 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                         res.sendStatus(204);
                         return;
                     }
-//                    console.log("INFO: Sending results: " + JSON.stringify(basketballstats, 2, null));
-                    if (from || to || stadium || date) {
-                        aux = buscador(basketballstats, aux, from, to, stadium, date);
+                    if (from || to || stadium || date || fc || sc || tc || frc) {
+                        aux = buscador(basketballstats, aux, from, to, stadium, date, fc, sc, tc, frc);
                         if (aux.length > 0) {
-                            if(stadium!=undefined && date!=undefined){
+                            if (stadium != undefined && date != undefined) {
                                 res.send(aux[0]);
-                            }else{
-                            res.send(aux);
+                            }
+                            else {
+                                res.send(aux);
                             }
                         }
                         else {
@@ -306,7 +374,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             else if (basketballstats.length == 0) {
                 res.sendStatus(404);
                 return;
-            };
+            }
             console.log(Date() + " - GET /basketball-stats " + parametro);
             res.send(basketballstats);
         });
@@ -328,7 +396,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             else if (basketballstats.length == 0) {
                 res.sendStatus(404);
                 return;
-            };
+            }
             console.log(Date() + " - GET /basketball-stats " + stadium + "/" + date);
             res.send(basketballstats[0]);
         });
@@ -355,15 +423,17 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 res.sendStatus(409);
                 return;
             }
-            dbbasketballstats.insert(basketballstat, function(err, newDoc) {
-                if (err) {
-                    console.error("Error accesing DB");
-                    res.sendStatus(500);
-                    return;
-                };
-                res.sendStatus(201);
-                console.log("INSERTED " + initialBasketballstats.length);
-            });
+            else {
+                dbbasketballstats.insert(basketballstat, function(err, newDoc) {
+                    if (err) {
+                        console.error("Error accesing DB");
+                        res.sendStatus(500);
+                        return;
+                    }
+                    res.sendStatus(201);
+                    console.log("INSERTED " + initialBasketballstats.length);
+                });
+            }
 
         });
     });
@@ -408,7 +478,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             else if (numUpdated.result.n == 0) {
                 res.sendStatus(404);
                 return;
-            };
+            }
             console.log("UPDATED " + numUpdated.result.n);
             res.sendStatus(200);
         });
@@ -458,7 +528,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             else if (numRemoved.result.n == 0) {
                 res.sendStatus(404);
                 return;
-            };
+            }
             console.log("DELETED " + numRemoved.result.n);
             res.sendStatus(200);
 
@@ -502,7 +572,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 console.error("Error accesing DB");
                 res.sendStatus(500);
                 return;
-            };
+            }
             console.log("DELETED " + numRemoved.result.n);
             res.sendStatus(200);
         });
