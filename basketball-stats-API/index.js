@@ -150,19 +150,6 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 else if (param_from == undefined && param_to == undefined && param_stadium != undefined && param_date != undefined) {
                     if (param_stadium == stadium && param_date == base[j].date) {
                         aux_set.push(base[j]);
-
-                }    
-            // STADIUM + DATE    
-            }else if (param_from == undefined && param_to == undefined && param_stadium != undefined && param_date != undefined) {
-                if (param_stadium == stadium && param_date == base[j].date) {
-                        aux_set.push(base[j]);
-                } 
-            
-            // STADIUM   
-            }else if(param_from == undefined && param_to == undefined && param_stadium != undefined && param_date == undefined){
-                
-                if (param_stadium == stadium) {
-
                     }
 
                     // STADIUM   
@@ -170,7 +157,6 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 else if (param_from == undefined && param_to == undefined && param_stadium != undefined && param_date == undefined) {
 
                     if (param_stadium == stadium) {
-
                         aux_set.push(base[j]);
                     }
 
@@ -256,7 +242,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             }
 
         });
-        res.sendStatus(200);
+        res.sendStatus(201);
         console.log("INSERTED " + initialBasketballstats.length);
     });
 
@@ -310,12 +296,6 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                         aux = buscador(basketballstats, aux, from, to, stadium, date, fc, sc, tc, frc);
                         if (aux.length > 0) {
                             aux2 = aux.slice(offset, offset + limit);
-
-/*                            console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux, 2, null));
-                            console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(basketballstats, 2, null));
-                          console.log("INFO: Sending results with from and to and limit and offset: " + JSON.stringify(aux2, 2, null));
-*/
-
                             res.send(aux2);
 
                         }
@@ -345,16 +325,12 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                     if (from || to || stadium || date || fc || sc || tc || frc) {
                         aux = buscador(basketballstats, aux, from, to, stadium, date, fc, sc, tc, frc);
                         if (aux.length > 0) {
-
-                            res.send(aux);
-
                             if (stadium != undefined && date != undefined) {
                                 res.send(aux[0]);
                             }
                             else {
                                 res.send(aux);
                             }
-
                         }
                         else {
                             res.sendStatus(404); //No content
