@@ -233,17 +233,22 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     // Inicializa DB
 
     app.get(BASE_API_PATH + "/basketball-stats/loadInitialData", (req, res) => {
-        if (!checkApiKey(req, res)) return;
-        dbbasketballstats.insert(initialBasketballstats, function(err, newDoc) {
-            if (err) {
-                console.error("Error accesing DB");
-                res.sendStatus(500);
-                return;
-            }
-
-        });
-        res.sendStatus(201);
-        console.log("INSERTED " + initialBasketballstats.length);
+        if (!checkApiKey(req, res)) {
+            return;
+        }
+        else {
+            dbbasketballstats.insert(initialBasketballstats, function(err, newDoc) {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }
+                else {
+                    res.sendStatus(201);
+                    console.log("INSERTED " + initialBasketballstats.length);
+                }
+            });
+        }
     });
 
     // GET a basketball-help
@@ -290,8 +295,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                     if (basketballstats.length === 0) {
                         res.sendStatus(204);
                     }
-
-                    if (from || to || stadium || date || fc || sc || tc || frc) {
+                    else if (from || to || stadium || date || fc || sc || tc || frc) {
 
                         aux = buscador(basketballstats, aux, from, to, stadium, date, fc, sc, tc, frc);
                         if (aux.length > 0) {
@@ -322,7 +326,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                         res.sendStatus(204);
                         return;
                     }
-                    if (from || to || stadium || date || fc || sc || tc || frc) {
+                    else if (from || to || stadium || date || fc || sc || tc || frc) {
                         aux = buscador(basketballstats, aux, from, to, stadium, date, fc, sc, tc, frc);
                         if (aux.length > 0) {
                             if (stadium != undefined && date != undefined) {
@@ -392,8 +396,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                     if (basketballstats.length === 0) {
                         res.sendStatus(404);
                     }
-
-                    if (from || to || date || fc || sc || tc || frc) {
+                    else if (from || to || date || fc || sc || tc || frc) {
 
                         aux = buscador(basketballstats, aux, from, to, stadium, date, fc, sc, tc, frc);
                         if (aux.length > 0) {
@@ -424,7 +427,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                         res.sendStatus(404);
                         return;
                     }
-                    if (from || to || date || fc || sc || tc || frc) {
+                    else if (from || to || date || fc || sc || tc || frc) {
                         aux = buscador(basketballstats, aux, from, to, stadium, date, fc, sc, tc, frc);
                         if (aux.length > 0) {
                             res.send(aux);
@@ -475,8 +478,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 res.sendStatus(404);
                 return;
             }
-            console.log(Date() + " - GET /basketball-stats " + stadium + "/" + date);
-            res.send(basketballstats[0]);
+            else {
+                console.log(Date() + " - GET /basketball-stats " + stadium + "/" + date);
+                res.send(basketballstats[0]);
+            }
+
         });
     });
 
@@ -513,8 +519,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                             res.sendStatus(500);
                             return;
                         }
-                        res.sendStatus(201);
-                        console.log("INSERTED " + initialBasketballstats.length);
+                        else {
+                            res.sendStatus(201);
+                            console.log("INSERTED " + initialBasketballstats.length);
+                        }
+
                     });
                 }
 
@@ -563,8 +572,10 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                     res.sendStatus(404);
                     return;
                 }
-                console.log("UPDATED " + numUpdated.result.n);
-                res.sendStatus(200);
+                else {
+                    console.log("UPDATED " + numUpdated.result.n);
+                    res.sendStatus(200);
+                }
             });
         }
     });
@@ -614,9 +625,10 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 res.sendStatus(404);
                 return;
             }
-            console.log("DELETED " + numRemoved.result.n);
-            res.sendStatus(200);
-
+            else {
+                console.log("DELETED " + numRemoved.result.n);
+                res.sendStatus(200);
+            }
         });
     });
 
@@ -638,10 +650,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             else if (numRemoved.result.n == 0) {
                 res.sendStatus(404);
                 return;
-            };
-            console.log("DELETED " + numRemoved.result.n);
-            res.sendStatus(200);
-
+            }
+            else {
+                console.log("DELETED " + numRemoved.result.n);
+                res.sendStatus(200);
+            }
         });
     });
 
@@ -658,8 +671,10 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 res.sendStatus(500);
                 return;
             }
-            console.log("DELETED " + numRemoved.result.n);
-            res.sendStatus(200);
+            else {
+                console.log("DELETED " + numRemoved.result.n);
+                res.sendStatus(200);
+            }
         });
     });
 
