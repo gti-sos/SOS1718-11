@@ -547,16 +547,11 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
         var basketballstat = req.body;
         console.log(Date() + " - PUT /basketball-stats/" + stadium);
 
-        if (!basketballstat.stadium || !basketballstat.date || !basketballstat.first || !basketballstat.second || !basketballstat.third || !basketballstat.fourth) {
+        if (!basketballstat.stadium || !basketballstat.date || !basketballstat.first || !basketballstat.second || !basketballstat.third || !basketballstat.fourth || stadium != basketballstat.stadium || date != basketballstat.date) {
             res.sendStatus(400);
             return;
         }
         else {
-            if (stadium != basketballstat.stadium || date != basketballstat.date) {
-                res.sendStatus(400);
-                return;
-
-            }
             dbbasketballstats.update({ "stadium": stadium, "date": date }, basketballstat, (err, numUpdated) => {
                 if (err) {
                     console.error("Error accesing DB");
