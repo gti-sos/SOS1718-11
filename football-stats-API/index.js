@@ -235,7 +235,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
                 }
                 else {
                     if (footballstats.length === 0) {
-                        res.sendStatus(204);
+                        res.sendStatus(404);
                     }
 
                     if (from || to || stadium || date || goal || corner || fault) {
