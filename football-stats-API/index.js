@@ -202,7 +202,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
 
     app.get(BASE_API_PATH + "/football-stats/docs", (req, res) => {
         if (!checkApiKey(req, res)) return;
-        res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYgit DKSG");
+        res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYDKSG");
     });
 
     //Get a un recurso base
@@ -404,6 +404,12 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
         if (!checkApiKey(req, res)) return;
         console.log(Date() + " - POST /football-stats");
         var footballstat = req.body;
+        
+        if (!footballstat.stadium || !footballstat.date ||!footballstat.goal || !footballstat.corner || !footballstat.fault ) {
+            res.sendStatus(400);
+            return;
+
+        }else{
 
         dbfootballstats.find({ "stadium": footballstat.stadium, "date": footballstat.date }).toArray((err, footballstats) => {
             if (err) {
@@ -414,18 +420,23 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
             else if (footballstats.length != 0) {
                 res.sendStatus(409);
                 return;
-            }
+            }else{
             dbfootballstats.insert(footballstat, function(err, newDoc) {
                 if (err) {
                     console.error("Error accesing DB");
                     res.sendStatus(500);
                     return;
-                }
+                }else{
+                    
+                
                 res.sendStatus(201);
                 console.log("INSERTED " + initialfootballstats.length);
+                }
             });
+        }
 
         });
+    }
     });
 
 
@@ -448,11 +459,11 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
 
         console.log(Date() + " - PUT /football-stats/" + stadium + date);
 
-        if (stadium != footballstat.stadium || date != footballstat.date) {
-            res.sendStatus(409);
+        if (stadium != footballstat.stadium || date != footballstat.date ||!footballstat.stadium || !footballstat.date ||!footballstat.goal || !footballstat.corner || !footballstat.fault ) {
+            res.sendStatus(400);
             return;
 
-        }
+        }else{
 
         dbfootballstats.update({ "stadium": stadium, "date": date }, footballstat, (err, numUpdated) => {
             if (err) {
@@ -464,10 +475,12 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
                 console.log("error");
                 res.sendStatus(404);
                 return;
-            }
+            }else{
             console.log("Updated: " + numUpdated.result.n);
             res.sendStatus(200);
+            }
         });
+        }
     });
 
 
@@ -476,7 +489,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     app.put(BASE_API_PATH + "/football-stats/:data", (req, res) => {
         if (!checkApiKey(req, res)) return;
         var data = req.params.data;
-        console.log(Date() + " - POST /football-stats/" + data);
+        console.log(Date() + " - PUT /football-stats/" + data);
         res.sendStatus(405);
 
     });
