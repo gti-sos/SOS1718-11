@@ -209,12 +209,12 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
 
 
-    // POST a recurso base
 
     app.post(BASE_API_PATH + "/baseball-stats", (req, res) => {
         if (!checkApiKey(req, res)) return;
         console.log(Date() + " - POST /baseball-stats");
         var baseballstat = req.body;
+
 
         if (!baseballstat.stadium || !baseballstat.date || !baseballstat.hit || !baseballstat.run || !baseballstat.error || Object.keys(baseballstat).length != 5) {
             res.sendStatus(400);
