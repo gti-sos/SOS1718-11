@@ -18,19 +18,13 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
         console.error("Error accesing DB");
         process.exit(1);
     }
-<<<<<<< HEAD
-/*
-    console.log("Connected to Football Stats DB");
-=======
 
- /*   console.log("Connected to Football Stats DB");
->>>>>>> 886bd9aa044be08c5a2d1a6662fcc1b43bca51c8
+    console.log("Connected to Football Stats DB");
     var dbFootball = mlabs.db("sos1718-als-sandbox");
     var dbfootballstats = dbFootball.collection("football-stats");
     var footballstatsAPI = require("./football-stats-API");
     footballstatsAPI.register(app, dbfootballstats,secure.checkApiKey);
 
-*/
 
 
     console.log("Connected to Basketball Stats DB");
@@ -38,29 +32,16 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
     var dbbasketballstats = dbBasketball.collection("basketball-stats");
     var basketballstatsAPI = require("./basketball-stats-API");
     basketballstatsAPI.register(app, dbbasketballstats, secure.checkApiKey);
-<<<<<<< HEAD
 
-/*
-=======
-*/
 
->>>>>>> 886bd9aa044be08c5a2d1a6662fcc1b43bca51c8
 
     console.log("Connected to Baseball Stats DB");
     var dbBaseball = mlabs.db("sos1718-als-sandbox");
     var dbbaseballstats = dbBaseball.collection("baseball-stats");
     var baseballstatsAPI = require("./baseball-stats-API");
     baseballstatsAPI.register(app, dbbaseballstats, secure.checkApiKey);
-    baseballstatsAPI.register(app, dbbaseballstats);
-  */ 
 
 
-
-
-/*Si se intenta acceder a la API con…
-sin apikey se debe devolver el código 401.
-con una apikey inválida se debe devolver el código 403.
-*/
 
     app.listen(port, () => {
         console.log("Server ready on port" + port + "!");
