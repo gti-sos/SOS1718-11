@@ -19,7 +19,7 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
         process.exit(1);
     }
 
-    console.log("Connected to Football Stats DB");
+ /*   console.log("Connected to Football Stats DB");
     var dbFootball = mlabs.db("sos1718-als-sandbox");
     var dbfootballstats = dbFootball.collection("football-stats");
     var footballstatsAPI = require("./football-stats-API");
@@ -33,7 +33,7 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
     var dbbasketballstats = dbBasketball.collection("basketball-stats");
     var basketballstatsAPI = require("./basketball-stats-API");
     basketballstatsAPI.register(app, dbbasketballstats, secure.checkApiKey);
-
+*/
 
 
     console.log("Connected to Baseball Stats DB");
