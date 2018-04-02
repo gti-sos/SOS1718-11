@@ -1,4 +1,5 @@
 var BASE_API_PATH = "/api/v1";
+var BASE_API_PATH_SECURE = "/api/v1/secure";
 var footballstatsAPI = {};
 module.exports = footballstatsAPI;
 
@@ -185,7 +186,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     // Inicializamos la base de datos
 
     app.get(BASE_API_PATH + "/football-stats/loadInitialData", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+        //if (!checkApiKey(req, res)) return;
         dbfootballstats.insert(initialfootballstats, function(err, newDoc) {
             if (err) {
                 console.error("Error accesing DB");
@@ -197,11 +198,12 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
         console.log("INSERTED" + initialfootballstats.length);
 
     });
+    
 
     //Get docs
 
     app.get(BASE_API_PATH + "/football-stats/docs", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+        //if (!checkApiKey(req, res)) return;
         res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYDKSG");
     });
 
@@ -209,7 +211,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
 
 
     app.get(BASE_API_PATH + "/football-stats", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+       // if (!checkApiKey(req, res)) return;
 
          var limit = parseInt(req.query.limit);
           var offset = parseInt(req.query.offset);
@@ -294,7 +296,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     //GET a recurso concreto 1 dato
 
     app.get(BASE_API_PATH + "/football-stats/:dato", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+       // if (!checkApiKey(req, res)) return;
         
           var limit = parseInt(req.query.limit);
           var offset = parseInt(req.query.offset);
@@ -379,7 +381,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     //GET a un recurso con dos parametros 
 
     app.get(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+     //   if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
 
@@ -401,7 +403,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
 
     //POST a ruta base
     app.post(BASE_API_PATH + "/football-stats", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+       // if (!checkApiKey(req, res)) return;
         console.log(Date() + " - POST /football-stats");
         var footballstat = req.body;
         
@@ -442,7 +444,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
 
     //POST a un recurso concreto (Error)
     app.post(BASE_API_PATH + "/football-stats/:stadium", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+        //if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
         console.log(Date() + " - POST /football-stats/" + stadium);
         res.sendStatus(405);
@@ -452,7 +454,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
 
     //PUT a un recurso concreto
     app.put(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+       // if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         var footballstat = req.body;
@@ -487,7 +489,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     // PUT a recurso concreto 1 parámetros
 
     app.put(BASE_API_PATH + "/football-stats/:data", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+        //if (!checkApiKey(req, res)) return;
         var data = req.params.data;
         console.log(Date() + " - PUT /football-stats/" + data);
         res.sendStatus(405);
@@ -498,7 +500,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     // PUT a recurso base
 
     app.put(BASE_API_PATH + "/football-stats", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+       // if (!checkApiKey(req, res)) return;
         console.log(Date() + " - PUT /football-stats");
         res.sendStatus(405);
     });
@@ -507,7 +509,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     // DELETE a recurso concreto 1 parámetro
 
     app.delete(BASE_API_PATH + "/football-stats/:stadium", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+        //if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
 
         console.log(Date() + " - DELETE /football-stats/" + stadium);
@@ -532,7 +534,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     // DELETE a recurso concreto 2 parámetros
 
     app.delete(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+        //if (!checkApiKey(req, res)) return;
         var stadium = req.params.stadium;
         var date = req.params.date;
         console.log(Date() + " - DELETE /football-stats/" + stadium + "/" + date);
@@ -557,7 +559,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
     // DELETE a recurso base
 
     app.delete(BASE_API_PATH + "/football-stats", (req, res) => {
-        if (!checkApiKey(req, res)) return;
+        //if (!checkApiKey(req, res)) return;
 
         console.log(Date() + " - DELETE /football-stats");
 
@@ -572,4 +574,394 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
         });
     });
 
+    // Inicializamos la base de datos
+
+    app.get(BASE_API_PATH_SECURE + "/football-stats/loadInitialData", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        dbfootballstats.insert(initialfootballstats, function(err, newDoc) {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+        });
+        res.sendStatus(200);
+        console.log("INSERTED" + initialfootballstats.length);
+
+    });
+    
+
+    //Get docs
+
+    app.get(BASE_API_PATH_SECURE + "/football-stats/docs", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        res.redirect("https://documenter.getpostman.com/view/1806181/collection/RVnYDKSG");
+    });
+
+    //Get a un recurso base
+
+
+    app.get(BASE_API_PATH_SECURE + "/football-stats", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+
+         var limit = parseInt(req.query.limit);
+          var offset = parseInt(req.query.offset);
+          var from = req.query.fromDate;
+          var to = req.query.toDate;
+          var stadium = req.query.stadium;
+          var date = req.query.date;
+          var goal = req.query.goal;
+          var corner = req.query.corner;
+          var fault = req.query.fault;
+          
+          var aux = [];
+          var aux2= [];
+
+      
+    
+        if (limit || offset>=0) {
+            console.log("INFO : new request to /footballstats");
+            dbfootballstats.find({}).skip(offset).limit(limit).toArray(function(err, footballstats) {
+                if (err) {
+                    console.error('WARNING: Error getting data from DB');
+                    res.sendStatus(500); // internal server error
+                }
+                else {
+                    if (footballstats.length === 0) {
+                        res.sendStatus(404);
+                    }
+
+                    if (from || to || stadium || date || goal || corner || fault) {
+
+                        aux = buscador(footballstats, aux, from, to, stadium, date, goal, corner, fault);
+                        if (aux.length > 0) {
+                            aux2 = aux.slice(offset, offset + limit);
+                            res.send(aux2);
+
+                        }
+                        else {
+                            res.sendStatus(404); // No content 
+                        }
+                    }
+                    else {
+                        res.send(footballstats);
+                    }
+                }
+            });
+
+        }
+        else {
+
+            dbfootballstats.find({}).toArray(function(err, dbfootballstats) {
+                if (err) {
+                    console.error('ERROR from database');
+                    res.sendStatus(500); // internal server error
+                }
+                else {
+                    if (dbfootballstats.length == 0) {
+                        res.sendStatus(204);
+                        return;
+                    }
+                    if (from || to || stadium || date || goal || corner || fault ) {
+                        aux = buscador(dbfootballstats, aux, from, to, stadium, date, goal, corner, fault);
+                        if (aux.length > 0) {
+                            if (stadium != undefined && date != undefined) {
+                                res.send(aux[0]);
+                            }
+                            else {
+                                res.send(aux);
+                            }
+                        }
+                        else {
+                            res.sendStatus(404); //No content
+                        }
+                    }
+                    else {
+                        res.send(dbfootballstats);
+                    }
+                }
+            });
+        }
+
+    });
+    //GET a recurso concreto 1 dato
+
+    app.get(BASE_API_PATH_SECURE + "/football-stats/:dato", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        
+          var limit = parseInt(req.query.limit);
+          var offset = parseInt(req.query.offset);
+          var from = req.query.fromDate;
+          var to = req.query.toDate;
+          var stadium = req.query.stadium;
+          var date = req.query.date;
+          var goal = req.query.goal;
+          var corner = req.query.corner;
+          var fault = req.query.fault;
+          
+          var aux = [];
+          var aux2= [];
+          var dato = req.params.dato;
+          
+        if (limit || offset >= 0) {
+            dbfootballstats.find({ $or: [{ "stadium": dato }, { "date": dato }] }).skip(offset).limit(limit).toArray(function(err, footballstats) {
+
+                if (err) {
+                    console.error('WARNING: Error getting data from DB');
+                    res.sendStatus(500); // internal server error
+                }
+                else {
+                    if (footballstats.length === 0) {
+                        res.sendStatus(404);
+                    }
+
+                    if (from || to || date || goal || corner || fault) {
+
+                        aux = buscador(footballstats, aux, from, to, stadium, date, goal, corner, fault);
+                        if (aux.length > 0) {
+                            aux2 = aux.slice(offset, offset + limit);
+                            res.send(aux2);
+
+                        }
+                        else {
+                            res.sendStatus(404); // No content 
+                        }
+                    }
+                    else {
+                        res.send(footballstats);
+                    }
+                }
+            });
+
+        }
+        else {
+          
+        dbfootballstats.find({ $or: [{ "stadium": dato }, { "date": dato }] }).toArray((err, footballstats) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                
+            }else{
+             if (footballstats.length == 0) {
+                res.sendStatus(404);
+                return;
+            }
+             if (from || to || date || goal || corner || fault ) {
+                        aux = buscador(footballstats, aux, from, to, stadium, date, goal, corner, fault);
+                        if (aux.length > 0) {
+                            res.send(aux);
+                        }
+                        else {
+                            res.sendStatus(404); //No content
+                        }
+                    }
+                    else {
+            console.log(Date() + " - GET /football-stats" + dato);
+            res.send(footballstats);
+                    }
+        }
+        });
+    
+    }
+    });
+
+
+
+
+
+    //GET a un recurso con dos parametros 
+
+    app.get(BASE_API_PATH_SECURE + "/football-stats/:stadium/:date", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        var stadium = req.params.stadium;
+        var date = req.params.date;
+
+
+        dbfootballstats.find({ "stadium": stadium, "date": date }).toArray((err, footballstats) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            else if (footballstats.length == 0) {
+                res.sendStatus(404);
+                return;
+            }
+            console.log(Date(), "- GET /football-stats/" + stadium + "/" + date);
+            res.send(footballstats[0]);
+        });
+    });
+
+    //POST a ruta base
+    app.post(BASE_API_PATH_SECURE + "/football-stats", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        console.log(Date() + " - POST /football-stats");
+        var footballstat = req.body;
+        
+        if (!footballstat.stadium || !footballstat.date ||!footballstat.goal || !footballstat.corner || !footballstat.fault ) {
+            res.sendStatus(400);
+            return;
+
+        }else{
+
+        dbfootballstats.find({ "stadium": footballstat.stadium, "date": footballstat.date }).toArray((err, footballstats) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            else if (footballstats.length != 0) {
+                res.sendStatus(409);
+                return;
+            }else{
+            dbfootballstats.insert(footballstat, function(err, newDoc) {
+                if (err) {
+                    console.error("Error accesing DB");
+                    res.sendStatus(500);
+                    return;
+                }else{
+                    
+                
+                res.sendStatus(201);
+                console.log("INSERTED " + initialfootballstats.length);
+                }
+            });
+        }
+
+        });
+    }
+    });
+
+
+    //POST a un recurso concreto (Error)
+    app.post(BASE_API_PATH_SECURE + "/football-stats/:stadium", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        var stadium = req.params.stadium;
+        console.log(Date() + " - POST /football-stats/" + stadium);
+        res.sendStatus(405);
+    });
+
+
+
+    //PUT a un recurso concreto
+    app.put(BASE_API_PATH_SECURE + "/football-stats/:stadium/:date", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        var stadium = req.params.stadium;
+        var date = req.params.date;
+        var footballstat = req.body;
+
+        console.log(Date() + " - PUT /football-stats/" + stadium + date);
+
+        if (stadium != footballstat.stadium || date != footballstat.date ||!footballstat.stadium || !footballstat.date ||!footballstat.goal || !footballstat.corner || !footballstat.fault ) {
+            res.sendStatus(400);
+            return;
+
+        }else{
+
+        dbfootballstats.update({ "stadium": stadium, "date": date }, footballstat, (err, numUpdated) => {
+            if (err) {
+                console.log("Error accesing data base");
+                res.sendStatus(500);
+                return;
+            }
+            else if (numUpdated.result.n == 0) {
+                console.log("error");
+                res.sendStatus(404);
+                return;
+            }else{
+            console.log("Updated: " + numUpdated.result.n);
+            res.sendStatus(200);
+            }
+        });
+        }
+    });
+
+
+    // PUT a recurso concreto 1 parámetros
+
+    app.put(BASE_API_PATH_SECURE + "/football-stats/:data", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        var data = req.params.data;
+        console.log(Date() + " - PUT /football-stats/" + data);
+        res.sendStatus(405);
+
+    });
+
+
+    // PUT a recurso base
+
+    app.put(BASE_API_PATH_SECURE + "/football-stats", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        console.log(Date() + " - PUT /football-stats");
+        res.sendStatus(405);
+    });
+
+
+    // DELETE a recurso concreto 1 parámetro
+
+    app.delete(BASE_API_PATH_SECURE + "/football-stats/:stadium", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        var stadium = req.params.stadium;
+
+        console.log(Date() + " - DELETE /football-stats/" + stadium);
+
+        dbfootballstats.remove({ "stadium": stadium }, { multi: true }, function(err, numRemoved) {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            else if (numRemoved.result.n == 0) {
+                res.sendStatus(404);
+                return;
+            }
+            console.log("DELETED " + numRemoved.result.n);
+            res.sendStatus(200);
+
+        });
+    });
+
+
+    // DELETE a recurso concreto 2 parámetros
+
+    app.delete(BASE_API_PATH_SECURE + "/football-stats/:stadium/:date", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+        var stadium = req.params.stadium;
+        var date = req.params.date;
+        console.log(Date() + " - DELETE /football-stats/" + stadium + "/" + date);
+
+        dbfootballstats.remove({ "stadium": stadium, "date": date }, (err, numRemoved) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            else if (numRemoved.result.n == 0) {
+                res.sendStatus(404);
+                return;
+            }
+            console.log("DELETED " + numRemoved.result.n);
+            res.sendStatus(200);
+
+        });
+    });
+
+
+    // DELETE a recurso base
+
+    app.delete(BASE_API_PATH_SECURE + "/football-stats", (req, res) => {
+        if (!checkApiKey(req, res)) return;
+
+        console.log(Date() + " - DELETE /football-stats");
+
+        dbfootballstats.remove({}, { multi: true }, (err, numRemoved) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            console.log("DELETED " + numRemoved.result.n);
+            res.sendStatus(200);
+        });
+    });
 };
