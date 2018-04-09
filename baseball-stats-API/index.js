@@ -360,7 +360,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
         console.log(Date() + " - PUT /baseball-stats/" + stadium + date);
 
-        if (stadium != baseballstat.stadium || date != baseballstat.date) {
+        if (stadium != baseballstat.stadium || date != baseballstat.date || Object.keys(baseballstat).length != 5) {
             console.log("Bad request");
             res.sendStatus(400);
             return;
@@ -771,7 +771,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
         console.log(Date() + " - PUT /baseball-stats/" + stadium + date);
 
-        if (stadium != baseballstat.stadium || date != baseballstat.date) {
+        if (stadium != baseballstat.stadium || date != baseballstat.date || Object.keys(baseballstat).length != 5) {
             console.log("Bad request");
             res.sendStatus(400);
             return;
