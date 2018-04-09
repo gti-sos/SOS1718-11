@@ -194,7 +194,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
                 return;
             }
         });
-        res.sendStatus(200);
+        res.sendStatus(201);
         console.log("INSERTED" + initialfootballstats.length);
 
     });
@@ -585,7 +585,7 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
                 return;
             }
         });
-        res.sendStatus(200);
+        res.sendStatus(201);
         console.log("INSERTED" + initialfootballstats.length);
 
     });
