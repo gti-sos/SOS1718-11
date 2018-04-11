@@ -1,38 +1,18 @@
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>
-            SOS1718-11
-        </title>
-    </head>
-    <body style="background-color: #F5F1F0;font-family:Arial;" link="black" vlink="grey" alink="yellow">
-        <h1 style="background-color: #4B4A4A;text-align:center;color:white;">SOS1718-11</h1>
-        <ul>
-            <li>
-                <h2>Team</h2>
-            </li>
-            <ul>
-                <li><h3><a href="https://github.com/TITANLUX619")>Antonio López Soult</a></h3></li>
-                <li><h3><a href="https://github.com/soult91")>Mar López Soult </a></h3></li>
-                <li><h3><a href="https://github.com/lucdelcan")>Luciano Del Valle Cano </a></h3></li>
-            </ul>
-                <li><h3>Project description:</h3>Processing of data collected from matches of differents sports.</li>
-                <li><h3>Repository:</h3><a href="https://github.com/gti-sos/SOS1718-11")>SOS1718/SOS1718-11</a></li>
-                <li><h3>URL:<a href="https://sos1718-11.herokuapp.com">https://sos1718-11.herokuapp.com</a></h3></li>
-            </ul>
-        
-        
-         <h2>API</h2>
-        <ul>
-            
-        <li><a href="https://sos1718-11.herokuapp.com/api/v1/basketball-stats/docs">Antonio López Soult</a></br></li>
-        <li><a href="https://sos1718-11.herokuapp.com/api/v1/baseball-stats/docs">Mar López Soult</a></br></li>
-        <li><a href="https://sos1718-11.herokuapp.com/api/v1/football-stats/docs">Luciano Del Valle Cano</a></br></li>
-       
-        </ul>    
-    
-    </body>
+<html ng-app="StatsManagerApp">
+
+<head>
+    <title>Stats Manager</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="statsManagerApp.js"></script>
+    <script src="/basketballStats/listCtrl.js"></script>
+    <script src="/basketballStats/editCtrl.js"></script>
+</head>
+
+<body>
+        <div ng-view></div>
+</body>
 
 </html>
-                    
-             
