@@ -11,6 +11,6 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/basketball-stats/:stadium/:date", {
             templateUrl: "/basketballStats/edit.html",
             controller:"EditBasketballStatsCtrl"
-        });
+        })
         console.log("App initialized and configured");
 });

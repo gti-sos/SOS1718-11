@@ -417,7 +417,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
     // Inicializa DB
 
-    app.get(BASE_API_PATH + "/basketball-stats/loadInitialData", (req, res) => {
+    app.get(BASE_API_PATH_SECURE + "/basketball-stats/loadInitialData", (req, res) => {
         if (!checkApiKey(req, res)) return;
         dbbasketballstats.insert(initialBasketballstats, function(err, newDoc) {
             if (err) {
@@ -436,7 +436,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
     // GET a basketball-help
 
-    app.get(BASE_API_PATH + "/basketball-stats/docs", (req, res) => {
+    app.get(BASE_API_PATH_SECURE + "/basketball-stats/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVtvqYrC");
     });
 
