@@ -1,0 +1,41 @@
+<div ng-controller="ListFootballStatsCtrl">
+<h1>Football Stats </h1>
+</div>
+
+<div ng-controller="ListFootballStatsCtrl">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Stadium</th>
+            <th>date</th>
+            <th>goal</th>
+            <th>corner</th>
+            <th>fault</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input class="form-control" ng-model="newFootballStat.stadium"></td>
+            <td><input class="form-control" ng-model="newFootballStat.date"></td>
+            <td><input class="form-control" ng-model="newFootballStat.goal"></td>
+            <td><input class="form-control" ng-model="newFootballStat.corner"></td>
+            <td><input class="form-control" ng-model="newFootballStat.fault"></td>
+            <td><button type="button" class="btn btn-primary" ng-click="addFootballStat()">
+                 Add
+            </button></td>
+        </tr>
+        <tr  ng-repeat="footbalstat in initialfootballstats">
+            <td>{{footbalstat.stadium}}</td>
+            <td>{{footbalstat.date}}</td>
+            <td>{{footbalstat.goal}}</td>
+            <td>{{footbalstat.corner}}</td>
+            <td>{{footbalstat.fault}}</td>
+            <td><button type="button" class="btn btn-danger" ng-click="deleteFootballStat(footbalstat.stadium,footbalstat.date)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr/>
+<h9><i>{{status}}</i></h9>
+</div>

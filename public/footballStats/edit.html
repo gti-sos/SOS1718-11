@@ -1,0 +1,30 @@
+<h1>Edit Football Stats</h1>
+<div ng-controller="EditFootballStatsCtrl">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Stadium</th>
+            <th>date</th>
+            <th>goal</th>
+            <th>corner</th>
+            <th>fault</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{updatedFootballStat.stadium}}</td>
+            <td>{{updatedFootballStat.date}}</td>
+            <td><input class="form-control" ng-model="updatedFootballStat.goal"></td>
+            <td><input class="form-control" ng-model="updatedFootballStat.corner"></td>
+            <td><input class="form-control" ng-model="updatedFootballStat.fault"></td>
+            <td><button type="button" class="btn btn-primary" ng-click="updateFootballStat()">
+                 Update
+            </button></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr/>
+<h9><i>{{status}}</i></h9>
+</div>
