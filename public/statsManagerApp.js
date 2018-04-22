@@ -17,8 +17,8 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             controller: "ListBaseballStatsCtrl"
         })
         .when("/baseball-stats/:stadium/:date", {
-        templateUrl: "/baseballStats/edit.html",
-        controller: "EditBaseballStatsCtrl"
+            templateUrl: "/baseballStats/edit.html",
+            controller: "EditBaseballStatsCtrl"
         })
         .when("/football-stats", {
             templateUrl: "footballStats/list.html",
