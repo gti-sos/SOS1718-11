@@ -11,7 +11,7 @@
              $http.post(api, $scope.newBaseballStat).then(function(response) {
                  $scope.status = "Status: " + response.status;
                  console.log(JSON.stringify(response, null, 2));
-                // getBaseballStats();
+                 getBaseballStats();
 
              });
          };
@@ -20,7 +20,7 @@
              console.log("Stat to be deleted");
              $http.delete(api + "/" + stadium + "/" + date).then(function(response) {
                  $scope.status = "Status: " + response.status;
-               //  getBaseballStats();
+                 getBaseballStats();
              });
          };
 
