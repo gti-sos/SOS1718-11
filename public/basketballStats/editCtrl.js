@@ -3,10 +3,12 @@
 
 angular
     .module("StatsManagerApp")
-    .controller("EditBasketballStatsCtrl", ["$scope", "$http", "$routeParams", "$rootScope", function($scope, $http, $routeParams, $rootScope) {
+    .controller("EditBasketballStatsCtrl", ["$scope", "$http", "$routeParams", "$rootScope","$location", function($scope, $http, $routeParams, $rootScope, $location) {
         console.log("EditBasketballStatsCtrl initialized!");
         var api = "/api/v2/secure/basketball-stats";
         //var api="/api/v2/basketball-stats";
+        
+        if(!$rootScope.apikey) $rootScope.apikey = "scraping";
 
         function refresh() {
             $http.get(api + "/" + $routeParams.stadium + "/" + $routeParams.date + "?apikey=" + $rootScope.apikey).then(function(response) {
@@ -25,7 +27,7 @@ angular
             updatedStatAux.second = parseInt($scope.updatedStat.second);
             updatedStatAux.third = parseInt($scope.updatedStat.third);
             updatedStatAux.fourth = parseInt($scope.updatedStat.fourth);
-            console.log($cope.updatedStat);
+            console.log($scope.updatedStat);
 
             $http.put(api + "/" + updatedStatAux.stadium + "/" + updatedStatAux.date + "?apikey=" + $rootScope.apikey, updatedStatAux).then(function(response) {
                 $scope.status = "Status: " + response.status;
@@ -38,7 +40,6 @@ angular
                         Materialize.toast('<i class="material-icons">error_outline</i> Error getting data!', 2500);
                         break;
                 }
-
             });
         };
         refresh();
