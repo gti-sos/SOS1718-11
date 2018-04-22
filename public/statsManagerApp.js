@@ -6,19 +6,19 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         })
         .when("/basketball-stats", {
             templateUrl: "/basketballStats/list.html",
-            controller:"ListBasketballStatsCtrl"
+            controller: "ListBasketballStatsCtrl"
         })
         .when("/basketball-stats/:stadium/:date", {
             templateUrl: "/basketballStats/edit.html",
-            controller:"EditBasketballStatsCtrl"
+            controller: "EditBasketballStatsCtrl"
         })
         .when("/baseball-stats", {
-        templateUrl: "/baseballStats/list.html",
-        controller: "ListBaseballStatsCtrl"
+            templateUrl: "/baseballStats/list.html",
+            controller: "ListBaseballStatsCtrl"
         })
         .when("/baseball-stats/:stadium/:date", {
-        templateUrl: "/baseballStats/edit.html",
-        controller: "EditBaseballStatsCtrl"
+            templateUrl: "/baseballStats/edit.html",
+            controller: "EditBaseballStatsCtrl"
         });
-        console.log("App initialized and configured");
+    console.log("App initialized and configured");
 });

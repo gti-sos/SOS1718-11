@@ -1,0 +1,167 @@
+<div>
+    <h1>BASKETBALL STATS</h1>
+
+    <table>
+        <tr>
+            <td width="20%">
+                <div class="pagination justify-content-left">
+                    <div class=float-left>
+                        <div class="form-group">
+                            <label for="elementsPerPageForm">Elements per page (default 5):</label>
+                            <input class="form-control" style="text-align:center" id="elementsPerPageForm" ng-model="elementsPerPage" ng-change="refreshPage()" placeholder="Num Elements" />
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td width="60%">
+                <div class="pagination justify-content-center">
+                    <li class="disabled" ng-show="currentPage == 1"><a><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect" ng-hide="currentPage == 1"><a ng-click="previousPage()"><i class="material-icons">chevron_left</i></a></li>
+                    <li>Page: {{currentPage}} of {{totalPages}}</li>
+                    <li class="disabled" ng-show="currentPage == totalPages"><a><i class="material-icons">chevron_right</i></a></li>
+                    <li class="waves-effect" ng-show="currentPage != totalPages"><a href="" ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+                </div>
+            </td>
+            <td width="20%">
+                <div class="float-right">
+                    <button class="btn-floating waves-effect waves-light blue btn-sm" data-toggle="modal" onClick="$('#searchModal').modal('open');"><i class="material-icons">search</i></button>
+                </div>
+            </td>
+
+        </tr>
+    </table>
+
+
+
+
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th style="text-align:center">Stadium</th>
+                <th style="text-align:center">Date</th>
+                <th style="text-align:center">1Q Points</th>
+                <th style="text-align:center">2Q Points</th>
+                <th style="text-align:center">3Q Points</th>
+                <th style="text-align:center">4Q Points</th>
+                <th style="text-align:center">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="stat in stats">
+                <td style="text-align:center">{{stat.stadium}}</td>
+                <td style="text-align:center">{{stat.date}}</td>
+                <td style="text-align:center">{{stat.first}}</td>
+                <td style="text-align:center">{{stat.second}}</td>
+                <td style="text-align:center">{{stat.third}}</td>
+                <td style="text-align:center">{{stat.fourth}}</td>
+                <td width="15%" style="text-align:center">
+                    <a href="#!/basketball-stats/{{stat.stadium}}/{{stat.date}}" class="btn-floating waves-effect waves-light yellow darken-3"><i class="material-icons">edit</i></a>
+                    <button class="btn-floating waves-effect waves-light red" ng-click="deleteStat(stat.stadium, stat.date)"><i class="material-icons">delete</i></button>
+                </td>
+            </tr>
+    </table>
+
+
+
+    <table class="table table-hover table-dark mt-4">
+        <tr>
+            <td><input class="form-control" style="text-align:center" ng-model="newStat.stadium" placeholder="Stadium" /></td>
+            <td><input class="form-control" style="text-align:center" ng-model="newStat.date" placeholder="yyyy-mm-dd" /></td>
+            <td><input class="form-control" style="text-align:center" ng-model="newStat.first" placeholder="1Q Points" /></td>
+            <td><input class="form-control" style="text-align:center" ng-model="newStat.second" placeholder="2Q Points" /></td>
+            <td><input class="form-control" style="text-align:center" ng-model="newStat.third" placeholder="3Q Points" /></td>
+            </td>
+            <td><input class="form-control" ng-model="newStat.fourth" placeholder="4Q Points" /></td>
+            </td>
+            <td style="text-align:center"><button class="btn-floating waves-effect waves-light green" ng-click="addStat()"><i class="material-icons">add</i></button></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th  style="text-align:center">Stadium</th>
+                <th  style="text-align:center">Date</th>
+                <th  style="text-align:center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input class="form-control" style="text-align:center" ng-model="deletedStat.stadium" placeholder="Stadium" /></td>
+                <td><input class="form-control" style="text-align:center" ng-model="deletedStat.date" placeholder="yyyy-mm-dd" /></td>
+                <td style="text-align:center"><button class="btn-floating waves-effect waves-light red" ng-click="deleteStatM()"><i class="material-icons">delete</i></button></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <div class="float-right" style="margin-bottom:40px">
+        <button type="button" class="btn-floating waves-effect waves-light yellow darken-3" data-toggle="modal" onClick="$('#apikeyModal').modal('open');"><i class="material-icons">vpn_key</i></button>
+        <button class="btn-floating waves-effect waves-light red" ng-click="deleteStats()"><i class="material-icons">clear</i></button>
+        <button class="btn-floating waves-effect waves-light green" ng-click="loadInitialData()"><i class="material-icons">refresh</i></button>
+    </div>
+
+
+    <div class="fixed-action-btn">
+        <a href="#!" class="btn-floating waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+    </div>
+</div>
+
+ <div id="apikeyModal" class="modal" style="max-height: 35%" data-backdrop="false">
+        <div class="modal-content">
+            <h4>Set apikey</h4>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="form-control" type="text" id="apikey" ng-model="apikey">
+                            <label for="apikey" class="active">Apikey</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="button btn-sm btn-primary modal-action modal-close waves-effect waves-green">Set</button>
+        </div>
+    </div>
+
+
+<div id="searchModal" class="modal" style="max-height: 32%" data-backdrop="false">
+    <div class="modal-content">
+        <h4>Search Stats</h4>
+        <div>
+            <div class="row" style="margin-bottom:30px margin-top:40px">
+                <div class="col s12">
+                    <input class="form-control" style="text-align:center" ng-model="searchedStat.stadium" placeholder="Stadium">
+                </div>
+                <div class="col s12">
+                    <input class="form-control" style="text-align:center" ng-model="searchedStat.date" placeholder="Date">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s3">
+                    <input class="form-control" style="text-align:center" ng-model="searchedStat.first" placeholder="1Q Points">
+                </div>
+                <div class="col s3">
+                    <input class="form-control" style="text-align:center" ng-model="searchedStat.second" placeholder="2Q Points">
+                </div>
+                <div class="col s3">
+                    <input class="form-control" style="text-align:center" ng-model="searchedStat.third" placeholder="3Q Points">
+                </div>
+                <div class="col s3">
+                    <input class="form-control" style="text-align:center" ng-model="searchedStat.fourth" placeholder="4Q Points">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer col" style="text-align:center">
+            <button class="button btn-sm btn-primary modal-action modal-close waves-effect waves-green">Search</button>
+        </div>
+    </div>
+</div>

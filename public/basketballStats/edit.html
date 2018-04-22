@@ -1,0 +1,51 @@
+<h1>
+
+    BASKETBALL STATS</h1>
+<form>
+    <div class="form-row">
+        <div class="col-md-2 offset-sm-5 mb-3">
+            <label>Stadium</label>
+            <input class="form-control" style="text-align:center" ng-model="updatedStat.stadium" placeholder="updatedStat.stadium" readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 offset-sm-5 mb-3">
+            <label>Date</label>
+            <input class="form-control" style="text-align:center" ng-model="updatedStat.date" placeholder="updatedStat.date" readonly>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-2 offset-sm-5 mb-3">
+            <label>1Q Points</label>
+            <td><input class="form-control" style="text-align:center" ng-model="updatedStat.first" placeholder="1Q Points">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 offset-sm-5 mb-3">
+            <label>2Q Points</label>
+            <input class="form-control" style="text-align:center" ng-model="updatedStat.second" placeholder="2Q Points">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 offset-sm-5 mb-3">
+            <label>3Q Points</label>
+            <input class="form-control" style="text-align:center" ng-model="updatedStat.third" placeholder="3Q Points">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 offset-sm-5 mb-3">
+            <label>4Q Points</label>
+            <input class="form-control" style="text-align:center" ng-model="updatedStat.fourth" placeholder="4Q Points">
+        </div>
+
+    </div>
+    <div class="form-row" style="margin-bottom:40px">
+        <div class="col-md-2 offset-sm-5  mb-3 text-center">
+            <a href="#!/basketball-stats" style="text-align:center" class="btn-primary btn-lg blue" ng-click="updateStat()">Update</a>
+        </div>
+    </div>
+</form>
+<div class="fixed-action-btn">
+    <a href="#!/basketball-stats" class="btn-floating waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+</div>
