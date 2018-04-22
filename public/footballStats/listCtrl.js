@@ -4,24 +4,24 @@ angular.module("StatsManagerApp").controller("ListFootballStatsCtrl", ["$scope",
     var api ="/api/v2/football-stats";
     
     
-    $scope.addContact = function (){
-        $http.post(api,$scope.newContact).then(function (response){
+    $scope.addFootballStat = function (){
+        $http.post(api,$scope.newFootballStat).then(function (response){
             $scope.status="Status: "+ response.status;
-            getContacts();
+            getFootballStats();
         });
     }
-     $scope.deleteContact = function (name){
-         console.log("Contact to be deleted" + name);
-        $http.delete(api+"/"+name).then(function (response){
+     $scope.deleteFootballStat = function (stadium,date){
+         console.log("Football stat to be deleted" + stadium,date);
+        $http.delete(api+"/"+stadium+"/"+date).then(function (response){
              $scope.status="Status: "+ response.status;
-             getContacts();
+              getFootballStats();
         });
     }
-    function getContacts(){
+    function getFootballStats(){
         $http.get(api).then(function (response){
-            $scope.contacts = response.data;
+            $scope.initialfootballstats = response.data;
         });
     }
-    getContacts();
+    getFootballStats();
     
 }]);
