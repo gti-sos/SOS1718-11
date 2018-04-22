@@ -105,7 +105,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     // GET a basketball-help
 
     app.get(BASE_API_PATH + "/basketball-stats/docs", (req, res) => {
-        res.redirect("https://documenter.getpostman.com/view/3936462/collection/RVtvqYrC");
+        res.redirect("https://documenter.getpostman.com/view/3936462/collection/RW1XKM7N");
     });
 
 

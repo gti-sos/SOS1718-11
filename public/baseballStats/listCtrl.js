@@ -20,8 +20,12 @@
              console.log("Stat to be deleted");
              $http.delete(api + "/" + stadium + "/" + date).then(function(response) {
                  $scope.status = "Status: " + response.status;
+<<<<<<< HEAD
                 getBaseballStats();
 
+=======
+                 getBaseballStats();
+>>>>>>> 5d9aa224830928533b8c85dce990a25ca61b0d96
              });
          };
 
