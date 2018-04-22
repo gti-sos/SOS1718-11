@@ -13,12 +13,14 @@
                  
                  
                  $scope.updateBaseballStat = function(){
-                 $http.put(editURL, $scope.updatedBaseballStat).then(function (response){
+                     console.log($scope.updateBaseballStat);
+                 $http.put(editURL).then(function (response){
                     $scope.status = "Status: " + response.status;
                      
                  });
+                 
+             
                 }
-                 
-                 
-                
  }]);
+ 
+ 
