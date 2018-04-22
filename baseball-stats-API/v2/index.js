@@ -359,8 +359,8 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
 
         console.log(Date() + " - PUT /baseball-stats/" + stadium + "/" + date);
-
-        if (stadium != baseballstat.stadium || date != baseballstat.date || Object.keys(baseballstat).length != 6) {
+//|| Object.keys(baseballstat).length != 5
+        if (stadium != baseballstat.stadium || date != baseballstat.date ) {
             console.log("Bad request");
             res.sendStatus(400);
             return;

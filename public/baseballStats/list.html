@@ -1,6 +1,3 @@
-
-   
-
 <div style="background-color:#F5F1F0;color:grey" ng-controller="ListBaseballStatsCtrl">
      <h1>Baseball Stats</h1>
     <button type="button" class="btn btn-danger" ng-click="deleteAllBaseballStat()">Delete All</button>
@@ -10,8 +7,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
                 <th>Stadium</th>
+                <th>Date</th>
                 <th>Hit</th>
                 <th>Run</th>
                 <th>Error</th>
@@ -20,22 +17,20 @@
         </thead>
         <tbody>
             <tr>
-                <td><input class="form-control" ng-model="newBaseballStat.date"></td>
                 <td><input class="form-control" ng-model="newBaseballStat.stadium"></td>
+                <td><input class="form-control" ng-model="newBaseballStat.date"></td>
                 <td><input class="form-control" ng-model="newBaseballStat.hit"></td>
                 <td><input class="form-control" ng-model="newBaseballStat.run"></td>
                 <td><input class="form-control" ng-model="newBaseballStat.error"></td>
-                <td><button type="button" class="btn btn-primary" ng-click="addBaseballStat()">
-                 Add
-            </button></td>
+                <td><button type="button" class="btn btn-primary" ng-click="addBaseballStat()"> Add </button></td>
             </tr>
             <tr ng-repeat="baseballstat in initialbaseballstats">
+                <td>{{baseballstat.stadium}}</td>                
                 <td>{{baseballstat.date}}</td>
-                <td>{{baseballstat.stadium}}</td>
                 <td>{{baseballstat.hit}}</td>
                 <td>{{baseballstat.run}}</td>
                 <td>{{baseballstat.error}}</td>
-                <td><button type="button" class="btn btn-danger" ng-click="deleteBaseballStat(baseballstat.date,baseballstat.stadium)">Delete</button></td>
+                <td><button type="button" class="btn btn-danger" ng-click="deleteBaseballStat(baseballstat.date,baseballstat.stadium)"> Delete </button></td>
             </tr>
 
 
