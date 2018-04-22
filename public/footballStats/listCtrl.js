@@ -17,6 +17,15 @@ angular.module("StatsManagerApp").controller("ListFootballStatsCtrl", ["$scope",
               getFootballStats();
         });
     }
+    
+    $scope.deleteAllFootballStats = function (){
+         console.log("Football stats to be deleted all");
+        $http.delete(api).then(function (response){
+             $scope.status="Status: "+ response.status;
+              getFootballStats();
+        });
+    }
+    
     function getFootballStats(){
         $http.get(api).then(function (response){
             $scope.initialfootballstats = response.data;

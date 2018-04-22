@@ -1,6 +1,6 @@
-<div ng-controller="ListFootballStatsCtrl">
+
 <h1>Football Stats </h1>
-</div>
+
 
 <div ng-controller="ListFootballStatsCtrl">
 <table class="table">
@@ -35,7 +35,13 @@
         </tr>
     </tbody>
 </table>
+    
+        <td><button type="button" class="btn btn-danger" ng-click="deleteAllFootballStats()">Delete All</button></td>
+        <td><button type="button" class="btn btn-success" ng-click="loadInitialFootballStats()">LoadInitialData</button></td>
+    
+
 
 <hr/>
 <h9><i>{{status}}</i></h9>
+    
 </div>

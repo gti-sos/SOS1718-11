@@ -17,10 +17,6 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             controller: "ListBaseballStatsCtrl"
         })
         .when("/baseball-stats/:stadium/:date", {
-<<<<<<< HEAD
-            templateUrl: "/baseballStats/edit.html",
-            controller: "EditBaseballStatsCtrl"
-=======
         templateUrl: "/baseballStats/edit.html",
         controller: "EditBaseballStatsCtrl"
         })
@@ -31,7 +27,6 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats/:stadium/:date", {
             templateUrl: "footballStats/edit.html",
             controller: "EditFootballStatsCtrl"
->>>>>>> 01d4fb3f57e06991dcfa64cae5d87508798087cb
         });
     console.log("App initialized and configured");
 });
