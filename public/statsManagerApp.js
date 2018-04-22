@@ -4,7 +4,14 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/", {
             templateUrl: "main.html",
         })
-     
+        .when("/basketball-stats", {
+            templateUrl: "/basketballStats/list.html",
+            controller:"ListBasketballStatsCtrl"
+        })
+        .when("/basketball-stats/:stadium/:date", {
+            templateUrl: "/basketballStats/edit.html",
+            controller:"EditBasketballStatsCtrl"
+        })
         .when("/baseball-stats", {
         templateUrl: "/baseballStats/list.html",
         controller: "ListBaseballStatsCtrl"
