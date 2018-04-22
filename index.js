@@ -38,7 +38,7 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
     console.log("Connected to Baseball Stats DB");
     var dbBaseball = mlabs.db("sos1718-als-sandbox");
     var dbbaseballstats = dbBaseball.collection("baseball-stats");
-    var baseballstatsAPI = require("./baseball-stats-API");
+    var baseballstatsAPI = require("./baseball-stats-API/v2");
     baseballstatsAPI.register(app, dbbaseballstats, secure.checkApiKey);
 
 
