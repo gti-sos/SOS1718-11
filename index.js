@@ -22,7 +22,7 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
     console.log("Connected to Football Stats DB");
     var dbFootball = mlabs.db("sos1718-als-sandbox");
     var dbfootballstats = dbFootball.collection("football-stats");
-    var footballstatsAPI = require("./football-stats-API");
+    var footballstatsAPI = require("./football-stats-API/v2");
     footballstatsAPI.register(app, dbfootballstats,secure.checkApiKey);
 
 

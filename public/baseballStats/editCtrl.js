@@ -4,6 +4,7 @@
  .controller("EditBaseballStatsCtrl", ["$scope","$http", "$routeParams", function($scope, $http, $routeParams){
                 
                 var editURL="/api/v2/baseball-stats/" + $routeParams.stadium + "/" + $routeParams.date;
+                var api="/api/v2/baseball-stats/";
                 console.log("initialized EditBaseballStatsCtrl");
                 console.log(editURL);
                 
@@ -13,8 +14,8 @@
                  
                  
                  $scope.updateBaseballStat = function(){
-                     console.log($scope.updateBaseballStat);
-                 $http.put(editURL).then(function (response){
+                     console.log($scope.updatedBaseballStat);
+                 $http.put(api+ $scope.updatedBaseballStat.stadium+"/"+$scope.updatedBaseballStat.date, $scope.updatedBaseballStat).then(function (response){
                     $scope.status = "Status: " + response.status;
                      
                  });
