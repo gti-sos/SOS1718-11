@@ -43,7 +43,9 @@ angular
         $scope.addStat = function() {
             $http.post(api + "?apikey=" + $rootScope.apikey, $scope.newStat).then(function(response) {
                 $scope.status = "Status: " + response.status;
+                Materialize.toast('<i class="material-icons">error_outline</i> Stats added!', 2500);
                 getStats();
+                
 
             }, function(response) {
                 switch (response.status) {
