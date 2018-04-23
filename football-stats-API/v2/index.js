@@ -1,5 +1,5 @@
-var BASE_API_PATH = "/api/v1";
-var BASE_API_PATH_SECURE = "/api/v1/secure";
+var BASE_API_PATH = "/api/v2";
+var BASE_API_PATH_SECURE = "/api/v2/secure";
 var footballstatsAPI = {};
 module.exports = footballstatsAPI;
 
@@ -366,7 +366,10 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
                     }
                     else {
             console.log(Date() + " - GET /football-stats" + dato);
-            res.send(footballstats);
+            res.send(footballstats.map((c)=>{
+                            delete c._id;
+                            return c;
+                        }));
                     }
         }
         });
