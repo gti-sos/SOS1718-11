@@ -26,7 +26,7 @@
             </button></td>
         </tr>
         <tr  ng-repeat="footbalstat in initialfootballstats">
-            <td>{{footbalstat.stadium}}</td>
+            <td><a href="/#!/football-stats/{{footbalstat.stadium}}/{{footbalstat.date}}"</a>{{footbalstat.stadium}}</td>
             <td>{{footbalstat.date}}</td>
             <td>{{footbalstat.goal}}</td>
             <td>{{footbalstat.corner}}</td>

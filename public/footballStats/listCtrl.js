@@ -25,6 +25,12 @@ angular.module("StatsManagerApp").controller("ListFootballStatsCtrl", ["$scope",
               getFootballStats();
         });
     }
+    $scope.loadInitialFootballStats =function(){
+        console.log("Load Initial Football Stats");
+        $http.get(api+"/loadInitialData").then(function (response){
+            getFootballStats();
+        })
+    }
     
     function getFootballStats(){
         $http.get(api).then(function (response){
