@@ -13,12 +13,19 @@ angular
         if (!$rootScope.apikey) $rootScope.apikey = "scraping";
 
         $scope.refresh = function() {
-
-            if ($scope.date == undefined) Materialize.toast('<i class="material-icons">error_outline</i> Introduce a Date!', 2500);
+            
+            var filter = '';
+            
+            if ($scope.date == undefined){ 
+                Materialize.toast('<i class="material-icons">error_outline</i> Introduce a Date!', 2500);
+        
+            }else{
+                filter = "&date=" + $scope.date;
+            }
 
 
             $http
-                .get(api + "?apikey=" + $rootScope.apikey + "&date=" + $scope.date)
+                .get(api + "?apikey=" + $rootScope.apikey + filter)
                 .then(function(response) {
 
                     if (response.data.length == 0) Materialize.toast('<i class="material-icons">error_outline</i> No matches on this day!', 2500);
