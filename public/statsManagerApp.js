@@ -27,6 +27,9 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats/:stadium/:date", {
             templateUrl: "footballStats/edit.html",
             controller: "EditFootballStatsCtrl"
+         }).when("/footballchart", {
+            templateUrl: "footballStats/highcharts.html",
+            controller: "HighChartsCtrl"
         });
     console.log("App initialized and configured");
 });
