@@ -1,42 +1,148 @@
 <div style="background-color:#F5F1F0;color:grey" ng-controller="ListBaseballStatsCtrl">
-     <h1>Baseball Stats</h1>
-    <button type="button" class="btn btn-danger" ng-click="deleteAllBaseballStat()">Delete All</button>
-    <button type="button" class="btn btn-primary" ng-click="loadInitialBaseballStat()">Load Initial Data</button>
+    <div>
+        <h1>Baseball Stats</h1>
+    </div>
 
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Stadium</th>
-                <th>Date</th>
-                <th>Hit</th>
-                <th>Run</th>
-                <th>Error</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input class="form-control" ng-model="newBaseballStat.stadium"></td>
-                <td><input class="form-control" ng-model="newBaseballStat.date"></td>
-                <td><input class="form-control" ng-model="newBaseballStat.hit"></td>
-                <td><input class="form-control" ng-model="newBaseballStat.run"></td>
-                <td><input class="form-control" ng-model="newBaseballStat.error"></td>
-                <td><button type="button" class="btn btn-primary" ng-click="addBaseballStat()"> Add </button></td>
-            </tr>
-            <tr ng-repeat="baseballstat in initialbaseballstats">
-                <td>{{baseballstat.stadium}}</td>                
-                <td>{{baseballstat.date}}</td>
-                <td>{{baseballstat.hit}}</td>
-                <td>{{baseballstat.run}}</td>
-                <td>{{baseballstat.error}}</td>
-                <td><button type="button" class="btn btn-danger" ng-click="deleteBaseballStat(baseballstat.date,baseballstat.stadium)"> Delete </button></td>
-            </tr>
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <h4>Add</h4>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input class="form-control" type="text" id="newStadium" ng-model="searchBaseballStat.stadium">
+                            <label for="from">Stadium</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input class="form-control" type="text" id="newDate" ng-model="searchBaseballStat.date">
+                            <label for="to">Date</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input class="form-control" type="text" id="newHit" ng-model="searchBaseballStat.hit">
+                            <label for="to">Hit</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input class="form-control" type="text" id="newRun" ng-model="searchBaseballStat.run">
+                            <label for="to">Run</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input class="form-control" type="text" id="newError" ng-model="searchBaseballStat.error">
+                            <label for="to">Error</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input class="form-control" type="text" id="newError" ng-model="searchBaseballStat.from">
+                            <label for="to">From</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input class="form-control" type="text" id="newError" ng-model="newBaseballStat.to">
+                            <label for="to">To</label>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary"><a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Search</a></button>
+        </div>
+    </div>
 
 
-        </tbody>
-    </table>
+    <div id="apikeyModal" class="modal">
+        <div class="modal-content">
+            <h4>Set apikey</h4>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="form-control" type="text" id="apikey" ng-model="apikey">
+                            <label for="apikey" class="active">Apikey</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    <hr/>
-    <h9><i>{{status}}</i></h9>
+        <div class="modal-footer">
+            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Set</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row">
+            <div class="col s12 center-align">
+                <div>
+                    <input class="form-control" type="text" id="numPage" ng-model="inputPage" ng-change="inputPageButton()" placeholder="Page">
+                </div>
+                <div class="pagination">
+
+                    <li class="disabled" ng-show="currentPage == 1"><a href=""><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect" ng-hide="currentPage == 1"><a href="" ng-click="previousPage()"><i class="material-icons">chevron_left</i></a></li>
+
+                    <li>Page {{currentPage}} of {{maxPages}} </li>
+
+
+                    <li class="disabled" ng-show="currentPage == maxPages"><a href=""><i class="material-icons">chevron_right</i></a></li>
+                    <li class="waves-effect" ng-show="currentPage != maxPages"><a href="" ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="initial-buttons" style="margin-bottom:20px;">
+        <button type="button" class="btn-floating btn-large green" ng-click="loadInitialBaseballStat()">Load Initial Data</button>
+        <button type="button" class="btn-floating btn-large red" ng-click="deleteAllBaseballStat()"><i class="material-icons">delete_forever</i></button>
+        <button class="btn-floating btn-large yellow " onClick="$('#apikeyModal').modal('open');"><i class="material-icons center">vpn_key</i></button>
+
+
+    </div>
+
+    <div id="table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Stadium</th>
+                    <th>Date</th>
+                    <th>Hit</th>
+                    <th>Run</th>
+                    <th>Error</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div id="searchModal" class="modal">
+                    <div class="modal-content">
+                        <tr>
+                            <td><input class="form-control" ng-model="newBaseballStat.stadium"></td>
+                            <td><input class="form-control" ng-model="newBaseballStat.date"></td>
+                            <td><input class="form-control" ng-model="newBaseballStat.hit"></td>
+                            <td><input class="form-control" ng-model="newBaseballStat.run"></td>
+                            <td><input class="form-control" ng-model="newBaseballStat.error"></td>
+                            <td><button type="button" class="btn-floating btn-large blue" ng-click="addBaseballStat()" id="addButton"><i class="material-icons">add</i></button></td>
+                        </tr>
+                    </div>
+                </div>
+                <tr ng-repeat="baseballstat in initialbaseballstats track by $index">
+                    <td>{{baseballstat.stadium}}</td>
+                    <td>{{baseballstat.date}}</td>
+                    <td>{{baseballstat.hit}}</td>
+                    <td>{{baseballstat.run}}</td>
+                    <td>{{baseballstat.error}}</td>
+                    <td><a href="/#!/baseball-stats/{{baseballstat.stadium}}/{{baseballstat.date}}"><button type="button" class="btn-floating btn-large orange"><i class="material-icons">edit</i></button></a></td>
+                    <td><button type="button" class="btn-floating btn-large red" ng-click="deleteBaseballStat(baseballstat.date,baseballstat.stadium)"><i class="material-icons">delete</i></button></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large blue" onClick="$('#searchModal').modal('open');">
+            <i class="large material-icons">search</i>
+        </a>
 </div>

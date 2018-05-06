@@ -1,7 +1,7 @@
  /*global angular*/
  angular
      .module("StatsManagerApp")
-     .controller("EditBaseballStatsCtrl", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
+     .controller("EditBaseballStatsCtrl", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams, $location) {
 
          var editURL = "/api/v2/baseball-stats/" + $routeParams.stadium + "/" + $routeParams.date;
          console.log("initialized EditBaseballStatsCtrl");
@@ -22,7 +22,7 @@
              console.log($scope.updatedBaseballStat);
              $http.put(editURL, updatedStatAux).then(function(response) {
                  $scope.status = "Status: " + response.status;
-
+            $location.path("/baseball-stats");
              });
 
 

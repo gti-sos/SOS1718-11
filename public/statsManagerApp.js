@@ -12,6 +12,18 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/basketballStats/edit.html",
             controller: "EditBasketballStatsCtrl"
         })
+        .when("/baseball-stats/graph1.html", {
+            templateUrl: "/baseballStats/graph1.html",
+            controller: "Graph1Ctrl"
+        })
+        .when("/baseball-stats/graph2.html", {
+            templateUrl: "/baseballStats/graph2.html",
+            controller: "Graph2Ctrl"
+        })
+        .when("/baseball-stats/graph3.html", {
+            templateUrl: "/baseballStats/graph3.html",
+            controller: "Graph3Ctrl"
+        })
         .when("/baseball-stats", {
             templateUrl: "/baseballStats/list.html",
             controller: "ListBaseballStatsCtrl"
