@@ -28,6 +28,7 @@ angular
             updatedStatAux.third = parseInt($scope.updatedStat.third);
             updatedStatAux.fourth = parseInt($scope.updatedStat.fourth);
             console.log($scope.updatedStat);
+            Materialize.toast('<i class="material-icons">error_outline</i> Stat updated!', 2500);
 
             $http.put(api + "/" + updatedStatAux.stadium + "/" + updatedStatAux.date + "?apikey=" + $rootScope.apikey, updatedStatAux).then(function(response) {
                 $scope.status = "Status: " + response.status;
