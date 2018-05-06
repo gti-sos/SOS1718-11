@@ -4,7 +4,7 @@
 
 angular
     .module("StatsManagerApp")
-    .controller("Graph3Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
+    .controller("BasketBallGraph3Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
 
         console.log("Graph3 Controller initialized");
 
