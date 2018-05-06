@@ -68,6 +68,158 @@ var initialBasketballstats = [{
         "second": 43,
         "third": 54,
         "fourth": 47
+    },
+    {
+        "stadium": "detroit",
+        "date": "2018-03-09",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "boston",
+        "date": "2018-06-09",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "miami",
+        "date": "2018-04-09",
+        "first": 57,
+        "second": 45,
+        "third": 45,
+        "fourth": 66
+    },
+    {
+        "stadium": "boston",
+        "date": "2018-08-09",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "toronto",
+        "date": "2018-05-01",
+        "first": 63,
+        "second": 43,
+        "third": 54,
+        "fourth": 47
+    },
+    {
+        "stadium": "charlotte",
+        "date": "2018-03-01",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "oackland",
+        "date": "2018-03-01",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "phenix",
+        "date": "2018-03-02",
+        "first": 57,
+        "second": 45,
+        "third": 45,
+        "fourth": 66
+    },
+    {
+        "stadium": "orlando",
+        "date": "2018-03-02",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "menphis",
+        "date": "2018-03-02",
+        "first": 63,
+        "second": 43,
+        "third": 54,
+        "fourth": 47
+    },
+    {
+        "stadium": "atlanta",
+        "date": "2018-03-02",
+        "first": 54,
+        "second": 38,
+        "third": 68,
+        "fourth": 47
+    },
+    {
+        "stadium": "brooklin",
+        "date": "2018-05-02",
+        "first": 63,
+        "second": 43,
+        "third": 54,
+        "fourth": 47
+    },
+    {
+        "stadium": "cleveland",
+        "date": "2018-03-02",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "indiana",
+        "date": "2018-03-02",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "new york",
+        "date": "2018-03-02",
+        "first": 57,
+        "second": 45,
+        "third": 45,
+        "fourth": 66
+    },
+    {
+        "stadium": "philadelphia",
+        "date": "2018-04-03",
+        "first": 64,
+        "second": 60,
+        "third": 57,
+        "fourth": 55
+    },
+    {
+        "stadium": "chicago",
+        "date": "2018-03-03",
+        "first": 63,
+        "second": 43,
+        "third": 54,
+        "fourth": 47
+    },
+    {
+        "stadium": "dember",
+        "date": "2018-03-03",
+        "first": 54,
+        "second": 38,
+        "third": 68,
+        "fourth": 47
+    },
+    {
+        "stadium": "los angeles",
+        "date": "2018-05-03",
+        "first": 63,
+        "second": 43,
+        "third": 54,
+        "fourth": 47
     }
 ];
 
@@ -101,6 +253,37 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
         });
     });
+    
+     app.get(BASE_API_PATH + "/basketball-stats-count", (req, res) => {
+        
+        var query = {};
+        for (var attr in req.query) {
+
+
+            if (attr === "stadium")
+                query[attr] = req.query[attr];
+            if (attr === "date")
+                query[attr] = req.query[attr];
+            if (attr === "fc")
+                query["first"] = parseInt(req.query[attr]);
+            if (attr === "sc")
+                query["second"] = parseInt(req.query[attr]);
+            if (attr === "tc")
+                query["third"] = parseInt(req.query[attr]);
+            if (attr === "frc")
+                query["fourth"] = parseInt(req.query[attr]);
+
+        }
+       dbbasketballstats.find(query).count((err, count) => {
+           if (err) {
+                console.error("Error accesing to DB");
+                res.sendStatus(500);
+                return;
+            }else{
+                res.send(String(count));
+            }
+       });
+    });
 
     // GET a basketball-help
 
@@ -112,10 +295,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     //----------------------------------------------------------------------------------//
     app.get(BASE_API_PATH + "/basketball-stats", (req, res) => {
 
-
-        let query = {};
-        let offset = 0;
-        let limit = Number.MAX_SAFE_INTEGER;
+        var query = {};
+        var offset = 0;
+        var limit = Number.MAX_SAFE_INTEGER;
 
         if (req.query.offset) {
             offset = parseInt(req.query.offset);
@@ -127,7 +309,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             delete req.query.limit;
         }
 
-        for (let attr in req.query) {
+        for (var attr in req.query) {
 
 
             if (attr === "stadium")
@@ -164,8 +346,8 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
     app.get(BASE_API_PATH + "/basketball-stats/:parametro", (req, res) => {
 
-        let offset = 0;
-        let limit = Number.MAX_SAFE_INTEGER;
+        var offset = 0;
+        var limit = Number.MAX_SAFE_INTEGER;
 
         if (req.query.offset) {
             offset = parseInt(req.query.offset);
@@ -418,7 +600,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     // Inicializa DB
 
     app.get(BASE_API_PATH_SECURE + "/basketball-stats/loadInitialData", (req, res) => {
+        
         if (!checkApiKey(req, res)) return;
+        
         dbbasketballstats.insert(initialBasketballstats, function(err, newDoc) {
             if (err) {
                 console.error("Error accesing DB");
@@ -433,7 +617,38 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
         });
     });
+   
+    app.get(BASE_API_PATH_SECURE + "/basketball-stats-count", (req, res) => {
+        
+        var query = {};
+        for (var attr in req.query) {
 
+
+            if (attr === "stadium")
+                query[attr] = req.query[attr];
+            if (attr === "date")
+                query[attr] = req.query[attr];
+            if (attr === "fc")
+                query["first"] = parseInt(req.query[attr]);
+            if (attr === "sc")
+                query["second"] = parseInt(req.query[attr]);
+            if (attr === "tc")
+                query["third"] = parseInt(req.query[attr]);
+            if (attr === "frc")
+                query["fourth"] = parseInt(req.query[attr]);
+
+        }
+       dbbasketballstats.find(query).count((err, count) => {
+           if (err) {
+                console.error("Error accesing to DB");
+                res.sendStatus(500);
+                return;
+            }else{
+                res.send(String(count));
+            }
+       });
+    });
+    
     // GET a basketball-help
 
     app.get(BASE_API_PATH_SECURE + "/basketball-stats/docs", (req, res) => {
@@ -446,9 +661,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
         if (!checkApiKey(req, res)) return;
 
-        let query = {};
-        let offset = 0;
-        let limit = Number.MAX_SAFE_INTEGER;
+        var query = {};
+        var offset = 0;
+        var limit = Number.MAX_SAFE_INTEGER;
 
         if (req.query.offset) {
             offset = parseInt(req.query.offset);
@@ -460,7 +675,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             delete req.query.limit;
         }
 
-        for (let attr in req.query) {
+        for (var attr in req.query) {
 
 
             if (attr === "stadium")
@@ -485,12 +700,8 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 return;
             }
             else {
-                if (basketballstats.length === 0) {
-                    res.status(404).send(basketballstats);
-                }
-                else {
-                    res.status(200).send(basketballstats);
-                }
+                res.status(200).send(basketballstats);
+
             }
         });
     });
@@ -502,8 +713,8 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     app.get(BASE_API_PATH_SECURE + "/basketball-stats/:parametro", (req, res) => {
         if (!checkApiKey(req, res)) return;
 
-        let offset = 0;
-        let limit = Number.MAX_SAFE_INTEGER;
+        var offset = 0;
+        var limit = Number.MAX_SAFE_INTEGER;
 
         if (req.query.offset) {
             offset = parseInt(req.query.offset);
@@ -759,7 +970,5 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
             }
         });
     });
-
-
 
 };
