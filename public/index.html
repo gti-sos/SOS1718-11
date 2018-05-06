@@ -2,22 +2,38 @@
 
 <head>
     <title>Stats Manager</title>
+
     <link rel="icon" type="image/x-icon" href="https://github.com/favicon.ico" />
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/bower_components/materialize/dist/css/materialize.min.css" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="/bower_components/materialize/dist/js/materialize.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="/bower_components/rgraph/RGraph.common.core.js"></script>
+    <script type="text/javascript" src="/bower_components/rgraph/RGraph.bar.js"></script>
+    <script type="text/javascript" src="/bower_components/rgraph/RGraph.drawing.yaxis.js"></script>
+
     <script src="statsManagerApp.js"></script>
+
     <script src="/baseballStats/listCtrl.js"></script>
     <script src="/baseballStats/editCtrl.js"></script>
+
     <script src="/basketballStats/listCtrl.js"></script>
     <script src="/basketballStats/editCtrl.js"></script>
+    <script src="/basketballStats/graph1Ctrl.js"></script>
+    <script src="/basketballStats/graph2Ctrl.js"></script>
+    <script src="/basketballStats/graph3Ctrl.js"></script>
+
     <script src="/footballStats/listCtrl.js"></script>
-    <script src="/footballStats/editCtrl.js"></script> 
+    <script src="/footballStats/editCtrl.js"></script>
 
 
 
@@ -31,11 +47,18 @@
             <li><a href="#!/football-stats"><i class="material-icons left">list</i>FootBall Stats</a></li>
 
         </ul>
+        <ul id="dropdown-menu2" class="dropdown-content">
+            <li><a href="#!/basketball-stats-graph1"><i class="material-icons left">list</i>BasketBall Stats Graph 1</a></li>
+            <li><a href="#!/basketball-stats-graph2"><i class="material-icons left">list</i>BasketBall Stats Graph 2</a></li>
+            <li><a href="#!/basketball-stats-graph3"><i class="material-icons left">list</i>BasketBall Stats Graph 3</a></li>
+
+        </ul>
         <nav>
             <div class="nav-wrapper grey darken-4">
                 <a href="#!" class="brand-logo center">SOS1718-11</a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a class="dropdown-button" href="#!" data-activates="dropdown-menu"><i class="material-icons left">list</i>Front-end view<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a class="dropdown-button" href="#!" data-activates="dropdown-menu"><i class="material-icons left">list</i>Front-end views<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a class="dropdown-button" href="#!" data-activates="dropdown-menu2"><i class="material-icons left">list</i>Graph views<i class="material-icons right">arrow_drop_down</i></a></li>
                 </ul>
             </div>
         </nav>

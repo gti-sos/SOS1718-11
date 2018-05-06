@@ -3,6 +3,8 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
     $routeProvider
         .when("/", {
             templateUrl: "main.html",
+        }).when("/analytics", {
+            templateUrl: "/analytics.html",
         })
         .when("/basketball-stats", {
             templateUrl: "/basketballStats/list.html",
@@ -11,6 +13,18 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/basketball-stats/:stadium/:date", {
             templateUrl: "/basketballStats/edit.html",
             controller: "EditBasketballStatsCtrl"
+        })
+        .when("/basketball-stats-graph1", {
+            templateUrl: "/basketballStats/graph1.html",
+            controller: "Graph1Ctrl"
+        })
+        .when("/basketball-stats-graph2", {
+            templateUrl: "/basketballStats/graph2.html",
+            controller: "Graph2Ctrl"
+        })
+        .when("/basketball-stats-graph3", {
+            templateUrl: "/basketballStats/graph3.html",
+            controller: "Graph3Ctrl"
         })
         .when("/baseball-stats", {
             templateUrl: "/baseballStats/list.html",
