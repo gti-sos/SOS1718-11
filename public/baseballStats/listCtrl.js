@@ -262,7 +262,6 @@
              if ($scope.inputPage == undefined) {
 
                  offset=0;
-                 $scope.getBaseballStats();
              }
 
              if ($scope.inputPage > $scope.currentPage) {

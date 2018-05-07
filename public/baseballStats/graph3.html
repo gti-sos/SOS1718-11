@@ -1,13 +1,24 @@
-   <div ng-controller="Graph3Ctrl">
-    
-    
-<div id="button-search-grpah3">
- <input class="form-control" ng-model="searchGraph3.date">
- <button type="button" class="btn-floating btn-large blue" ng-click="searchGraph3()" id="searchButtonGraph3"><i class="material-icons">search</i></button>
+<div ng-controller="BaseballGraph3Ctrl">
+
+
+
+    <div id="button-search-grpah3" class="section">
+
+
+        <div style="float:left">
+            <h3>Hits</h3>
+        </div>
+
+        <div>
+            <button type="button" style="margin-left: 10px; float:right" class="btn-floating btn-large blue" ng-click="searchGraph3()" id="searchButtonGraph3"><i class="material-icons">search</i>
+   </button>
+        </div>
+
+        <div style="float:right"><input class="form-control" ng-model="searchGraph3.date" style="margin-top: 10px"></div>
+
+    </div>
+
+    <div id="graph3" style="height: 100%"></div>
+
+
 </div>
-       
-       <div id="graph3" style="height: 100%"></div>
-       
-   
-</div>
-   
