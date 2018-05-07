@@ -25,6 +25,7 @@
     "google": "^2.1.0",
     "mongodb": "^3.0.7",
     "nedb": "^1.8.0",
-    "npm-install-all": "^1.1.21"
+    "npm-install-all": "^1.1.21",
+    "protractor": "^5.3.1"
   }
 }
