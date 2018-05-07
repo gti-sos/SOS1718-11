@@ -1,4 +1,4 @@
-browser.get('https://sos1718-11.herokuapp.com/#!/basketball-stats');
+browser.get('https://sos171811als-sos171811als.c9users.io/#!/basketball-stats');
 
 element(by.id('next')).click().then(function() {
     element(by.id('next')).click().then(function() {
