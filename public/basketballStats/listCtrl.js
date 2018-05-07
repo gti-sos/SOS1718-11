@@ -61,6 +61,11 @@ angular
         };
 
 
+        $scope.deleteFilter = function() {
+            $scope.searchedStat=undefined;
+            $scope.getStats();
+        };
+
         $scope.getStats = function() {
             var filter = "";
             try {

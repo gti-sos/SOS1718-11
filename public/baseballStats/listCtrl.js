@@ -65,7 +65,6 @@
 
          $scope.nextPage = function() {
              console.log("offset antes+: " + $scope.currentPage);
-             //a = (($scope.currentPage + 1) * 2) - 2;
              offset += limit;
 
              if (offset > (limit * ($scope.maxPages - 1))) {
@@ -262,7 +261,6 @@
              if ($scope.inputPage == undefined) {
 
                  offset=0;
-                 $scope.getBaseballStats();
              }
 
              if ($scope.inputPage > $scope.currentPage) {

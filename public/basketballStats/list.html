@@ -24,9 +24,15 @@
                     <li class="waves-effect" ng-show="currentPage != totalPages"><a href="" ng-click="nextPage()"><i id="next" class="material-icons">chevron_right</i></a></li>
                 </div>
             </td>
-            <td width="20%">
+
+            <td width="15%">
                 <div class="float-right">
                     <button class="btn-floating waves-effect waves-light blue btn-sm" data-toggle="modal" onClick="$('#searchModal').modal('open');"><i class="material-icons">search</i></button>
+                </div>
+            </td>
+            <td width="5%">
+                <div class="float-right">
+                    <button class="btn-floating waves-effect waves-light orange btn-sm" ng-click="deleteFilter()"><i class="material-icons"><i class="material-icons">refresh</i></button>
                 </div>
             </td>
 

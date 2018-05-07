@@ -5,7 +5,7 @@
  angular
 
      .module("StatsManagerApp")
-     .controller("Graph2Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
+     .controller("BaseballGraph2Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
 
          if (!$rootScope.apikey) $rootScope.apikey = "scraping";
 

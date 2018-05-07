@@ -16,27 +16,27 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         })
          .when("/basketball-stats-graph1", {
             templateUrl: "/basketballStats/graph1.html",
-            controller: "Graph1Ctrl"
+            controller: "BasketBallGraph1Ctrl"
         })
         .when("/basketball-stats-graph2", {
             templateUrl: "/basketballStats/graph2.html",
-            controller: "Graph2Ctrl"
+            controller: "BasketBallGraph2Ctrl"
         })
         .when("/basketball-stats-graph3", {
             templateUrl: "/basketballStats/graph3.html",
-            controller : "Graph3Ctrl"
+            controller : "BasketBallGraph3Ctrl"
         })
-        .when("/baseball-stats/graph1.html", {
+        .when("/baseball-stats-graph1", {
             templateUrl: "/baseballStats/graph1.html",
-            controller: "Graph1Ctrl"
+            controller: "BaseballGraph1Ctrl"
         })
-        .when("/baseball-stats/graph2.html", {
+        .when("/baseball-stats-graph2", {
             templateUrl: "/baseballStats/graph2.html",
-            controller: "Graph2Ctrl"
+            controller: "BaseballGraph2Ctrl"
         })
-        .when("/baseball-stats/graph3.html", {
+        .when("/baseball-stats-graph3", {
             templateUrl: "/baseballStats/graph3.html",
-            controller: "Graph3Ctrl"
+            controller: "BaseballGraph3Ctrl"
         })
         .when("/baseball-stats", {
             templateUrl: "/baseballStats/list.html",

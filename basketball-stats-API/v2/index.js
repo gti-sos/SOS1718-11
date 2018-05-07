@@ -658,6 +658,8 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
     //----------------------------------------------------------------------------------//
     app.get(BASE_API_PATH_SECURE + "/basketball-stats", (req, res) => {
+        
+        console.log(Date() + " - GET /basketball-stats");
 
         if (!checkApiKey(req, res)) return;
 
