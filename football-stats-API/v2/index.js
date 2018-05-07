@@ -12,61 +12,61 @@ var initialfootballstats = [{
         "fault": 13
     },
     {
-        "stadium": "florencia",
+        "stadium": "madrid",
         "date": "2018-03-01",
         "goal": 3,
         "corner": 16,
         "fault": 14
     }, {
-        "stadium": "paris",
+        "stadium": "granada",
         "date": "2018-03-11",
         "goal": 3,
         "corner": 16,
         "fault": 16
     },
     {
-        "stadium": "glasgow",
+        "stadium": "murcia",
         "date": "2018-03-09",
         "goal": 2,
         "corner": 5,
         "fault": 15
     },
     {
-        "stadium": "venecia",
+        "stadium": "sevilla",
         "date": "2018-04-10",
         "goal": 9,
         "corner": 26,
         "fault": 11
     },
     {
-        "stadium": "santiago de chile",
+        "stadium": "galicia",
         "date": "2018-04-15",
         "goal": 5,
         "corner": 5,
         "fault": 31
     },
     {
-        "stadium": "valencia",
+        "stadium": "huelva",
         "date": "2018-04-10",
         "goal": 2,
         "corner": 4,
         "fault": 23
     },
     {
-        "stadium": "praga",
+        "stadium": "extremadura",
         "date": "2018-03-19",
         "goal": 1,
         "corner": 1,
         "fault": 1
     },
     {
-        "stadium": "toronto",
+        "stadium": "asturias",
         "date": "2018-04-05",
         "goal": 1,
         "corner": 1,
         "fault": 1
     },{
-        "stadium": "jisuscry",
+        "stadium": "navarra",
         "date": "2018-06-05",
         "goal": 1,
         "corner": 1,
@@ -532,7 +532,7 @@ app.delete(BASE_API_PATH + "/football-stats/:stadium/:date", (req, res) => {
                 return;
             }
             else {
-                res.status(200).send(footballstats.map(function(d) {return d.stadium}));
+                res.status(200).send(footballstats.map(function(d) {return d.stadium }));
 
             }
         });

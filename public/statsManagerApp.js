@@ -53,9 +53,18 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats/:stadium/:date", {
             templateUrl: "footballStats/edit.html",
             controller: "EditFootballStatsCtrl"
-         }).when("/footballchart", {
+         })
+         .when("/football-stats-footballchart", {
             templateUrl: "footballStats/highcharts.html",
             controller: "HighChartsCtrl"
+        })
+        .when("/football-stats-footballgeo", {
+            templateUrl: "footballStats/geo.html",
+            controller: "GeoCtrl"
+        })
+        .when("/football-stats-footballd3", {
+            templateUrl: "footballStats/d3.html",
+            controller: "D3Ctrl"
         });
     console.log("App initialized and configured");
 });
