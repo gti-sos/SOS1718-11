@@ -10,7 +10,7 @@ function writeScreenShot(data, filename) {
 //si no funciona añadir track by $index en repeater
 describe('Data is loaded', function() {
     it('should show some stats', function() {
-        browser.get('https://sos171811mls-sos171811mls.c9users.io/#!/baseball-stats')
+        browser.get('https://sos1718-11.herokuapp.com/#!/baseball-stats')
             .then(function() {
                 var stats = element.all(by.repeater('baseballstat in initialbaseballstats'));
                 browser.takeScreenshot().then(function(png) {
