@@ -65,7 +65,6 @@
 
          $scope.nextPage = function() {
              console.log("offset antes+: " + $scope.currentPage);
-             //a = (($scope.currentPage + 1) * 2) - 2;
              offset += limit;
 
              if (offset > (limit * ($scope.maxPages - 1))) {
