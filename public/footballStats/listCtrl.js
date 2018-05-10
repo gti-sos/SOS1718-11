@@ -9,8 +9,8 @@ angular.module("StatsManagerApp").controller("ListFootballStatsCtrl", ["$scope",
 
     if(!$rootScope.apikey) $rootScope.apikey = "scraping";
 
-    var api ="/api/v2/secure/football-stats";
-
+    //var api ="/api/v2/secure/football-stats";
+    var api="https://sos171811ldvc-sos171811ldvc.c9users.io/api/v2/secure/football-stats"
 
         $scope.search = {};
         $scope.searchAdd = {};

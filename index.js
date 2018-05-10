@@ -5,9 +5,11 @@ var path = require("path");
 var port = (process.env.PORT || 16778);
 var BASE_API_PATH = "/api/v1";
 var MongoClient = require("mongodb").MongoClient;
-var secure = require("./secure.js")
+var secure = require("./secure.js");
+var cors = require("cors");
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname, "public")));
+app.use(cors());
 var dbURL = "mongodb://comun:123456@ds119049.mlab.com:19049/sos1718-als-sandbox";
 
 
