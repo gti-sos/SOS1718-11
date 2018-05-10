@@ -34,77 +34,52 @@ angular
                         .then(function(response) {
 
                             var univData = response.data;
-
-                            var categories = [];
-                            var data1 = [];
-                            var data2 = [];
-
+                            
+                            var data = [];
+                            
                             basketData.map(function(d) {
-                                categories.push(d['stadium']);
-                                data1.push(d['first']);
+                                data.push([d['stadium'],d['first']]);
                             })
-
-                            for (var i = 0; i < data1.length; i++) {
-                                data2.push("-");
-                            }
 
                             univData.map(function(d) {
-                                categories.push(d['headquar']);
-                                data2.push(d['nameUniversity'].length);
-                                data1.push("-");
+                                data.push([d['headquar'],d['nameUniversity'].length]);
                             })
-
-                            console.log(categories);
-                            console.log(data1);
-                            console.log(data2);
+                            console.log(data);
 
                             // Set up the chart
-                            var chart = new Highcharts.Chart({
+                            Highcharts.chart('cors', {
                                 chart: {
-                                    renderTo: 'cors',
-                                    type: 'column',
+                                    type: 'pie',
                                     options3d: {
                                         enabled: true,
-                                        alpha: 15,
-                                        beta: 15,
-                                        depth: 50,
-                                        viewDistance: 25
+                                        alpha: 45,
+                                        beta: 0
                                     }
                                 },
                                 title: {
                                     text: null
                                 },
-                                xAxis: {
-                                    categories: categories
+                                tooltip: {
+                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                                 },
                                 plotOptions: {
-                                    column: {
-                                        depth: 25
+                                    pie: {
+                                        allowPointSelect: true,
+                                        cursor: 'pointer',
+                                        depth: 35,
+                                        dataLabels: {
+                                            enabled: true,
+                                            format: '{point.name}'
+                                        }
                                     }
                                 },
                                 series: [{
-                                    name: 'Points',
-                                    data: data1
-                                }, {
-                                    name: 'Characters at ["nameUniversity"]',
-                                    data: data2
+                                    type: 'pie',
+                                    data: data
                                 }]
                             });
 
-                            function showValues() {
-                                $('#alpha-value').html(chart.options.chart.options3d.alpha);
-                                $('#beta-value').html(chart.options.chart.options3d.beta);
-                                $('#depth-value').html(chart.options.chart.options3d.depth);
-                            }
 
-                            // Activate the sliders
-                            $('#sliders input').on('input change', function() {
-                                chart.options.chart.options3d[this.id] = parseFloat(this.value);
-                                showValues();
-                                chart.redraw(false);
-                            });
-
-                            showValues();
                         });
 
                 });
