@@ -1,14 +1,30 @@
-<h2>Basketball Stats Graph 1</h2>
+<h2>Basketball Stats Integrations Proxy</h2>
 <div class="section">
     <div class="float-right">
         <button class="btn waves-effect waves-light yellow darken-3 btn-sm" data-toggle="modal" onClick="$('#dateModal').modal('open');">Select Date</button>
     </div>
     <div>
-        <h5>Points per Quarter on {{date}}</h5>
+        <h5>Points-Characters</h5>
     </div>
 </div>
 
-<div id="proxy1"></div>
+<div id="cors"></div>
+<div id="sliders">
+    <table>
+        <tr>
+        	<td>Alpha Angle</td>
+        	<td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value" class="value"></span></td>
+        </tr>
+        <tr>
+        	<td>Beta Angle</td>
+        	<td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value" class="value"></span></td>
+        </tr>
+        <tr>
+        	<td>Depth</td>
+        	<td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value" class="value"></span></td>
+        </tr>
+    </table>
+</div>
 
 <div class="fixed-action-btn">
     <a href="#!" class="btn-floating waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>

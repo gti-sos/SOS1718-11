@@ -1,5 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var cors = require("cors");
 var app = express();
 var path = require("path");
 var port = (process.env.PORT || 16778);
@@ -9,7 +10,7 @@ var secure = require("./secure.js")
 app.use(bodyParser.json());
 app.use("/", express.static(path.join(__dirname, "public")));
 var dbURL = "mongodb://comun:123456@ds119049.mlab.com:19049/sos1718-als-sandbox";
-
+app.use(cors());
 
 
 MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
