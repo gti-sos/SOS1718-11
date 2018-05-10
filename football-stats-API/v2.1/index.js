@@ -91,35 +91,6 @@ footballstatsAPI.register = function(app, dbfootballstats, checkApiKey) {
 
 // METODOS
 
- 
-var request = require('request');
-
-// Parameters
-// You can use a shorthand for multiple API endpoints: /api|/other_api
-var paths='/proxyBalta';
-var apiServerHost = 'https://sos1718-09.herokuapp.com/api/v2/span-univ-stats';
-
- 
-app.use(paths, function(req, res) {
-  var url = apiServerHost  + req.url;
-  console.log('piped: '+req.baseUrl + req.url);
-  req.pipe(request(url)).pipe(res);
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // llamada a pruebas postman
 
 app.get(BASE_API_PATH + "/football-stats/docs", (req, res) => {
