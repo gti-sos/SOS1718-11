@@ -5,6 +5,8 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "main.html",
         }).when("/analytics", {
             templateUrl: "/analytics.html",
+        }).when("/integrations", {
+            templateUrl: "/integrations.html",
         })
         .when("/basketball-stats", {
             templateUrl: "/basketballStats/list.html",
@@ -65,6 +67,10 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats-footballd3", {
             templateUrl: "footballStats/d3.html",
             controller: "D3Ctrl"
+        })
+        .when("/football-stats-footballintegration1", {
+            templateUrl: "footballStats/footballintegration1.html",
+            controller: "FootballIntegrationCtrl"
         });
     console.log("App initialized and configured");
 });
