@@ -30,7 +30,7 @@ angular
                     var basketData = response.data;
 
                     $http
-                        .get('https://sos171811als-sos171811als.c9users.io/api/v2/basketball-stats/cors')
+                        .get('https://sos1718-09.herokuapp.com/api/v1/secure/spanish-universities?apikey=sos1718-09')
                         .then(function(response) {
 
                             var univData = response.data;
