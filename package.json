@@ -34,4 +34,6 @@
   },
   "devDependencies": {},
   "description": ""
+    "request": "^2.85.0"
+  }
 }

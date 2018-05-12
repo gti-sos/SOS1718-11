@@ -2,6 +2,7 @@
 /*global AmCharts*/
 /*global anychart*/
 
+
 angular.module("StatsManagerApp").controller("D3Ctrl", ["$scope","$http","$rootScope", function($scope,$http,$rootScope) {
     console.log("List Football Ctrl initialized!");
     var api ="/api/v2/secure/football-stats";

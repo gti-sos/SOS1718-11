@@ -5,6 +5,8 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "main.html",
         }).when("/analytics", {
             templateUrl: "/analytics.html",
+        }).when("/integrations", {
+            templateUrl: "/integrations.html",
         })
         .when("/basketball-stats", {
             templateUrl: "/basketballStats/list.html",
@@ -26,6 +28,14 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/basketballStats/graph3.html",
             controller : "BasketBallGraph3Ctrl"
         })
+        .when("/basketball-stats-proxy1", {
+            templateUrl: "/basketballStats/integrationsProxy1.html",
+            controller : "integrationsProxy1Ctrl"
+        })
+        .when("/basketball-stats-cors", {
+            templateUrl: "/basketballStats/integrationsCors.html",
+            controller : "integrationsCorsCtrl"
+        })
         .when("/baseball-stats-graph1", {
             templateUrl: "/baseballStats/graph1.html",
             controller: "BaseballGraph1Ctrl"
@@ -46,7 +56,7 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/baseballStats/edit.html",
             controller: "EditBaseballStatsCtrl"
         })
-        .when("/proxyMLS/api/v1/world-stats", {
+        .when("/proxyMLS", {
             templateUrl: "/baseballStats/integrationGraph1.html",
             controller: "integrationGraph1Ctrl"
         })
@@ -73,6 +83,10 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats-footballd3", {
             templateUrl: "footballStats/d3.html",
             controller: "D3Ctrl"
+        })
+        .when("/football-stats-footballintegration1", {
+            templateUrl: "footballStats/footballintegration1.html",
+            controller: "FootballIntegrationCtrl"
         });
     console.log("App initialized and configured");
 });
