@@ -56,11 +56,11 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/baseballStats/edit.html",
             controller: "EditBaseballStatsCtrl"
         })
-        .when("/proxyMLS", {
+        .when("/baseball-stats-proxy", {
             templateUrl: "/baseballStats/integrationGraph1.html",
             controller: "integrationGraph1Ctrl"
         })
-        .when("/proxyRF/api/v2/open-source-contests", {
+        .when("/baseball-stats-cors", {
             templateUrl: "/baseballStats/integrationGraphCors.html",
             controller: "integrationGraph2Ctrl"
         })
