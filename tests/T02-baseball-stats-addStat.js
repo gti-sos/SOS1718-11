@@ -1,7 +1,37 @@
-browser.get('https://sos1718-11.herokuapp.com/#!/baseball-stats');
+describe('Add stat', function(){
+   
+   it('should add a new stat', function(){
+      browser.get('https://sos171811mls-sos171811mls.c9users.io/#!/baseball-stats')
+      .then(function(){
+          element.all(by.repeater('baseballstat in initialbaseballstats'))
+            .then(function(initialbaseball){
+                //browser.driver.sleep(2000);
+                element(by.model('newBaseballStat.stadium')).sendKeys('sevilla');
+                element(by.model('newBaseballStat.date')).sendKeys("2018-02-02");
+                element(by.model('newBaseballStat.hit')).sendKeys(Math.random());
+                element(by.model('newBaseballStat.run')).sendKeys(Math.random());
+                element(by.model('newBaseballStat.error')).sendKeys(Math.random());
+               
+                
+                element(by.buttonText('add_box')).click().then(function(){
+                   element.all(by.repeater('baseballstat in initialbaseballstats')).then(function(initialbaseballstats){
+                       expect(initialbaseballstats.length).toEqual(initialbaseball.length+1);
+                   }); 
+                });
+            });
+      });
+   });
+   
+    
+});
 
 
-    element(by.id('next')).click().then(function() {
+
+
+
+browser.get('https://sos171811mls-sos171811mls.c9users.io/#!/baseball-stats');
+
+element(by.id('next')).click().then(function() {
         element.all(by.repeater('baseballstat in initialbaseballstats')).then(function(initialStats) {
             browser.driver.sleep(2000);
 
@@ -19,3 +49,4 @@ browser.get('https://sos1718-11.herokuapp.com/#!/baseball-stats');
             });
         });
     });
+

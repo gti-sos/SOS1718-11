@@ -12,10 +12,37 @@
          var api = "/api/v2/secure/baseball-stats";
          var properties = "";
          var dataCache = {};
-         
+
          var stadium = {};
          var hit = {};
-     
+
+
+
+
+
+
+         // Apply the theme
+         Highcharts.setOptions(Highcharts.theme);
+
+
+         Highcharts.chart('container', {
+             colorAxis: {
+                 minColor: '#F5F1F0',
+                 maxColor: Highcharts.getOptions().colors[0]
+             },
+             series: [{
+                 type: 'treemap',
+                 layoutAlgorithm: 'squarified',
+                 data: []
+             }],
+             title: {
+                 text: 'Hits '
+             }
+
+         });
+         
+         
+
 
 
          $scope.searchGraph1 = function() {
@@ -39,13 +66,13 @@
                  .then(function(response) {
 
                      dataCache = response.data;
-                    
-                      var d=[];
-                     
+
+                     var d = [];
+
                      stadium = response.data.map(function(s) {
                          console.log(s["stadium"]);
-                        
-                         
+
+
                          return s["stadium"];
 
                      });
@@ -53,26 +80,27 @@
                      hit = response.data.map(function(h) {
                          return parseInt(h["hit"]);
                      });
-                     
-                     for (var i=0;i<dataCache.length; i++){
-                         
-                          d.push({
-                         name:stadium[i],
-                         value:hit[i],
-                         colorValue:parseInt(i)
-                     });
-                         
+
+                     for (var i = 0; i < dataCache.length; i++) {
+
+                         d.push({
+                             name: stadium[i],
+                             value: hit[i],
+                             colorValue: parseInt(i)
+                         });
+
                      }
-                     
-                   
-                     
+
+
+
                      console.log(d);
-                     
-                     
+
+
 
                      console.log(response.data);
 
                      Highcharts.chart('container', {
+                         background2: '#F0F0EA',
                          colorAxis: {
                              minColor: '#FFFFFF',
                              maxColor: Highcharts.getOptions().colors[0]

@@ -1,8 +1,12 @@
+var request = require("request");
+
+
 //-------------------index.js basketball-stats ----------------------------//
 
 var BASE_API_PATH = "/api/v2";
 var BASE_API_PATH_SECURE = "/api/v2/secure";
 var basketballstatsAPI = {};
+
 module.exports = basketballstatsAPI;
 
 var initialBasketballstats = [{
@@ -229,11 +233,23 @@ var initialBasketballstats = [{
 
 
 
+
 basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
     console.log("Registering routes for Basketball Stats API...");
 
+    
 
+    var alvaro = "https://sos1718-09.herokuapp.com/api/v1/secure/spanish-universities?apikey=sos1718-09";
+    var ismael = "https://sos1718-07.herokuapp.com/api/v1/attacks-data"
+   
+    app.use(BASE_API_PATH + "/basketball-stats/proxy1", function(req, res) {
+        req.pipe(request(ismael)).pipe(res);
+    });
+    
+    app.use(BASE_API_PATH + "/basketball-stats/cors", function(req, res) {
+        req.pipe(request(alvaro)).pipe(res);
+    });
 
     // Inicializa DB
 
@@ -253,9 +269,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
         });
     });
-    
-     app.get(BASE_API_PATH + "/basketball-stats-count", (req, res) => {
-        
+
+    app.get(BASE_API_PATH + "/basketball-stats-count", (req, res) => {
+
         var query = {};
         for (var attr in req.query) {
 
@@ -274,15 +290,16 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 query["fourth"] = parseInt(req.query[attr]);
 
         }
-       dbbasketballstats.find(query).count((err, count) => {
-           if (err) {
+        dbbasketballstats.find(query).count((err, count) => {
+            if (err) {
                 console.error("Error accesing to DB");
                 res.sendStatus(500);
                 return;
-            }else{
+            }
+            else {
                 res.send(String(count));
             }
-       });
+        });
     });
 
     // GET a basketball-help
@@ -600,9 +617,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     // Inicializa DB
 
     app.get(BASE_API_PATH_SECURE + "/basketball-stats/loadInitialData", (req, res) => {
-        
+
         if (!checkApiKey(req, res)) return;
-        
+
         dbbasketballstats.insert(initialBasketballstats, function(err, newDoc) {
             if (err) {
                 console.error("Error accesing DB");
@@ -617,9 +634,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
         });
     });
-   
+
     app.get(BASE_API_PATH_SECURE + "/basketball-stats-count", (req, res) => {
-        
+
         var query = {};
         for (var attr in req.query) {
 
@@ -638,17 +655,18 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 query["fourth"] = parseInt(req.query[attr]);
 
         }
-       dbbasketballstats.find(query).count((err, count) => {
-           if (err) {
+        dbbasketballstats.find(query).count((err, count) => {
+            if (err) {
                 console.error("Error accesing to DB");
                 res.sendStatus(500);
                 return;
-            }else{
+            }
+            else {
                 res.send(String(count));
             }
-       });
+        });
     });
-    
+
     // GET a basketball-help
 
     app.get(BASE_API_PATH_SECURE + "/basketball-stats/docs", (req, res) => {
@@ -658,7 +676,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
 
     //----------------------------------------------------------------------------------//
     app.get(BASE_API_PATH_SECURE + "/basketball-stats", (req, res) => {
-        
+
         console.log(Date() + " - GET /basketball-stats");
 
         if (!checkApiKey(req, res)) return;

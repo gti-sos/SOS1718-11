@@ -1,7 +1,6 @@
 {
   "name": "sos1718-11",
   "version": "0.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -27,6 +26,14 @@
     "mongodb": "^3.0.7",
     "nedb": "^1.8.0",
     "npm-install-all": "^1.1.21",
+    "phantomjs": "^2.1.7",
     "protractor": "^5.3.1"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "description": ""
+    "request": "^2.85.0"
   }
 }

@@ -28,6 +28,14 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/basketballStats/graph3.html",
             controller : "BasketBallGraph3Ctrl"
         })
+        .when("/basketball-stats-proxy1", {
+            templateUrl: "/basketballStats/integrationsProxy1.html",
+            controller : "integrationsProxy1Ctrl"
+        })
+        .when("/basketball-stats-cors", {
+            templateUrl: "/basketballStats/integrationsCors.html",
+            controller : "integrationsCorsCtrl"
+        })
         .when("/baseball-stats-graph1", {
             templateUrl: "/baseballStats/graph1.html",
             controller: "BaseballGraph1Ctrl"
@@ -47,6 +55,14 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/baseball-stats/:stadium/:date", {
             templateUrl: "/baseballStats/edit.html",
             controller: "EditBaseballStatsCtrl"
+        })
+        .when("/baseball-stats-proxy", {
+            templateUrl: "/baseballStats/integrationGraph1.html",
+            controller: "integrationGraph1Ctrl"
+        })
+        .when("/baseball-stats-cors", {
+            templateUrl: "/baseballStats/integrationGraphCors.html",
+            controller: "integrationGraph2Ctrl"
         })
         .when("/football-stats", {
             templateUrl: "footballStats/list.html",
