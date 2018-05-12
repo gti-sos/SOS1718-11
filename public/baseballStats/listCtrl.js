@@ -44,42 +44,48 @@
          };
 
          $scope.previousPage = function() {
+             if (!$scope.inputPage || $scope.inputPage) {
 
-             console.log("offset antes-: " + limit);
-             offset -= limit;
+                 console.log("offset antes-: " + limit);
+                 offset -= limit;
 
-             if (offset < 0) {
-                 offset = 0;
+                 if (offset < 0) {
+                     offset = 0;
+                 }
+
+                 console.log("offset despues-: " + offset);
+                 $http
+                     .get(api + "?apikey=" + $rootScope.apikey + "&limit=10&offset=" + offset)
+                     .then(function(response) {
+                         properties = "&limit=10&offset=" + offset;
+                         $scope.currentPage--;
+                         $scope.getBaseballStats();
+
+                     });
              }
-
-             console.log("offset despues-: " + offset);
-             $http
-                 .get(api + "?apikey=" + $rootScope.apikey + "&limit=10&offset=" + offset)
-                 .then(function(response) {
-                     properties = "&limit=10&offset=" + offset;
-                     $scope.currentPage--;
-                     $scope.getBaseballStats();
-
-                 });
          };
 
          $scope.nextPage = function() {
-             console.log("offset antes+: " + $scope.currentPage);
-             offset += limit;
 
-             if (offset > (limit * ($scope.maxPages - 1))) {
-                 offset = limit * ($scope.maxPages - 1);
+             if (!$scope.inputPage || $scope.inputPage) {
+
+                 console.log("offset antes+: " + $scope.currentPage);
+                 offset += limit;
+
+                 if (offset > (limit * ($scope.maxPages - 1))) {
+                     offset = limit * ($scope.maxPages - 1);
+                 }
+
+                 console.log("offset despues +: " + offset);
+                 $http
+                     .get(api + "?apikey=" + $rootScope.apikey + "&limit=10&offset=" + offset)
+                     .then(function(response) {
+                         properties = "&limit=10&offset=" + offset;
+
+                         $scope.currentPage++;
+                         $scope.getBaseballStats();
+                     });
              }
-
-             console.log("offset despues +: " + offset);
-             $http
-                 .get(api + "?apikey=" + $rootScope.apikey + "&limit=10&offset=" + offset)
-                 .then(function(response) {
-                     properties = "&limit=10&offset=" + offset;
-
-                     $scope.currentPage++;
-                     $scope.getBaseballStats();
-                 });
          };
 
 
@@ -218,6 +224,29 @@
              }
 
 
+             if ($scope.inputPage < $scope.currentPage) {
+                 console.log("entra en el menor");
+                 offset -= (limit * ($scope.inputPage - 1));
+                 if (offset < 0) { offset = 0; }
+
+                 console.log("input menor");
+             }
+             if ($scope.inputPage == "") {
+
+                 offset = 0;
+             }
+
+             if ($scope.inputPage > $scope.currentPage) {
+                 offset += limit * ($scope.inputPage - 1);
+
+                 if (offset > (limit * ($scope.maxPages - 1))) {
+                     offset = limit * ($scope.maxPages - 1);
+                 }
+             }
+
+
+
+
 
              $http
                  .get(api + "/count" + "?apikey=" + $rootScope.apikey + properties)
@@ -249,7 +278,7 @@
          };
 
 
-         $scope.inputPageButton = function() {
+         /*  $scope.inputPageButton = function() {
 
              if ($scope.inputPage < $scope.currentPage) {
                  console.log("entra en el menor");
@@ -286,7 +315,7 @@
          };
 
 
-
+*/
 
 
 

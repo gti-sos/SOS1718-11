@@ -1,7 +1,15 @@
 var BASE_API_PATH = "/api/v2";
 var BASE_API_PATH_secure = "/api/v2/secure";
 var baseballstatsAPI = {};
+var request = require("request");
+var cors=  require("cors");
+
+
+var port = (process.env.PORT || 1607);
+
 module.exports = baseballstatsAPI;
+
+
 
 var initialbaseballstats = [{
         "stadium": "new-york",
@@ -86,6 +94,25 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
     //-------------------baseball-stats----------------------------//
 
     console.log("Registering routes for Baseball Stats API...");
+     app.use(cors());
+
+    var apiServerHostOS = "https://SOS1718-05.herokuapp.com";
+    
+    var apiServerHost = "https://sos1718-09.herokuapp.com";
+   
+    app.use("/proxyMLS", function(req, res) {
+        var url = apiServerHostOS + req.url;
+        console.log(req.url);
+        req.pipe(request(url)).pipe(res);
+    });
+    
+     app.use("/proxyRF", function(req, res) {
+        var url = apiServerHost + req.url;
+        console.log(req.url);
+        req.pipe(request(url)).pipe(res);
+    });
+  
+
 
     //---------------------------MONGODB--------------------------------------//
 
@@ -399,7 +426,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
     app.get(BASE_API_PATH + "/baseball-stats/count", (req, res) => {
         let query = {};
-       
+
         for (let attr in req.query) {
 
 
@@ -427,7 +454,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
             }
         });
-        
+
     });
 
 
@@ -458,7 +485,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
         if (!checkApiKey(req, res)) return;
 
         let query = {};
-       
+
         for (let attr in req.query) {
 
 
@@ -486,7 +513,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
             }
         });
-        
+
     });
 
     app.post(BASE_API_PATH_secure + "/baseball-stats", (req, res) => {

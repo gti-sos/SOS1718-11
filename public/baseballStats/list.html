@@ -73,7 +73,7 @@
         <div class="row">
             <div class="col s12 center-align">
                 <div>
-                    <input class="form-control" type="text" id="numPage" ng-model="inputPage" ng-change="inputPageButton()" placeholder="Page">
+                    <input class="form-control" type="text" id="numPage" ng-model="inputPage" ng-change="getBaseballStats()" placeholder="Page">
                 </div>
                 <div class="pagination">
 
@@ -83,8 +83,10 @@
                     <li>Page {{currentPage}} of {{maxPages}} </li>
 
 
-                    <li class="disabled" ng-show="currentPage == maxPages"><a href=""><i class="material-icons">chevron_right</i></a></li>
-                    <li class="waves-effect" ng-show="currentPage != maxPages"><a href="" ng-click="nextPage()"><i class="material-icons">chevron_right</i></a></li>
+                    <li class="disabled" ng-show="currentPage == maxPages"><a href=""><i id="next" class="material-icons">chevron_right</i></a></li>
+                    
+                    <li class="waves-effect" ng-hide="currentPage == maxPages"><a href="" ng-click="nextPage()"><i id="next" class="material-icons">chevron_right</i></a></li>
+
                 </div>
             </div>
         </div>

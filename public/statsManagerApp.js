@@ -46,6 +46,14 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/baseballStats/edit.html",
             controller: "EditBaseballStatsCtrl"
         })
+        .when("/proxyMLS/api/v1/world-stats", {
+            templateUrl: "/baseballStats/integrationGraph1.html",
+            controller: "integrationGraph1Ctrl"
+        })
+        .when("/proxyRF/api/v2/open-source-contests", {
+            templateUrl: "/baseballStats/integrationGraphCors.html",
+            controller: "integrationGraph2Ctrl"
+        })
         .when("/football-stats", {
             templateUrl: "footballStats/list.html",
             controller: "ListFootballStatsCtrl"
