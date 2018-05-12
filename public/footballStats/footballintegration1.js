@@ -11,6 +11,7 @@ angular.module("StatsManagerApp").controller("FootballIntegrationCtrl", ["$scope
       databalta=response.data;
       console.log(databalta);
       
+      
     var data = [];
     $http.get(api + "?apikey=" + $rootScope.apikey).then(function (response){
       data=response.data;
@@ -58,6 +59,9 @@ Highcharts.chart('container', {
   }, {
     name: 'Corner',
     data: data.map(function(d) {return d.corner})
+  }, {
+    name: 'fault',
+    data: data.map(function(d) {return d.fault})
   }, {
     name: 'fault',
     data: data.map(function(d) {return d.fault})
