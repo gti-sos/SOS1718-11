@@ -10,7 +10,7 @@
          if (!$rootScope.apikey) $rootScope.apikey = "scraping";
 
          var api = "/api/v2/secure/baseball-stats";
-         var apiEx1 = "/proxyRF/api/v2/open-source-contests";
+         var apiEx1 = "https://sos1718-09.herokuapp.com/api/v2/open-source-contests";
          var properties = "";
 
 

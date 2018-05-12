@@ -98,7 +98,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
     var apiServerHostOS = "https://SOS1718-05.herokuapp.com";
     
-    var apiServerHost = "https://sos1718-09.herokuapp.com";
+   // var apiServerHost = "https://sos1718-09.herokuapp.com";
    
     app.use("/proxyMLS", function(req, res) {
         var url = apiServerHostOS + req.url;
@@ -106,11 +106,11 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
         req.pipe(request(url)).pipe(res);
     });
     
-     app.use("/proxyRF", function(req, res) {
+    /* app.use("/proxyRF", function(req, res) {
         var url = apiServerHost + req.url;
         console.log(req.url);
         req.pipe(request(url)).pipe(res);
-    });
+    });*/
   
 
 
