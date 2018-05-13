@@ -10,7 +10,7 @@
          if (!$rootScope.apikey) $rootScope.apikey = "scraping";
 
          var api = "/api/v2/secure/baseball-stats";
-         var apiEx1 = "https://sos1718-09.herokuapp.com/api/v2/open-source-contests";
+         var apiEx1 = "https://sos1718-08.herokuapp.com/api/v1/divorces-an";
          var properties = "";
 
 
@@ -27,12 +27,12 @@
              },
             yAxis: {
                  title: {
-                     text: 'City & Stadium'
+                     text: 'Hits & Nullities'
                  }
              },
-             yAxis: {
+             xAxis: {
                  title: {
-                     text: 'Hits & Members'
+                     text: 'Province & Stadium'
                  }
              },
              legend: {
@@ -98,14 +98,14 @@
 
                          response1.data.map(function(c) {
 
-                             x.push(c["city"]);
+                             x.push(c["province"]);
 
                          });
 
                          console.log("----------------team------------------")
 
                          response1.data.map(function(v) {
-                            b.push(v["team"].length);
+                            b.push(v["nullity"]);
                          });
                          
                         for(var i=0; i<b.length;i++){
@@ -137,13 +137,13 @@
 
                              yAxis: {
                                  title: {
-                                     text: 'Hits & Members of team'
+                                     text: 'Hits & Nullities'
                                  }
                              },
                              xAxis: {
                                  categories: x,
                                  title: {
-                                     text: 'Stadium & City'
+                                     text: 'Province & Stadium'
                                  }
                              },
                              legend: {
@@ -155,7 +155,7 @@
                                  name: 'Hits',
                                  data: d
                              }, {
-                                 name: 'Miembros equipo',
+                                 name: 'Nullities',
                                  data: b
                              }],
 
