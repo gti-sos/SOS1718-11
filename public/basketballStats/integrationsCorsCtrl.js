@@ -30,7 +30,7 @@ angular
                     var basketData = response.data;
 
                     $http
-                        .get('https://sos1718-09.herokuapp.com/api/v1/secure/spanish-universities?apikey=sos1718-09')
+                        .get('https://sos1718-01.herokuapp.com/api/v1/goals-stats')
                         .then(function(response) {
 
                             var univData = response.data;
@@ -42,7 +42,7 @@ angular
                             })
 
                             univData.map(function(d) {
-                                data.push([d['headquar'],d['nameUniversity'].length]);
+                                data.push([d['city'],d['rightfoot']]);
                             })
                             console.log(data);
 
@@ -59,9 +59,7 @@ angular
                                 title: {
                                     text: null
                                 },
-                                tooltip: {
-                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                                },
+                                
                                 plotOptions: {
                                     pie: {
                                         allowPointSelect: true,
