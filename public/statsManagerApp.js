@@ -87,6 +87,10 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats-footballintegration1", {
             templateUrl: "footballStats/footballintegration1.html",
             controller: "FootballIntegrationCtrl"
+        })
+         .when("/football-stats-footballintegration2", {
+            templateUrl: "footballStats/footballintegration2.html",
+            controller: "FootballIntegration2Ctrl"
         });
     console.log("App initialized and configured");
 });
