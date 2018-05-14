@@ -16,58 +16,38 @@
 
 
 
-         Highcharts.chart('container', {
-
+         Highcharts.chart('cors', {
+             chart: {
+                 type: 'pie',
+                 options3d: {
+                     enabled: true,
+                     alpha: 45,
+                     beta: 0
+                 }
+             },
              title: {
-                 text: 'Integration Graph'
-             },
-
-             subtitle: {
-                 text: ''
-             },
-            yAxis: {
-                 title: {
-                     text: 'Hits & Nullities'
-                 }
-             },
-             xAxis: {
-                 title: {
-                     text: 'Province & Stadium'
-                 }
-             },
-             legend: {
-                 layout: 'vertical',
-                 align: 'right',
-                 verticalAlign: 'middle'
+                 text: null
              },
 
              plotOptions: {
-                 series: {
-                     label: {
-                         connectorAllowed: false
-                     },
-                     pointStart: 2010
+                 pie: {
+                     allowPointSelect: true,
+                     cursor: 'pointer',
+                     depth: 35,
+                     dataLabels: {
+                         enabled: true,
+                         format: '{point.name}'
+                     }
                  }
              },
-
-             series: [],
-
-             responsive: {
-                 rules: [{
-                     condition: {
-                         maxWidth: 500
-                     },
-                     chartOptions: {
-                         legend: {
-                             layout: 'horizontal',
-                             align: 'center',
-                             verticalAlign: 'bottom'
-                         }
-                     }
-                 }]
-             }
-
+             series: [{
+                 type: 'pie',
+                 data: []
+             }]
          });
+
+
+
 
 
          $scope.searchGraph1 = function() {
@@ -105,78 +85,52 @@
                          console.log("----------------team------------------")
 
                          response1.data.map(function(v) {
-                            b.push(v["nullity"]);
+                             b.push([v["province"],v["nullity"]]);
                          });
-                         
-                        for(var i=0; i<b.length;i++){
-                            d.push("-");
-                        }
+
                         
-                        console.log("----------------member------------------")
+                         console.log("----------------member------------------")
 
-                        response2.data.map(function(s) {
+                      
 
-                             x.push(s["stadium"]);
-
-                         });
-
-                        response2.data.map(function(h) {
-                             d.push(parseInt(h["hit"]));
+                         response2.data.map(function(h) {
+                             d.push([h["stadium"],parseInt(h["hit"])]);
                          });
 
 
-                         Highcharts.chart('container', {
-
+                        
+                         Highcharts.chart('cors', {
+                             chart: {
+                                 type: 'pie',
+                                 options3d: {
+                                     enabled: true,
+                                     alpha: 45,
+                                     beta: 0
+                                 }
+                             },
                              title: {
-                                 text: 'Integration Graph'
+                                 text: null
                              },
 
-                             subtitle: {
-                                 text: ''
-                             },
-
-                             yAxis: {
-                                 title: {
-                                     text: 'Hits & Nullities'
+                             plotOptions: {
+                                 pie: {
+                                     allowPointSelect: true,
+                                     cursor: 'pointer',
+                                     depth: 35,
+                                     dataLabels: {
+                                         enabled: true,
+                                         format: '{point.name}'
+                                     }
                                  }
-                             },
-                             xAxis: {
-                                 categories: x,
-                                 title: {
-                                     text: 'Province & Stadium'
-                                 }
-                             },
-                             legend: {
-                                 layout: 'vertical',
-                                 align: 'right',
-                                 verticalAlign: 'middle'
                              },
                              series: [{
-                                 name: 'Hits',
-                                 data: d
-                             }, {
-                                 name: 'Nullities',
-                                 data: b
-                             }],
-
-                             responsive: {
-                                 rules: [{
-                                     condition: {
-                                         maxWidth: 500
-                                     },
-                                     chartOptions: {
-                                         legend: {
-                                             layout: 'horizontal',
-                                             align: 'center',
-                                             verticalAlign: 'bottom'
-                                         }
-                                     }
-                                 }]
-                             }
-
+                                 type: 'pie',
+                                 data: b.concat(d)
+                             }]
                          });
-                     });
 
+
+                     });
                  });
          }
      }]);
