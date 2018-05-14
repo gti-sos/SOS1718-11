@@ -12,6 +12,9 @@ angular.module("StatsManagerApp").controller("FootballIntegrationCtrl", ["$scope
       var goal = [];
       var autCommunity = [];
       var enrolledNumber = [];
+      var degree = [];
+      var master = [];
+      var corner = [];
            
 
 $http.get(api + "?apikey=" + $rootScope.apikey)
@@ -26,6 +29,12 @@ $http.get(api + "?apikey=" + $rootScope.apikey)
        var d1 = [];
        var todo =[];      
        var x=[];
+       var golcor = [];
+       var demas =[];
+       var golesillos= [];
+       var master2 = [];
+       var corner2 = [];
+       tomagol= [];
 
        autCommunity = response1.data.map(function(c) {
 
@@ -36,7 +45,13 @@ $http.get(api + "?apikey=" + $rootScope.apikey)
 
 
        enrolledNumber = response1.data.map(function(e) {
-        return parseInt(e["enrolledNumber"]);
+        return parseInt(e["enrolledNumber"]/100000);
+       });
+        degree = response1.data.map(function(d) {
+        return parseInt(d["degree"]);
+       });
+         master = response1.data.map(function(m) {
+        return parseInt(m["master"]);
        });
 
 
@@ -49,6 +64,12 @@ $http.get(api + "?apikey=" + $rootScope.apikey)
        goal = response2.data.map(function(g) {
         return parseInt(g["goal"]);
        });
+        corner = response2.data.map(function(c) {
+        return parseInt(c["corner"]);
+       });
+       
+
+
 
 
 
@@ -58,6 +79,11 @@ $http.get(api + "?apikey=" + $rootScope.apikey)
         d1.push([autCommunity[i], enrolledNumber[i]]);
         x.push(autCommunity[i]);
         todo.push([autCommunity[i], enrolledNumber[i]]);
+        demas.push([degree[i], master[i]]);
+        golesillos.push("");
+        corner2.push("");
+        master2.push(master[i]/10000);
+        
        }
 
 
@@ -68,14 +94,127 @@ $http.get(api + "?apikey=" + $rootScope.apikey)
         d.push([stadium[i], goal[i]]);
         x.push(stadium[i]);
        todo.push([stadium[i], goal[i]]);
+       golcor.push([goal[i], corner[i]]);
+       
+       golesillos.push(goal[i]);
+        corner2.push(corner[i]);
+        master2.push("");
+       /*if(x.includes(stadium[i])){
+        
+       }else{
+        x.push(stadium[i]);
+       }*/
        }
+       
+       
+       Highcharts.chart('container', {
+  chart: {
+    type: 'bar'
+  },
+  title: {
+    text: 'Integration1'
+  },
+  subtitle: {
+    text: ''
+  },
+  xAxis: {
+    categories: x,
+    title: {
+      text: null
+    }
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Population (millions)',
+      align: 'high'
+    },
+    labels: {
+      overflow: 'justify'
+    }
+  },
+  tooltip: {
+    valueSuffix: ' millions'
+  },
+  plotOptions: {
+    bar: {
+      dataLabels: {
+        enabled: true
+      }
+    }
+  },
+  legend: {
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'top',
+    x: -40,
+    y: 80,
+    floating: true,
+    borderWidth: 1,
+    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+    shadow: true
+  },
+  credits: {
+    enabled: false
+  },
+  series: [{
+    name: 'Goals',
+    data: golesillos
+  }, {
+    name: 'Corners',
+    data: corner2
+  }, {
+    name: 'Masters',
+    data: master
+  
+  }]
+});
 
-console.log(d);
-console.log(d1);
+/*
+       Highcharts.chart('container', {
+  chart: {
+    type: 'pyramid'
+  },
+  title: {
+    text: 'goals and enrolledNumber ',
+    x: -50
+  },
+  plotOptions: {
+    series: {
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.name}</b> ({point.y:,.0f})',
+        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+        softConnector: true
+      },
+      center: ['40%', '50%'],
+      width: '80%'
+    }
+  },
+  legend: {
+    enabled: false
+  },
+  series: [{
+    name: 'Countrie Data',
+    data: todo
+  }]
+});
+        
+      
+
+//console.log(d);
+//console.log(d1);
 console.log(todo);
+console.log (x);
+//console.log(demas);
 
 
 
+
+
+*/
+
+/*
        Highcharts.chart('container', {
         chart: {
          type: 'scatter',
@@ -157,83 +296,7 @@ console.log(todo);
        });
 
 
-
-/*Highcharts.chart('container', {
-
-  chart: {
-    type: 'bubble',
-    plotBorderWidth: 1,
-    zoomType: 'xy'
-  },
-
-  title: {
-    text: 'Goals & Enrrolled'
-  },
-
-  xAxis: {
-    gridLineWidth: 1
-  },
-
-  yAxis: {
-    startOnTick: false,
-    endOnTick: false
-  },
-
-  series: [{
-    data: [
-      [9, 81, 63],
-      [98, 5, 89],
-      [51, 50, 73],
-      [41, 22, 14],
-      [58, 24, 20],
-      [78, 37, 34],
-      [55, 56, 53],
-      [18, 45, 70],
-      [42, 44, 28],
-      [3, 52, 59],
-      [31, 18, 97],
-      [79, 91, 63]
-
-    ],
-    marker: {
-      fillColor: {
-        radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
-        stops: [
-          [0, 'rgba(255,255,255,0.5)'],
-          [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.5).get('rgba')]
-        ]
-      }
-    }
-  }, {
-    data: [
-      [42, 38, 20],
-      [6, 18, 1],
-      [1, 93, 55],
-      [57, 2, 90],
-      [80, 76, 22],
-      [11, 74, 96],
-      [88, 56, 10],
-      [30, 47, 49],
-      [57, 62, 98],
-      [4, 16, 16],
-      [46, 10, 11],
-      [22, 87, 89],
-      [57, 91, 82],
-      [45, 15, 98]
-    ],
-    marker: {
-      fillColor: {
-        radialGradient: { cx: 0.4, cy: 0.3, r: 0.7 },
-        stops: [
-          [0, 'rgba(255,255,255,0.5)'],
-          [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.5).get('rgba')]
-        ]
-      }
-    }
-  }]
-
-});*/
-
+*/
 
 
 
