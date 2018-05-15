@@ -799,6 +799,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
         if (!checkApiKey(req, res)) return;
 
         console.log(Date() + " - POST /basketball-stats");
+        
         var basketballstat = req.body;
         basketballstat.first = parseInt(basketballstat.first);
         basketballstat.second = parseInt(basketballstat.second);

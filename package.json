@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest":"tests/runPhantomjs.sh",
+    "test": "protractor tests/basketball-stats-config.js",
+    "posttest": "killall phantomjs",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
