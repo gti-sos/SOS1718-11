@@ -4,7 +4,7 @@
 
 angular
     .module("StatsManagerApp")
-    .controller("integrationsCorsCtrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
+    .controller("IntegrationsCorsCtrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
 
         console.log("Cors Controller initialized");
 

@@ -34,7 +34,8 @@ angular
                         chart: {
                             type: 'bar',
                             height: 700,
-                            backgroundColor: ('#212529')
+                            backgroundColor: ('#212529'),
+                 
                         },
                         title: {
                             text: null

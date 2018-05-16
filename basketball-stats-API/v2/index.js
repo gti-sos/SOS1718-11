@@ -1,6 +1,3 @@
-var request = require("request");
-
-
 //-------------------index.js basketball-stats ----------------------------//
 
 var BASE_API_PATH = "/api/v2";
@@ -146,7 +143,7 @@ var initialBasketballstats = [{
         "fourth": 55
     },
     {
-        "stadium": "menphis",
+        "stadium": "memphis",
         "date": "2018-03-02",
         "first": 63,
         "second": 43,
@@ -210,7 +207,7 @@ var initialBasketballstats = [{
         "fourth": 47
     },
     {
-        "stadium": "dember",
+        "stadium": "denver",
         "date": "2018-03-03",
         "first": 54,
         "second": 38,
@@ -234,19 +231,19 @@ var initialBasketballstats = [{
 
 
 
-basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
+basketballstatsAPI.register = function(app, request, io, dbbasketballstats, checkApiKey) {
 
     console.log("Registering routes for Basketball Stats API...");
 
-    
+
 
     var goals = "https://sos1718-01.herokuapp.com/api/v1/goals-stats";
-    var ismael = "https://sos1718-07.herokuapp.com/api/v1/attacks-data"
-   
+    var ismael = "https://sos1718-07.herokuapp.com/api/v1/attacks-data";
+
     app.use(BASE_API_PATH + "/basketball-stats/proxy1", function(req, res) {
         req.pipe(request(ismael)).pipe(res);
     });
-    
+
     app.use(BASE_API_PATH + "/basketball-stats/cors", function(req, res) {
         req.pipe(request(goals)).pipe(res);
     });
@@ -614,6 +611,35 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
     //--------------------------------------------------------------//
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    io.on('connection', function(socket){
+        console.log('New connection to SOCKETS GRAPH!');
+    });
+    
+
+
     // Inicializa DB
 
     app.get(BASE_API_PATH_SECURE + "/basketball-stats/loadInitialData", (req, res) => {
@@ -799,7 +825,7 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
         if (!checkApiKey(req, res)) return;
 
         console.log(Date() + " - POST /basketball-stats");
-        
+
         var basketballstat = req.body;
         basketballstat.first = parseInt(basketballstat.first);
         basketballstat.second = parseInt(basketballstat.second);
@@ -829,6 +855,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                             return;
                         }
                         else {
+                            dbbasketballstats.find().toArray((err, data) => {
+                                io.emit('reload', { data: data });
+                            });
                             res.sendStatus(201);
                             console.log("INSERTED 1");
                         }
@@ -882,6 +911,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                     return;
                 }
                 else {
+                    dbbasketballstats.find().toArray((err, data) => {
+                        io.emit('reload', { data: data });
+                    });
                     console.log("UPDATED " + numUpdated.result.n);
                     res.sendStatus(200);
                 }
@@ -938,6 +970,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 return;
             }
             else {
+                dbbasketballstats.find().toArray((err, data) => {
+                    io.emit('reload', { data: data });
+                });
                 console.log("DELETED " + numRemoved.result.n);
                 res.sendStatus(200);
             }
@@ -965,6 +1000,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 return;
             }
             else {
+                dbbasketballstats.find().toArray((err, data) => {
+                    io.emit('reload', { data: data });
+                });
                 console.log("DELETED " + numRemoved.result.n);
                 res.sendStatus(200);
             }
@@ -986,6 +1024,9 @@ basketballstatsAPI.register = function(app, dbbasketballstats, checkApiKey) {
                 return;
             }
             else {
+                dbbasketballstats.find().toArray((err, data) => {
+                    io.emit('reload', { data: data });
+                });
                 console.log("DELETED " + numRemoved.result.n);
                 res.sendStatus(200);
             }

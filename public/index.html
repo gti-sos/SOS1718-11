@@ -13,6 +13,7 @@
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="/bower_components/materialize/dist/js/materialize.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -54,6 +55,7 @@
     <script src="/baseballStats/integrationGraph1.js"></script>
     <script src="/baseballStats/integrationGraphCors.js"></script>
 
+
     <script src="/basketballStats/listCtrl.js"></script>
     <script src="/basketballStats/editCtrl.js"></script>
     <script src="/basketballStats/graph1Ctrl.js"></script>
@@ -61,6 +63,8 @@
     <script src="/basketballStats/graph3Ctrl.js"></script>
     <script src="/basketballStats/integrationsProxy1Ctrl.js"></script>
     <script src="/basketballStats/integrationsCorsCtrl.js"></script>
+    <script src="/basketballStats/socketGraphCtrl.js"></script>
+
 
     <script src="/footballStats/listCtrl.js"></script>
     <script src="/footballStats/editCtrl.js"></script>
@@ -75,14 +79,17 @@
             text-decoration: none;
             color: grey;
         }
+
         a:visited {
             text-decoration: none;
             color: grey;
         }
+
         a:active {
             text-decoration: none;
             color: #26a69a;
         }
+
         a:hover {
             text-decoration: none;
             color: #26a69a;
@@ -92,7 +99,7 @@
 
 </head>
 
-<body style="background-color: #F5F1F0" style="  color:black" >
+<body style="background-color: #F5F1F0" style="  color:black">
     <header>
         <ul id="dropdown-menu" class="dropdown-content">
             <li><a href="#!/basketball-stats"><i class="material-icons left"></i>BasketBall Stats</a></li>
@@ -104,11 +111,13 @@
             <li><a href="#!/basketball-stats-graph1"><i class="material-icons left"></i>BasketBall Stats Graph 1</a></li>
             <li><a href="#!/basketball-stats-graph2"><i class="material-icons left"></i>BasketBall Stats Graph 2</a></li>
             <li><a href="#!/basketball-stats-graph3"><i class="material-icons left"></i>BasketBall Stats Graph 3</a></li>
+            <li><a href="#!/basketball-stats-socket"><i class="material-icons left"></i>BasketBall Stats SOCKET</a></li>
+
 
             <li><a href="#!/baseball-stats-graph1"><i class="material-icons left"></i>BaseBall Stats Graph 1</a></li>
             <li><a href="#!/baseball-stats-graph2"><i class="material-icons left"></i>BaseBall Stats Graph 2</a></li>
             <li><a href="#!/baseball-stats-graph3"><i class="material-icons left"></i>BaseBall Stats Graph 3</a></li>
-            
+
             <li><a href="#!/football-stats-footballchart"><i class="material-icons left"></i>FootBall Stats Graph 1</a></li>
             <li><a href="#!/football-stats-footballgeo"><i class="material-icons left"></i>FootBall Stats Graph 2</a></li>
             <li><a href="#!/football-stats-footballd3"><i class="material-icons left"></i>FootBall Stats Graph 3</a></li>

@@ -4,7 +4,7 @@
 
 angular
     .module("StatsManagerApp")
-    .controller("integrationsProxy1Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
+    .controller("IntegrationsProxy1Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
 
         console.log("Proxy1 Controller initialized");
 
