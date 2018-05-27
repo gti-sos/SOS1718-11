@@ -6,6 +6,8 @@
     <link rel="icon" type="image/x-icon" href="https://github.com/favicon.ico" />
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/bower_components/materialize/dist/css/materialize.min.css" type="text/css" />
+    <link rel="stylesheet" href="/bower_components/ejcharts/EJSChart.css" type="text/css" />
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -13,7 +15,7 @@
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="/bower_components/materialize/dist/js/materialize.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+
 
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -30,6 +32,21 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="/bower_components/rgraph/RGraph.common.core.js"></script>
     <script type="text/javascript" src="/bower_components/rgraph/RGraph.bar.js"></script>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script type="text/javascript" src="/bower_components/smoothie/smoothie.js"></script>
+    <script type="text/javascript" src="/bower_components/ejcharts/EJSChart.js"></script>
+    <script type="text/javascript" src="/bower_components/ejcharts/excanvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+
     <script type="text/javascript" src="/bower_components/rgraph/RGraph.drawing.yaxis.js"></script>
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>
@@ -61,9 +78,17 @@
     <script src="/basketballStats/graph1Ctrl.js"></script>
     <script src="/basketballStats/graph2Ctrl.js"></script>
     <script src="/basketballStats/graph3Ctrl.js"></script>
-    <script src="/basketballStats/integrationsProxy1Ctrl.js"></script>
-    <script src="/basketballStats/integrationsCorsCtrl.js"></script>
+    <script src="/basketballStats/integrationsProxyCtrl.js"></script>
+    <script src="/basketballStats/integrationsCors1Ctrl.js"></script>
+    <script src="/basketballStats/integrationsCors2Ctrl.js"></script>
+    <script src="/basketballStats/integrationsCors3Ctrl.js"></script>
     <script src="/basketballStats/socketGraphCtrl.js"></script>
+    <script src="/basketballStats/extGraph1Ctrl.js"></script>
+    <script src="/basketballStats/extGraph2Ctrl.js"></script>
+    <script src="/basketballStats/extGraph3Ctrl.js"></script>
+    <script src="/basketballStats/extGraph4Ctrl.js"></script>
+    <script src="/basketballStats/extGraph5Ctrl.js"></script>
+    <script src="/basketballStats/extGraph6Ctrl.js"></script>
 
 
     <script src="/footballStats/listCtrl.js"></script>
@@ -127,8 +152,17 @@
 
         </ul>
         <ul id="dropdown-menu3" class="dropdown-content">
-            <li><a href="#!/basketball-stats-cors"><i class="material-icons left"></i>BasketBall Stats CORS</a></li>
-            <li><a href="#!/basketball-stats-proxy1"><i class="material-icons left"></i>BasketBall Stats PROXY</a></li>
+            <li><a href="#!/basketball-stats-integrations-proxy"><i class="material-icons left"></i>BasketBall Stats Integrations PROXY</a></li>
+            <li><a href="#!/basketball-stats-integrations-cors1"><i class="material-icons left"></i>BasketBall Stats Integration CORS 1</a></li>
+            <li><a href="#!/basketball-stats-integrations-cors2"><i class="material-icons left"></i>BasketBall Stats Integration CORS 2</a></li>
+            <li><a href="#!/basketball-stats-integrations-cors3"><i class="material-icons left"></i>BasketBall Stats Integration CORS 3</a></li>
+            <li><a href="#!/basketball-stats-extGraph1"><i class="material-icons left"></i>BasketBall Stats External 1</a></li>
+            <li><a href="#!/basketball-stats-extGraph2"><i class="material-icons left"></i>BasketBall Stats External 2</a></li>
+            <li><a href="#!/basketball-stats-extGraph3"><i class="material-icons left"></i>BasketBall Stats External 3</a></li>
+            <li><a href="#!/basketball-stats-extGraph4"><i class="material-icons left"></i>BasketBall Stats External 4</a></li>
+            <li><a href="#!/basketball-stats-extGraph5"><i class="material-icons left"></i>BasketBall Stats External 5</a></li>
+            <li><a href="#!/basketball-stats-extGraph6"><i class="material-icons left"></i>BasketBall Stats External 6</a></li>
+            <li>---------------------------</li>
 
             <li><a href="#!/baseball-stats-cors"><i class="material-icons left"></i>BaseBall Stats CORS</a></li>
             <li><a href="#!/baseball-stats-proxy"><i class="material-icons left"></i>BaseBall Stats PROXY</a></li>
