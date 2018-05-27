@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var cors = require("cors");
+var request = require("request");
 var app = express();
 var path = require("path");
 var port = (process.env.PORT || 16778);
@@ -12,6 +13,8 @@ app.use("/", express.static(path.join(__dirname, "public")));
 app.use(cors());
 var dbURL = "mongodb://comun:123456@ds119049.mlab.com:19049/sos1718-als-sandbox";
 
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
 
@@ -32,7 +35,7 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
     var dbBasketball = mlabs.db("sos1718-als-sandbox");
     var dbbasketballstats = dbBasketball.collection("basketball-stats");
     var basketballstatsAPI = require("./basketball-stats-API/v2");
-    basketballstatsAPI.register(app, dbbasketballstats, secure.checkApiKey);
+    basketballstatsAPI.register(app, request, io, dbbasketballstats, secure.checkApiKey);
 
 
 
@@ -41,10 +44,10 @@ MongoClient.connect(dbURL, { native_parser: true }, (err, mlabs) => {
     var dbbaseballstats = dbBaseball.collection("baseball-stats");
     var baseballstatsAPI = require("./baseball-stats-API/v2");
     baseballstatsAPI.register(app, dbbaseballstats, secure.checkApiKey);
-
-
-
-    app.listen(port, () => {
+    
+    
+    
+    server.listen(port, () => {
         console.log("Server ready on port" + port + "!");
     }).on("error", (e) => {
         console.log("Server NOT READY:" + e);

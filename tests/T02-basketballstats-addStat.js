@@ -1,6 +1,13 @@
+/*global expect*/
+/*global browser*/
+/*global element*/
+/*global by*/
+
+var config = require("./basketball-stats-config.js")
+
 describe('Data is added', function() {
     it('should  add a stat', function() {
-        browser.get('https://sos1718-11.herokuapp.com//#!/basketball-stats');
+        browser.get(config.getAppUrl());
 
         element(by.id('next')).click().then(function() {
             element(by.id('next')).click().then(function() {

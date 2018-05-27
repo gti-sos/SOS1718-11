@@ -4,7 +4,7 @@
 
 angular
     .module("StatsManagerApp")
-    .controller("integrationsProxy1Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
+    .controller("IntegrationsProxy1Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
 
         console.log("Proxy1 Controller initialized");
 
@@ -30,7 +30,7 @@ angular
                     var basketData = response.data;
 
                     $http
-                        .get('https://sos171811als-sos171811als.c9users.io/api/v2/basketball-stats/proxy1')
+                        .get('/api/v2/basketball-stats/proxy1')
                         .then(function(response) {
 
                             var attackData = response.data;

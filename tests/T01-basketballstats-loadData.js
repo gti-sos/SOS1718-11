@@ -1,10 +1,13 @@
 /*global expect*/
+/*global browser*/
+/*global element*/
+/*global by*/
 
-var fs = require('fs');
+var config = require("./basketball-stats-config.js")
 
 describe('Data is loaded', function() {
     it('should show some stats', function() {
-        browser.get('https://sos171811als-sos171811als.c9users.io/#!/basketball-stats')
+        browser.get(config.getAppUrl())
             .then(function() {
                 var stats = element.all(by.repeater('stat in stats'));
                 expect(stats.count()).toBeGreaterThan(0);

@@ -30,11 +30,15 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         })
         .when("/basketball-stats-proxy1", {
             templateUrl: "/basketballStats/integrationsProxy1.html",
-            controller : "integrationsProxy1Ctrl"
+            controller : "IntegrationsProxy1Ctrl"
         })
         .when("/basketball-stats-cors", {
             templateUrl: "/basketballStats/integrationsCors.html",
-            controller : "integrationsCorsCtrl"
+            controller : "IntegrationsCorsCtrl"
+        })
+        .when("/basketball-stats-socket", {
+            templateUrl: "/basketballStats/socketGraph.html",
+            controller : "SocketGraphCtrl"
         })
         .when("/baseball-stats", {
             templateUrl: "/baseballStats/list.html",
