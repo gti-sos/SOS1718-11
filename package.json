@@ -36,7 +36,6 @@
     "test": "tests"
   },
   "devDependencies": {
-    //"nodemon": "^1.17.4"
   },
   "description": ""
 }
