@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "tests/runPhantomjs.sh",
-    "test": "protractor tests/basketball-stats-config.js",
+    "test": "protractor tests/footballTest/config.js",
     "posttest": "killall phantomjs",
     "start": "node index.js"
   },
@@ -27,6 +27,7 @@
     "google": "^2.1.0",
     "mongodb": "^3.0.7",
     "nedb": "^1.8.0",
+    "newman": "^3.9.4",
     "phantomjs": "^2.1.7",
     "protractor": "^5.3.1",
     "socket.io": "^2.1.0"
