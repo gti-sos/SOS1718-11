@@ -3,7 +3,7 @@ var path = require('path');
 
 describe('API should work', function(){
     newman.run({
-        collection: require(path.join(process.cwd(),"tests","/SOS1718-backend-tests.postman_collection.json")),
+        collection: require(path.join(process.cwd(),"tests","/SOS1718-backendTest.postman_collection.json")),
         reporters: "cli"
     }, function(err){
         if(err)
