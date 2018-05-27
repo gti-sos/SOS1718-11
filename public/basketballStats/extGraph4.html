@@ -1,0 +1,37 @@
+<h2>Basketball Stats External 4</h2>
+
+<div class="section">
+    <button class="btn waves-effect waves-light yellow darken-3 btn-sm" style="float:right" data-toggle="modal" onClick="$('#namesModal').modal('open');">Introduce a Couple</button>
+    <h5>Love Power Between {{couple}}</h5>
+</div>
+
+<div class="section" >
+    <div class="section" style="float:left">
+        <h5>{{advice}}</h5>
+    </div>
+    <div id="ext4" style="float:left"></div>
+</div>
+
+<div class="fixed-action-btn">
+    <a href="#!" class="btn-floating waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+</div>
+
+<div id="namesModal" class="modal" style="max-height: 41%" data-backdrop="false">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4>Select Names</h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" style="text-align:center" ng-model="name1" placeholder="Your Name">
+                    <input class="form-control" style="text-align:center" ng-model="name2" placeholder="Your Crush Name">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="button btn-sm btn-primary modal-action modal-close waves-effect waves-green">Search</button>
+        </div>
+    </div>
+</div>

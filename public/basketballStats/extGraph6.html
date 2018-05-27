@@ -1,0 +1,23 @@
+<h2>Basketball Stats External 6</h2>
+
+<div class="section">
+    <h5>Spanish HeartStone Credits Card</h5>
+    <select class="browser-default" ng-model="card" ng-change="refresh()">
+        <option value="" selected="">- Select Card -</option>
+        <option ng-repeat="card in cards" value={{card}}> {{card.name}} </option>
+    </select>
+</div>
+
+<div class="section">
+    <div style="float: left">
+        <img src={{img}} alt="Image not available, sorry.">
+    </div>
+    <div style="float: right">
+        <!--<div id="ext6"></div>-->
+        <canvas id="ext6" width="600" height="450"></canvas> 
+    </div>
+</div>
+
+<div class="fixed-action-btn">
+    <a href="#!" class="btn-floating waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+</div>
