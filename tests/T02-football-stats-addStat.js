@@ -27,7 +27,7 @@ describe('Add stat', function(){
                 });
             });
       });
-   });
+  // });
    
     
 });
