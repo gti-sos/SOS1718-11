@@ -77,9 +77,52 @@ console.log(responsePrimary.data);*/
 
 
                          console.log(conjunto);
-                         
+                         var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "funnel",
+  "theme": "light",
+  "dataProvider": [ {
+    "title": "Website visits",
+    "value": footballData.map(function(d) {})
+  }, {
+    "title": "Downloads",
+    "value": 123
+  }, {
+    "title": "Requested price list",
+    "value": 98
+  }, {
+    "title": "Contaced for more info",
+    "value": 72
+  }, {
+    "title": "Purchased",
+    "value": 35
+  }, {
+    "title": "Contacted for support",
+    "value": 35
+  }, {
+    "title": "Purchased additional products",
+    "value": 26
+  } ],
+  "balloon": {
+    "fixedPosition": true
+  },
+  "valueField": "value",
+  "titleField": "title",
+  "marginRight": 240,
+  "marginLeft": 50,
+  "startX": -500,
+  "depth3D": 100,
+  "angle": 40,
+  "outlineAlpha": 1,
+  "outlineColor": "#FFFFFF",
+  "outlineThickness": 2,
+  "labelPosition": "right",
+  "balloonText": "[[title]]: [[value]]n[[description]]",
+  "export": {
+    "enabled": true
+  }
+} );
                     
-                         var chart = AmCharts.makeChart("chartdiv", {
+                   /*      var chart = AmCharts.makeChart("chartdiv", {
     "type": "serial",
 	"theme": "light",
     "titles": [{
@@ -195,7 +238,7 @@ console.log(responsePrimary.data);*/
         "gridAlpha": 0.07,
         "position": "left",
         "title": "percent"
-    }*/],
+    }],
     "graphs": [{
         "balloonText": "<img src='https://www.amcharts.com/lib/3/images/car.png' style='vertical-align:bottom; margin-right: 10px; width:28px; height:21px;'><span style='font-size:14px; color:#000000;'><b>[[value]]</b></span>",
         "fillAlphas": 0.5,
@@ -225,7 +268,7 @@ console.log(responsePrimary.data);*/
     "export": {
     	"enabled": true
      }
-});
+});*/
 
 
 

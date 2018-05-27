@@ -1,0 +1,107 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SOS1718-backend-tests",
+		"_postman_id": "8cf3a63b-f108-479d-170b-4343b8483754",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get a la ruta base (check >2)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Should have more than 2\"]= jsonData.length >2"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/secure/football-stats?apikey=scraping",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"secure",
+						"football-stats"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "scraping",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get a la ruta base (check > 20)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Should have more than 10\"]= jsonData.length >20"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/secure/football-stats?apikey=scraping",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"secure",
+						"football-stats"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "scraping",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}

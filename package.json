@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "tests/runPhantomjs.sh",
-    "test": "protractor tests/footballTest/config.js",
+    "test": "protractor tests/config.js",
     "posttest": "killall phantomjs",
     "start": "node index.js"
   },

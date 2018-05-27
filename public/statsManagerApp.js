@@ -16,7 +16,7 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/basketballStats/edit.html",
             controller: "EditBasketballStatsCtrl"
         })
-         .when("/basketball-stats-graph1", {
+        .when("/basketball-stats-graph1", {
             templateUrl: "/basketballStats/graph1.html",
             controller: "BasketBallGraph1Ctrl"
         })
@@ -26,19 +26,51 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         })
         .when("/basketball-stats-graph3", {
             templateUrl: "/basketballStats/graph3.html",
-            controller : "BasketBallGraph3Ctrl"
+            controller: "BasketBallGraph3Ctrl"
         })
-        .when("/basketball-stats-proxy1", {
-            templateUrl: "/basketballStats/integrationsProxy1.html",
-            controller : "IntegrationsProxy1Ctrl"
+        .when("/basketball-stats-integrations-proxy", {
+            templateUrl: "/basketballStats/integrationsProxy.html",
+            controller: "IntegrationsProxyCtrl"
         })
-        .when("/basketball-stats-cors", {
-            templateUrl: "/basketballStats/integrationsCors.html",
-            controller : "IntegrationsCorsCtrl"
+        .when("/basketball-stats-integrations-cors1", {
+            templateUrl: "/basketballStats/integrationsCors1.html",
+            controller: "IntegrationsCors1Ctrl"
+        })
+        .when("/basketball-stats-integrations-cors2", {
+            templateUrl: "/basketballStats/integrationsCors2.html",
+            controller: "IntegrationsCors2Ctrl"
+        })
+        .when("/basketball-stats-integrations-cors3", {
+            templateUrl: "/basketballStats/integrationsCors3.html",
+            controller: "IntegrationsCors3Ctrl"
+        })
+        .when("/basketball-stats-extGraph1", {
+            templateUrl: "/basketballStats/extGraph1.html",
+            controller: "ExtGraph1Ctrl"
+        })
+        .when("/basketball-stats-extGraph2", {
+            templateUrl: "/basketballStats/extGraph2.html",
+            controller: "ExtGraph2Ctrl"
+        })
+        .when("/basketball-stats-extGraph3", {
+            templateUrl: "/basketballStats/extGraph3.html",
+            controller: "ExtGraph3Ctrl"
+        })
+        .when("/basketball-stats-extGraph4", {
+            templateUrl: "/basketballStats/extGraph4.html",
+            controller: "ExtGraph4Ctrl"
+        })
+        .when("/basketball-stats-extGraph5", {
+            templateUrl: "/basketballStats/extGraph5.html",
+            controller: "ExtGraph5Ctrl"
+        })
+        .when("/basketball-stats-extGraph6", {
+            templateUrl: "/basketballStats/extGraph6.html",
+            controller: "ExtGraph6Ctrl"
         })
         .when("/basketball-stats-socket", {
             templateUrl: "/basketballStats/socketGraph.html",
-            controller : "SocketGraphCtrl"
+            controller: "SocketGraphCtrl"
         })
         .when("/baseball-stats", {
             templateUrl: "/baseballStats/list.html",
@@ -91,8 +123,8 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats/:stadium/:date", {
             templateUrl: "footballStats/edit.html",
             controller: "EditFootballStatsCtrl"
-         })
-         .when("/football-stats-footballchart", {
+        })
+        .when("/football-stats-footballchart", {
             templateUrl: "footballStats/highcharts.html",
             controller: "HighChartsCtrl"
         })
@@ -108,7 +140,7 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "footballStats/footballintegration1.html",
             controller: "FootballIntegrationCtrl"
         })
-         .when("/football-stats-footballintegration2", {
+        .when("/football-stats-footballintegration2", {
             templateUrl: "footballStats/footballintegration2.html",
             controller: "FootballIntegration2Ctrl"
         })
