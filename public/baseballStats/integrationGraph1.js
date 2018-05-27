@@ -128,7 +128,6 @@
        dataCacheEx = response1.data;
        var d = [];
        var d1 = [];
-       var l = [];
        var x=[];
 
        country = response1.data.map(function(c) {

@@ -35,6 +35,8 @@
   "directories": {
     "test": "tests"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    //"nodemon": "^1.17.4"
+  },
   "description": ""
 }
