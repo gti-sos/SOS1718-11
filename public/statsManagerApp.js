@@ -36,6 +36,14 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/basketballStats/integrationsCors.html",
             controller : "integrationsCorsCtrl"
         })
+        .when("/baseball-stats", {
+            templateUrl: "/baseballStats/list.html",
+            controller: "ListBaseballStatsCtrl"
+        })
+        .when("/baseball-stats/:stadium/:date", {
+            templateUrl: "/baseballStats/edit.html",
+            controller: "EditBaseballStatsCtrl"
+        })
         .when("/baseball-stats-graph1", {
             templateUrl: "/baseballStats/graph1.html",
             controller: "BaseballGraph1Ctrl"
@@ -48,14 +56,6 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/baseballStats/graph3.html",
             controller: "BaseballGraph3Ctrl"
         })
-        .when("/baseball-stats", {
-            templateUrl: "/baseballStats/list.html",
-            controller: "ListBaseballStatsCtrl"
-        })
-        .when("/baseball-stats/:stadium/:date", {
-            templateUrl: "/baseballStats/edit.html",
-            controller: "EditBaseballStatsCtrl"
-        })
         .when("/baseball-stats-proxy", {
             templateUrl: "/baseballStats/integrationGraph1.html",
             controller: "integrationGraph1Ctrl"
@@ -63,6 +63,22 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/baseball-stats-cors", {
             templateUrl: "/baseballStats/integrationGraphCors.html",
             controller: "integrationGraph2Ctrl"
+        })
+         .when("/baseball-stats-apiext", {
+            templateUrl: "/baseballStats/apiext.html",
+            controller: "BaseballApiExtCtrl"
+        })
+         .when("/baseball-stats-apiext1", {
+            templateUrl: "/baseballStats/apiext1.html",
+            controller: "integrationGraph4Ctrl"
+        })
+        .when("/baseball-stats-apiext2", {
+            templateUrl: "/baseballStats/apiext2.html",
+            controller: "Baseballapiext2Ctrl"
+        })
+        .when("/baseball-stats-apiext04", {
+            templateUrl: "/baseballStats/apiext04.html",
+            controller: "integrationGraph3Ctrl"
         })
         .when("/football-stats", {
             templateUrl: "footballStats/list.html",

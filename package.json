@@ -26,11 +26,14 @@
     "mongodb": "^3.0.7",
     "nedb": "^1.8.0",
     "phantomjs": "^2.1.7",
-    "protractor": "^5.3.1"
+    "protractor": "^5.3.1",
+    "socket.io": "^3.10.10"
   },
   "directories": {
     "test": "tests"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    //"nodemon": "^1.17.4"
+  },
   "description": ""
 }
