@@ -1,0 +1,1346 @@
+{
+	"info": {
+		"_postman_id": "aead200f-2654-4591-a86e-f380c34e4399",
+		"name": "SOS1718-baseball-stats-Heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get a la ruta base sin apikey Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 401\"] = responseCode.code === 401;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/secure/baseball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "Get a la ruta base apikey erronea Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 403\"] = responseCode.code === 403;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/secure/baseball-stats?apikey=scra",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"secure",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "scra"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a la ruta base apikey correcta Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0cb1dff-d115-444e-be42-9c0f643993b4",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/secure/baseball-stats?apikey=scraping",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"secure",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "scraping"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a la ruta base Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "LoadInitialData Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "21ebebe3-4110-416b-a2b7-b5072346bec8",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 201\"] = responseCode.code === 201;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/loadInitialData"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a la ruta base Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e50e23d-cb03-4731-9d92-4d6d077451c8",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"The size of the list should be equal to 11\"] = jsonData.length === 11;",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "POST a la ruta base Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 201\"] = responseCode.code === 201;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"stadium\": \"new-york\",\n        \"date\": \"2018-05-11\",\n        \"hit\": 11,\n        \"run\":10,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "POST a la ruta recurso existente Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 409\"] = responseCode.code === 409;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"stadium\": \"new-york\",\n        \"date\": \"2018-05-11\",\n        \"hit\": 11,\n        \"run\":10,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "POST json erroneo Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n       \"stadium\": \"new-york\",\n        \"date\": \"2018-05-11\",\n        \"hit\": 11,\n        \"run\":10\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a un recurso Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a un recurso dos parametros Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"//var jsonData = JSON.parse(responseBody);",
+							"//tests[\"The country should be equal to USA\"] = jsonData[0].stadium === \"barcelona\";",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york/2018-02-27"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a un recurso (Not found) Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 404\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/tatata"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a un recurso con dos parametros Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"stadium\": \"new-york\",\n        \"date\": \"2018-02-27\",\n        \"hit\": 11,\n        \"run\":12,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york/2018-02-27"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a un recurso con dos parametros json erroneo Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"stadium\": \"new-yok\",\n        \"date\": \"2018-02-27\",\n        \"hit\": 11,\n        \"run\":12,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york/2018-02-27"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a un recurso con dos parametros BAD request Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"new-yrk\",\n        \"date\": \"2018-02-27\",\n        \"hit\": 11,\n        \"run\":12,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york/2018-02-27"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a un recurso  (Method not Allowed) Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"new-york\",\n        \"date\": \"2018-02-27\",\n        \"hit\": 11,\n        \"run\":12,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york"
+			},
+			"response": []
+		},
+		{
+			"name": "POST a un recurso Heroku (Method not Allowed)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"stadium\": \"new-york\",\n        \"date\": \"2018-02-30\",\n        \"hit\": 17,\n        \"run\":15,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a un recurso Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a la ruta base Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "LoadInitialData Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a03576ff-2ea6-44f8-bb99-a6342a7ff039",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 201\"] = responseCode.code === 201;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/loadInitialData"
+			},
+			"response": []
+		},
+		{
+			"name": "Get recurso 2 parametros Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york/2018-02-27"
+			},
+			"response": []
+		},
+		{
+			"name": "Acceder a todas las estadisticas de un fecha Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?date=2018-02-27",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2018-02-27"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda por fechas de un estadio concreto Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york?fromDate=2018-02-27&toDate=2018-03-09",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats",
+						"new-york"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2018-02-27"
+						},
+						{
+							"key": "toDate",
+							"value": "2018-03-09"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda por fechas Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?fromDate=2018-02-27&toDate=2018-03-09",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2018-02-27"
+						},
+						{
+							"key": "toDate",
+							"value": "2018-03-09"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busquedas por fechas y estadios Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?fromDate=2018-02-27&toDate=2018-03-09&stadium=seattle",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2018-02-27"
+						},
+						{
+							"key": "toDate",
+							"value": "2018-03-09"
+						},
+						{
+							"key": "stadium",
+							"value": "seattle"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busquedas por fecha desde y estadio Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?fromDate=2018-02-27&stadium=seattle",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "fromDate",
+							"value": "2018-02-27"
+						},
+						{
+							"key": "stadium",
+							"value": "seattle"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busquedas por fecha hasta y estadio Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?toDate=2018-02-27&stadium=seattle",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "toDate",
+							"value": "2018-02-27"
+						},
+						{
+							"key": "stadium",
+							"value": "seattle"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busquedas por estadio Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?stadium=seattle",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "stadium",
+							"value": "seattle"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a la ruta base y offset = 3 Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?offset=3",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a la ruta base y limit = 3 Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?limit=3",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST a un recurso Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"stadium\": \"new-york\",\n        \"date\": \"2018-02-12\",\n        \"hit\": 12,\n        \"run\":10,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york"
+			},
+			"response": []
+		},
+		{
+			"name": "POST a un recurso Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"stadium\": \"new-york\",\n        \"date\": \"2018-02-15\",\n        \"hit\": 11,\n        \"run\":15,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a la ruta base y limit = 3 y offset = 3 Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3992f5af-f973-4e54-9d0a-4829ab1db724",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?limit=3&offset=3",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "offset",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a la ruta base con error = 1 Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?error=1",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "error",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a la ruta base con hit =11 Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats?hit=11",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats"
+					],
+					"query": [
+						{
+							"key": "hit",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a un recurso con run = 7 Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Response code should be 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats/new-york?run=7",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"baseball-stats",
+						"new-york"
+					],
+					"query": [
+						{
+							"key": "run",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a la ruta base Heroku",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response code should be 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Og=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"new-york\",\n        \"date\": \"2018-02-30\",\n        \"hit\": 17,\n        \"run\":15,\n        \"error\":1\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/baseball-stats"
+			},
+			"response": []
+		}
+	]
+}
