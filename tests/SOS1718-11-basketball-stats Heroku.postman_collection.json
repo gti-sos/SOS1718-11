@@ -1,0 +1,1020 @@
+{
+	"info": {
+		"_postman_id": "e7e177cf-421b-4b12-b2df-dff80faaa1da",
+		"name": "SOS1718-11-basketball-stats Heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DELETE a recurso base (Sin ApiKey)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7c8ef1c3-0df3-410b-b0ce-56192bcd6781",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 401\"] = responseCode.code === 401;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/secure/basketball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a recurso base (ApiKey errónea)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62044815-72ca-44a6-8e28-647053476199",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 403\"] = responseCode.code === 403;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/secure/basketball-stats?apikey=scrap",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"secure",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "scrap"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a recurso base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d85630fd-6d0f-4dc9-bd48-795f22d10289",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9b12404-f3b5-4747-94b7-a7c828aab4c6",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 201\"] = responseCode.code === 201;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/loadInitialData"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a recurso base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7df15ba7-7ade-41d3-8a58-f442175c1773",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Devolución de un array de datos\"] = jsonData.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a recurso concreto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b95465a-b17f-46a9-8cea-feb511b67117",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Número de objetos devueltos\"] = jsonData.length > 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/boston"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a recurso concreto 2 parámetros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8eafd5c-a829-4ea7-bf97-f8bab63dcdfd",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Objeto correcto recibido\"] = (jsonData.stadium === \"toronto\" && jsonData.date === \"2018-03-09\")",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/toronto/2018-03-09"
+			},
+			"response": []
+		},
+		{
+			"name": "GET a recurso concreto (Not Found)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c89f453-abbe-43e7-8c13-e7ad8e0f0f0e",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 404\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/malaga"
+			},
+			"response": []
+		},
+		{
+			"name": "Búsqueda por Estadio (Boston)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6524e85b-dec2-441a-9bdc-4bdf5e9ed10a",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Número de objetos devueltos\"] = jsonData.length > 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats?stadium=boston",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "stadium",
+							"value": "boston"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Búsqueda por Estadio y Fecha (Boston 2018-02-27)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69287c4a-6d49-47b6-b40e-14a17e5a0fbe",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Objeto correcto recibido\"] = (jsonData[0].stadium === \"boston\" && jsonData[0].date === \"2018-02-27\")"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats?stadium=boston&date=2018-02-27",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "stadium",
+							"value": "boston"
+						},
+						{
+							"key": "date",
+							"value": "2018-02-27"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a recurso base (offset=3)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6f8a315d-850b-4e17-aa9a-bcef1f36ea18",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Número de objetos devueltos\"] = jsonData.length > 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats?offset=3",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a recurso base (limit =3)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e4456766-6f3f-493a-9642-57da7a802372",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Número de objetos devueltos\"] = jsonData.length === 3;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats?limit=3",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a recurso base (limit=3  offset=3)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7c374f86-4809-455a-a082-7d46a3221292",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Número de objetos devueltos\"] = jsonData.length === 3;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats?limit=3&offset=3",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "offset",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Búsqueda por Fecha (2018-02-27)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b068177-958c-4fa1-b60b-db0d75ed8f3b",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Número de objetos devueltos\"] = jsonData.length === 1;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats?date=2018-02-27",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2018-02-27"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET a recurso base por Puntos 4ºC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "77401324-9246-4bbb-ac15-2705398f905f",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Número de objetos devueltos\"] = jsonData.length > 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats?frc=47",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "frc",
+							"value": "47"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Búsqueda por Estadio, Fecha y Puntuacion 1er C",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcfe7bd-35f6-4cbb-bcc4-5bbf2b260af5",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Objeto correcto recibido\"] = (jsonData[0].stadium === \"toronto\" && jsonData[0].date === \"2018-03-09\" && jsonData[0].first === 63)",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"57\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": {
+					"raw": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats?stadium=toronto&date=2018-03-09&fc=63",
+					"protocol": "https",
+					"host": [
+						"sos1718-11",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"basketball-stats"
+					],
+					"query": [
+						{
+							"key": "stadium",
+							"value": "toronto"
+						},
+						{
+							"key": "date",
+							"value": "2018-03-09"
+						},
+						{
+							"key": "fc",
+							"value": "63"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST de un recurso ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "64461fa7-25cd-49e7-9451-a2ce7294da36",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 201\"] = responseCode.code === 201;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n    {\n        \"stadium\": \"miami\",\n        \"date\": \"2018-05-13\",\n        \"first\": 57,\n        \"second\": 45,\n        \"third\": 45,\n        \"fourth\": 66\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "POST de un recurso (Bad Request)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "91f79d59-ff3a-462b-87be-fec79ee7d6b8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"stadium\": \"logroño\",\n        \"date\": \"2018-05-13\",\n        \"first\": 57,\n        \"second\": 45,\n        \"third\": 45,\n        \"sixth\": 66\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats"
+			},
+			"response": []
+		},
+		{
+			"name": "POST a recurso concreto (Method Not Allowed)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "45d10c06-b503-4b3d-8bd3-a01ce7ba4e29",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": 2018, \n        \"mm-first-c\" : \"0\", \n        \"mm-second-c\": \"45\", \n        \"mm-third-c\" : \"45\", \n        \"mm-fourth-c\" : \"66\"\n        }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/detroit"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a recurso concreto 2 parámetros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8c4b0cb7-653f-476a-b783-b077cdfd5fd1",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"stadium\": \"miami\",\n        \"date\": \"2018-03-09\",\n        \"first\": 100,\n        \"second\": 45,\n        \"third\": 45,\n        \"fourth\": 66\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/miami/2018-03-09"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a recurso concreto 2 parámetros (Bad Request)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b989805d-fa4b-4836-b214-7df76da71bc9",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"stadium\": \"miami\",\n        \"date\": \"2018-05-13\",\n        \"first\": 57,\n        \"second\": 45,\n        \"third\": 45,\n        \"sixth\": 66\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/miami/2018-03-09"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a recurso concreto (Conflict)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a4b6a3c3-a89a-4678-bf68-ba91b5e38eba",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 400\"] = responseCode.code === 400;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"stadium\": \"los-angeles\",\n        \"date\": \"2018-03-09\",\n        \"first\": 100,\n        \"second\": 45,\n        \"third\": 45,\n        \"fourth\": 66\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/miami/2018-03-09"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a recurso base (Method Not Allowed)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "327458ba-df59-4535-abee-503910a44e3d",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"stadium\": \"detroit\", \n        \"date\": \"2018-06-14\", \n        \"first\" : 57, \n        \"second\": 45, \n        \"third\" : 45, \n        \"fourth\" : 66\n        }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/conil"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT a recurso concreto 1 parámetro (method Not Allowed)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "93fb62d7-61c2-48bb-aae3-1665c24b772a",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 405\"] = responseCode.code === 405;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"stadium\": \"miami\",\n        \"date\": \"2018-03-09\",\n        \"first\": 100,\n        \"second\": 45,\n        \"third\": 45,\n        \"fourth\": 66\n    }"
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/miami"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a recurso concreto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d714740-f4a1-4d0f-8cb0-be8e46677cb3",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/charlotte"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a recurso concreto 2 parámetros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bd66de5e-755c-4fa9-86c9-c6b6604ee511",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/miami/2018-05-13"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE a recurso concreto (Not Found)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d93e0e40-477c-420a-8787-c663b191ad30",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Código de error 404\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://sos1718-11.herokuapp.com/api/v2/basketball-stats/conil"
+			},
+			"response": []
+		}
+	]
+}

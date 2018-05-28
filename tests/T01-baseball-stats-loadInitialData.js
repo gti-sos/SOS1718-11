@@ -1,11 +1,9 @@
-var fs = require("fs");
-var path = require("path");
+var config = require("./config.js")
 
-describe('data is loaded', function() {
+describe('Baseball data is loaded', function() {
 
-  
     it('should show some initialbaseballstats', function() {
-        browser.get('https://sos171811mls-sos171811mls.c9users.io/#!/baseball-stats')
+        browser.get(config.getBaseballUrl())
             .then(function() {
                 element
                     .all(by.repeater('baseballstat in initialbaseballstats'))

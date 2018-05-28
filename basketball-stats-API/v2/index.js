@@ -237,16 +237,13 @@ basketballstatsAPI.register = function(app, request, io, dbbasketballstats, chec
 
 
 
-    var goals = "https://sos1718-01.herokuapp.com/api/v1/goals-stats";
     var ismael = "https://sos1718-07.herokuapp.com/api/v1/attacks-data";
 
-    app.use(BASE_API_PATH + "/basketball-stats/proxy1", function(req, res) {
+    app.use(BASE_API_PATH + "/basketball-stats/proxy", function(req, res) {
         req.pipe(request(ismael)).pipe(res);
     });
 
-    app.use(BASE_API_PATH + "/basketball-stats/cors", function(req, res) {
-        req.pipe(request(goals)).pipe(res);
-    });
+
 
     // Inicializa DB
 

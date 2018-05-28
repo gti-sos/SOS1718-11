@@ -9,7 +9,6 @@ angular.module("StatsManagerApp").controller("D3Ctrl", ["$scope","$http","$rootS
      if(!$rootScope.apikey) $rootScope.apikey = "scraping";
     
      var datos =[];
-     // anychart.Clear(document.getElementById("graphfootball"));
     $http.get(api + "?apikey=" + $rootScope.apikey).then(function (response){
       
        var stadium = response.data.map(function(d) {
@@ -73,27 +72,6 @@ anychart.onDocumentReady(function() {
 
 function getData() {
   return datos;
-  /*return [
-    ['Shanghai', 24.2],
-    ['Karachi', 23.5],
-    ['Beijing', 21.5],
-    ['Delhi', 16.7],
-    ['Lagos', 16.0],
-    ['Tianjin', 15.2],
-    ['Istanbul', 14.1],
-    ['Tokyo', 13.5],
-    ['Guangzhou', 13],
-    ['Mumbai', 12.4],
-    ['Moscow', 12.1],
-    ['S?o Paulo', 11.8],
-    ['Shenzhen', 10.4],
-    ['Jakarta', 10.1],
-    ['Lahore', 10],
-    ['Seoul', 9.9],
-    ['Wuhan', 9.7],
-    ['Kinshasa', 9.7],
-    ['Cairo', 9.2],
-    ['Mexico City', 8.8]
-  ];*/
+  
 }    });
 }]);
