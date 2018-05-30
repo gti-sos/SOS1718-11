@@ -112,6 +112,14 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/baseballStats/apiext2.html",
             controller: "Baseballapiext2Ctrl"
         })
+        .when("/baseball-stats-apiext3", {
+            templateUrl: "/baseballStats/apiext3.html",
+            controller: "counCheck"
+        })
+        .when("/baseball-stats-apiext4", {
+            templateUrl: "/baseballStats/apiext4.html",
+            controller: "genderCheck"
+        })
         .when("/baseball-stats-apiext04", {
             templateUrl: "/baseballStats/apiext04.html",
             controller: "integrationGraph3Ctrl"

@@ -1,25 +1,41 @@
-
+<style>
+.highcharts-yaxis-grid .highcharts-grid-line {
+	display: none;
+}
+</style>
  <div ng-controller="integrationGraph2Ctrl">
 
- <div id="button-search-grpah1" class="section" style="margin-bottom:70px" >
 
   <div style="float:left">
    <h2>Integration Graph</h2>
   </div>
   
-  
-  <div>
-   <button type="button" style="margin-left: 10px; float:right" class="btn-floating btn-large blue" ng-click="searchGraph1()" id="searchButtonGraph1"><i class="material-icons">search</i>
-   </button>
-  </div>
+      <div id="input_button" class="section" style="width:700px; position:relative;">
+        <div style="float:left; width:500px">
+            <form ng-submit="submit()">
+                Submit a province :
+                <input style="float:left;" type="text" ng-model="province" name="province" />
+            </form>
+             <form ng-submit="submit()">
+                Submit a stadium :
+                <input style="float:left;" type="text" ng-model="stadium" name="stadium" />
+            </form>
+        </div>
+        <div style="float:right; margin-top:20px">
+            <button type="button" class="btn primary-button" ng-click="submit()" id="submit">
+          Search
+      </button>
+        </div>
+    </div>
 
-  <div style="float:right"><input class="form-control" ng-model="inputIntegGraph1.date" style="margin-top: 10px">
-   <h11 style="color:grey">Introduce una fecha o pulsa buscar</h11>
-  </div>
+ 
 
- </div>
- 
- 
-<div class="section" style="margin-top: 40px">
-<div id="cors"></div>
+<div class="section" style="width: 1200px; height: 800px; margin-top: 30px;float:left">
+    <div id="container-speed" style="width: 500px; height: 400px; float: left"></div>
+    <div id="container-rpm" style="width: 500px; height: 400px; float: left"></div>
+</div>
+
+
+
+
 </div>

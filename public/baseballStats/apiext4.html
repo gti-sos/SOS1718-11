@@ -1,0 +1,32 @@
+
+<div ng-controller="genderCheck">
+
+<script type="text/javascript" src="/bower_components/eCharts/echarts.min.js"></script>
+<script type="text/javascript" src="/bower_components/eCharts/echarts-gl.min.js"></script>
+<script type="text/javascript" src="/bower_components/eCharts/dataTool.min.js"></script>
+<script type="text/javascript" src="/bower_components/eCharts/echarts.simple.min.js"></script>
+<script type="text/javascript" src="/bower_components/eCharts/simplex.js"></script>
+<script type="text/javascript" src="/bower_components/eCharts/ecStat.min.js"></script>
+
+    <div id="input_button" class="section" style="width:700px; position:relative;">
+        <div style="float:left; width:500px">
+            <form ng-submit="submit()">
+                Submit a name :
+                <input style="float:left;" type="text" ng-model="name" name="name" />
+            </form>
+             <form ng-submit="submit()">
+                Submit a stadium :
+                <input style="float:left;" type="text" ng-model="stadium" name="stadium" />
+            </form>
+        </div>
+        <div style="float:right; margin-top:20px">
+            <button type="button" class="btn primary-button" ng-click="submit()" id="submit">
+          Search
+      </button>
+        </div>
+    </div>
+    <div>
+       <div id="container" style="margin-top:50px;height: 100%"></div>
+       
+       </div>
+</div>

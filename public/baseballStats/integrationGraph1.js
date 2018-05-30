@@ -22,7 +22,7 @@
    var sale = [];
 
 
-
+/*
    Highcharts.chart('container', {
     chart: {
      type: 'scatter',
@@ -114,7 +114,7 @@
     catch (error) {
      console.log("Failed search");
     }
-
+*/
 
 
     $http
@@ -261,7 +261,7 @@
       });
      });
 
-   };
+  // };
 
 
   }]);
