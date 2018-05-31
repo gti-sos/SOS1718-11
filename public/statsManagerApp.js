@@ -3,10 +3,15 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
     $routeProvider
         .when("/", {
             templateUrl: "main.html",
-        }).when("/analytics", {
+        })
+        .when("/analytics", {
             templateUrl: "/analytics.html",
-        }).when("/integrations", {
+        })
+        .when("/integrations", {
             templateUrl: "/integrations.html",
+        })
+        .when("/videos", {
+            templateUrl: "/videos.html",
         })
         .when("/basketball-stats", {
             templateUrl: "/basketballStats/list.html",

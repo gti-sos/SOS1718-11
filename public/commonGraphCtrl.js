@@ -44,32 +44,27 @@ angular
                     var label1;
 
                     if ($scope.dataSet == "Basketball Stats") {
+                        label1 = 'Total points'
+                        $scope.title = 'Basketball Total Points per Stadium'
                         data.map(function(d) {
-                            categories.push(d['stadium']);
+                            categories.push(d['stadium']+' '+d['date']);
                             data1.push(d['first'] + d['second'] + d['third'] + d['fourth']);
-                            label1 = 'Total points'
-                            $scope.title = 'Basketball Total Points per Stadium'
                         })
                     }
                     else if ($scope.dataSet == "Baseball Stats") {
+                        label1 = 'Total hits'
+                        $scope.title = 'Baseball Total Hits per Stadium'
                         data.map(function(d) {
-                            categories.push(d['stadium']);
+                            categories.push(d['stadium']+' '+d['date']);
                             data1.push(d['hit']);
-                            label1 = 'Total hits'
-                            $scope.title = 'Baseball Total Hits per Stadium'
-
-
                         })
                     }
                     else if ($scope.dataSet == "Football Stats") {
                         data.map(function(d) {
-                            categories.push(d['stadium']);
-                            data1.push(d['goal']);
                             label1 = 'Total goals'
                             $scope.title = 'Football Total Goals per Stadium'
-
-
-
+                            categories.push(d['stadium']+' '+d['date']);
+                            data1.push(d['goal']);
                         })
                     }
 
