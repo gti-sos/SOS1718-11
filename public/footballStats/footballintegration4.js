@@ -1,73 +1,62 @@
  /*global angular*/
  /*global google*/
- /* global AmCharts */
-/* global jQuery*/
+ /* global Materialize */
+/* global $ */
 
-angular.module("StatsManagerApp").controller("FootballIntegration4Ctrl", ["$scope","$http","$rootScope", function($scope,$http,$rootScope) {
+angular.module("StatsManagerApp").controller("FootballIntegration3Ctrl", ["$scope","$http","$rootScope", function($scope,$http,$rootScope) {
     console.log("List Football Ctrl initialized!");
     
        if(!$rootScope.apikey) $rootScope.apikey = "scraping";
        var api ="/api/v2/secure/football-stats";
+         var dataPlace=[];
+        var datoslola=[];
+        var goals=[];
         var conjunto = [];
-        var golesTotales= 0.0;
-        var adultosTotales= 0.0;
-        var x=0;
-        var TgolesAdultos= [];
-        var Tadultos={};
        
-       // var myJSON= {stadium:"",goal:0 ,transportedTraveler:0 };
         
-    
-            $http.get(api + '?apikey=' + $rootScope.apikey).then(function(response) {
+        
+  $scope.data1={};
+  var dataCache1 = {};
+  
+
+            $http
+                .get(api + '?apikey=' + $rootScope.apikey)
+                .then(function(response) {
 
                     var footballData = response.data;
-                    console.log(footballData);
+                    $scope.data1=dataCache1;
+
+                    $http
+                        .get('https://sos1718-10.herokuapp.com/api/v1/buses/')
+                        .then(function(response) {
+
+                            var univData = response.data;
+                            
+                            var data = ['community', 'goal/transportedTraveler'];
+                            var goals= [];
+                            var transport = [];
+                            
+                            footballData.map(function(d) {
+                                data.push([d['stadium'],d['goal']]);
+                                goals.push(d['goal']);
+                            })
+
+                            univData.map(function(d) {
+                                data.push([d['community'],d['transportedTraveler']]);
+                                 transport.push(d['transportedTraveler']/100);
+                            })
+                            console.log(data);
+
+                         
+                         
                     
+                  
 
-                    $http.get('https://sos1718-02.herokuapp.com/api/v1/unemployments').then(function(response) {
 
-                            var unemployementData = response.data;
-                            
-                            for (var i=0;i<footballData.length;i++){
-                               golesTotales+= footballData[i].goal;
-                                
-                            }
-                            for (var i=0;i<unemployementData.length;i++){
-                               adultosTotales+= unemployementData[i].adult;
-                                
-                            }
-                            
-                            console.log("Numero total de goles" + golesTotales);
-                            console.log("Numero total de adultos" + adultosTotales);
-                        
-                          //Aqui mete las graficas
-
-                        var chart = AmCharts.makeChart( "chartdiv", {
-                          "type": "pie",
-                          "theme": "light",
-                          "dataProvider": [ {
-                            "title": "Goles Totales",
-                            "value": golesTotales
-                          }, {
-                            "title": "Total Desempleo Adultos",
-                            "value": adultosTotales
-                          } ],
-                          "titleField": "title",
-                          "valueField": "value",
-                          "labelRadius": 5,
-                        
-                          "radius": "42%",
-                          "innerRadius": "60%",
-                          "labelText": "[[title]]",
-                          "export": {
-                            "enabled": true
-                          }
-                        } );
 
                         });
 
       
 
       });
-
 }]);

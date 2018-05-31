@@ -1,206 +1,281 @@
  /*global angular*/
- /* global anychart*/
- /* global chartData*/
+ /*global google*/
+ /* global Materialize */
+/* global $ */
 
- angular.module("StatsManagerApp").controller("FootballIntegration3Ctrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
-     console.log("List Football Ctrl initialized!");
-
-     if (!$rootScope.apikey) $rootScope.apikey = "scraping";
-     var api = "/api/v2/secure/football-stats";
-     var conjunto = [];
-     var conjunto2 = [];
-
-     // var myJSON= {stadium:"",goal:0 ,transportedTraveler:0 };
-
-
-     $http.get(api + '?apikey=' + $rootScope.apikey).then(function(response) {
-
-         var footballData = response.data;
-         console.log(footballData);
-
-         $http.get('https://sos1718-10.herokuapp.com/api/v1/buses').then(function(response) {
-
-             var univData = response.data;
+angular.module("StatsManagerApp").controller("FootballIntegration3Ctrl", ["$scope","$http","$rootScope", function($scope,$http,$rootScope) {
+    console.log("List Football Ctrl initialized!");
+    
+       if(!$rootScope.apikey) $rootScope.apikey = "scraping";
+       var api ="/api/v2/secure/football-stats";
+         var dataPlace=[];
+        var datoslola=[];
+        var goals=[];
+        var conjunto = [];
+       
+        
+        
+     /*   $http.get("https://sos1718-10.herokuapp.com/api/v1/buses/").then(function doneFilter(responsePrimary){
+             $http.get(api + '?apikey=' + $rootScope.apikey).then(function doneFilter(responseGoal){
+                 
+                 
+                 for (var i = 0; i < responsePrimary.data.length; i++) {
+                    dataPlace.push(responsePrimary.data[i].comunity);
+                    datoslola.push(parseInt(responsePrimary.data[i].occupation));
+                    goals.push("");
+                    conjunto.push(responsePrimary.data[i].comunity,datoslola[i],0);
+                }
                 
-            for (var i = 0; i < footballData.length; i++) {
-                conjunto2.push([footballData[i].stadium,footballData[i].goal,0]);
-            }
-             footballData.map(function(d) {
-                 conjunto.push({ stadium: d['stadium'], goal: d['goal'], transportedTraveler: 0 });
-                 // conjunto2.push([d['stadium'],d['goal'],0]);
-               //  for (var i = 0; i < footballData.length; i++) {
-                    // conjunto2.push([d.stadium,d.goal,0]);
-                     
-                     
-                     
-                // }
-             }); 
-             univData.map(function(d) {
-                 for (var i = 0; i < conjunto.length; i++) {
-                     //console.log(conjunto[i])
-                     if (conjunto[i].stadium == d['community']) {
-                         conjunto[i].transportedTraveler = parseInt(d['transportedTraveler'] / 100);
-                     }
-                    /*  if (conjunto2[i].includes(d['community'])) {
-                     // console.log("jack hemos encontrado algo")
-                     conjunto2[i].splice(2, 1, parseInt(d['transportedTraveler']));
-                 }*/
-                 }
-
-                 //Creamos el array
+                 for (var i = 0; i < responseGoal.data.length; i++) {
+                    dataPlace.push(responseGoal.data[i].stadium );
+                    datoslola.push("");
+                    goals.push(responseGoal.data[i].goal);
+                     conjunto.push(responseGoal.data[i].stadium,0,responseGoal.data[i].goal);
+                }
 
 
+console.log(responsePrimary.data);*/
 
+            $http
+                .get(api + '?apikey=' + $rootScope.apikey)
+                .then(function(response) {
 
+                    var footballData = response.data;
+
+                    $http
+                        .get('https://sos1718-10.herokuapp.com/api/v1/buses/')
+                        .then(function(response) {
+
+                            var univData = response.data;
+                            
+                            var data = ['community', 'goal/transportedTraveler'];
+                            var goals= [];
+                            var transport = [];
+                            
+                            footballData.map(function(d) {
+                                data.push([d['stadium'],d['goal']]);
+                                goals.push(d['goal']);
+                               conjunto.push([d['stadium'],d['goal'],"0"]);
+                            });
+
+                            univData.map(function(d) {
+                                data.push([d['community'],d['transportedTraveler']]);
+                                 transport.push(d['transportedTraveler']/100);
+                                conjunto.push([d['community'],"0",d['transportedTraveler']]);
+                            });
+                            console.log(data);
+
+                           /*for (var i = 0; i < response.data.length; i++) {
+                    
+                    conjunto.push(univData.data[i].comunity,univData.data[i].transportedTraveler,"");
+                }
                 
-                 //  conjunto.push([d['community'],0,(parseInt(d['transportedTraveler']))]);
+                 for (var i = 0; i < footballData.length; i++) {
+                    
+                     conjunto.push(footballData.data[i].stadium,"",footballData.data[i].goal);
+                }*/
 
 
-             });
+                         console.log(conjunto);
+                         var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "funnel",
+  "theme": "light",
+  "dataProvider": [ {
+    "title": "Website visits",
+    "value": footballData.map(function(d) {})
+  }, {
+    "title": "Downloads",
+    "value": 123
+  }, {
+    "title": "Requested price list",
+    "value": 98
+  }, {
+    "title": "Contaced for more info",
+    "value": 72
+  }, {
+    "title": "Purchased",
+    "value": 35
+  }, {
+    "title": "Contacted for support",
+    "value": 35
+  }, {
+    "title": "Purchased additional products",
+    "value": 26
+  } ],
+  "balloon": {
+    "fixedPosition": true
+  },
+  "valueField": "value",
+  "titleField": "title",
+  "marginRight": 240,
+  "marginLeft": 50,
+  "startX": -500,
+  "depth3D": 100,
+  "angle": 40,
+  "outlineAlpha": 1,
+  "outlineColor": "#FFFFFF",
+  "outlineThickness": 2,
+  "labelPosition": "right",
+  "balloonText": "[[title]]: [[value]]n[[description]]",
+  "export": {
+    "enabled": true
+  }
+} );
+                    
+                   /*      var chart = AmCharts.makeChart("chartdiv", {
+    "type": "serial",
+	"theme": "light",
+    "titles": [{
+        "text": "goals and transportedTraveler per country",
+        "size": 15
+    }],
+    "legend": {
+        "align": "center",
+        "equalWidths": false,
+        "periodValueText": "total: [[value.sum]]",
+        "valueAlign": "left",
+        "valueText": "[[value]] ([[percents]]%)",
+        "valueWidth": 100
+    },
+    "dataProvider": [conjunto/*{
+        "year": "2000",
+        "cars": 1587,
+        "motorcycles": 650,
+        "bicycles": 121
+    }, {
+        "year": "1995",
+        "cars": 1567,
+        "motorcycles": 683,
+        "bicycles": 146
+    }, {
+        "year": "1996",
+        "cars": 1617,
+        "motorcycles": 691,
+        "bicycles": 138
+    }, {
+        "year": "1997",
+        "cars": 1630,
+        "motorcycles": 642,
+        "bicycles": 127
+    }, {
+        "year": "1998",
+        "cars": 1660,
+        "motorcycles": 699,
+        "bicycles": 105
+    }, {
+        "year": "1999",
+        "cars": 1683,
+        "motorcycles": 721,
+        "bicycles": 109
+    }, {
+        "year": "2000",
+        "cars": 1691,
+        "motorcycles": 737,
+        "bicycles": 112
+    }, {
+        "year": "2001",
+        "cars": 1298,
+        "motorcycles": 680,
+        "bicycles": 101
+    }, {
+        "year": "2002",
+        "cars": 1275,
+        "motorcycles": 664,
+        "bicycles": 97
+    }, {
+        "year": "2003",
+        "cars": 1246,
+        "motorcycles": 648,
+        "bicycles": 93
+    }, {
+        "year": "2004",
+        "cars": 1218,
+        "motorcycles": 637,
+        "bicycles": 101
+    }, {
+        "year": "2005",
+        "cars": 1213,
+        "motorcycles": 633,
+        "bicycles": 87
+    }, {
+        "year": "2006",
+        "cars": 1199,
+        "motorcycles": 621,
+        "bicycles": 79
+    }, {
+        "year": "2007",
+        "cars": 1110,
+        "motorcycles": 210,
+        "bicycles": 81
+    }, {
+        "year": "2008",
+        "cars": 1165,
+        "motorcycles": 232,
+        "bicycles": 75
+    }, {
+        "year": "2009",
+        "cars": 1145,
+        "motorcycles": 219,
+        "bicycles": 88
+    }, {
+        "year": "2010",
+        "cars": 1163,
+        "motorcycles": 201,
+        "bicycles": 82
+    }, {
+        "year": "2011",
+        "cars": 1180,
+        "motorcycles": 285,
+        "bicycles": 87
+    }, {
+        "year": "2012",
+        "cars": 1159,
+        "motorcycles": 277,
+        "bicycles": 71
+    }],
+    "valueAxes": [{
+        "stackType": "100%",
+        "gridAlpha": 0.07,
+        "position": "left",
+        "title": "percent"
+    }],
+    "graphs": [{
+        "balloonText": "<img src='https://www.amcharts.com/lib/3/images/car.png' style='vertical-align:bottom; margin-right: 10px; width:28px; height:21px;'><span style='font-size:14px; color:#000000;'><b>[[value]]</b></span>",
+        "fillAlphas": 0.5,
+        "lineAlpha": 0.5,
+        "title": "Cars",
+        "valueField": "cars"
+    }, {
+        "balloonText": "<img src='https://www.amcharts.com/lib/3/images/motorcycle.png' style='vertical-align:bottom; margin-right: 10px; width:28px; height:21px;'><span style='font-size:14px; color:#000000;'><b>[[value]]</b></span>",
+        "fillAlphas": 0.5,
+        "lineAlpha": 0.5,
+        "title": "Motorcycles",
+        "valueField": "motorcycles"
+    }],
+    "plotAreaBorderAlpha": 0,
+    "marginLeft": 0,
+    "marginBottom": 0,
+    "chartCursor": {
+        "cursorAlpha": 0,
+        "zoomable": false
+    },
+    "categoryField": "country",
+    "categoryAxis": {
+        "startOnAxis": true,
+        "axisColor": "#DADADA",
+        "gridAlpha": 0.07
+    },
+    "export": {
+    	"enabled": true
+     }
+});*/
 
-             console.log(conjunto);
-             console.log("Conjunto 2: " + conjunto2);
-
-
-             //Aqui mete las graficas
-
-
-             // create data set on our data
-             chartData = {
-                 title: 'Average temperature in London',
-                 header: ['#', 'Day (max)', 'Night (min)'],
-                 rows: /*[
-                     ['January', 8.1, 2.3],
-                     ['February', 8.4, 2.1],
-                     ['March', 11.4, 3.9],
-                     ['April', 14.2, 5.5],
-                     ['May', 17.9, 8.7],
-                     ['June', 21.1, 11.7],
-                     ['July', 23.5, 13.9],
-                     ['August', 23.2, 13.7],
-                     ['September', 19.9, 11.4],
-                     ['October', 15.6, 8.4],
-                     ['November', 11.2, 4.9],
-                     ['December', 8.3, 2.7]
-                 ]*/conjunto
-             };
-
-             // create radar chart
-             var chart = anychart.radar();
-
-             // set default series type
-             chart.defaultSeriesType('area');
-
-             // set chart data
-             chart.data(chartData);
-
-             // set chart yScale settings
-             chart.yScale()
-                 .minimum(0)
-                 .maximumGap(0)
-                 .ticks({
-                     interval: 5
-                 });
-
-             // set axes labels settings
-             chart.xAxis().labels().padding(5);
-
-             // set chart legend settings
-             chart.legend()
-                 .align('center')
-                 .enabled(true);
-
-             // set tooltip format
-             chart.tooltip().format('Temperature: {%Value}?');
-
-             // set container id for the chart
-             chart.container('container');
-             // initiate chart drawing
-             chart.draw();
-         });
 
 
 
+                        });
 
+      
 
-
-
-
-
-
-
-
-         /*
-         var chart = AmCharts.makeChart("chartdiv", {
-             "theme": "light",
-             "type": "serial",
-             "dataProvider":conjunto/* [{
-                 "country": "USA",
-                 "year2004": 3.5,
-                 "year2005": 4.2
-             }, {
-                 "country": "UK",
-                 "year2004": 1.7,
-                 "year2005": 3.1
-             }, {
-                 "country": "Canada",
-                 "year2004": 2.8,
-                 "year2005": 2.9
-             }, {
-                 "country": "Japan",
-                 "year2004": 2.6,
-                 "year2005": 2.3
-             }, {
-                 "country": "France",
-                 "year2004": 1.4,
-                 "year2005": 2.1
-             }, {
-                 "country": "Brazil",
-                 "year2004": 2.6,
-                 "year2005": 4.9
-             }]*/
-         /*,
-             "valueAxes": [{
-                 "unit": "",
-                 "position": "left",
-                 "title": "goles y gente que coje los buses",
-             }],
-             "startDuration": 1,
-             "graphs": [{
-                 "balloonText": "Goles in [[category]]: <b>[[value]]</b>",
-                 "fillAlphas": 0.9,
-                 "lineAlpha": 0.2,
-                 "title": "2004",
-                 "type": "column",
-                 "valueField": "goal"
-             }, {
-                 "balloonText": "Gente en el bus in [[category]]: <b>[[value]]</b>",
-                 "fillAlphas": 0.9,
-                 "lineAlpha": 0.2,
-                 "title": "2005",
-                 "type": "column",
-                 "clustered":false,
-                 "columnWidth":0.5,
-                 "valueField": "transportedTraveler"
-             }],
-             "plotAreaFillAlphas": 0.1,
-             "categoryField": "stadium",
-             "categoryAxis": {
-                 "gridPosition": "start"
-             },
-             "export": {
-             	"enabled": true
-              }
-
-         });*/
-
-
-
-     });
-
-
-
-     // });
-
- }]);
- 
+      });
+}]);
