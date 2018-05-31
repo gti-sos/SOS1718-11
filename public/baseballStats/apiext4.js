@@ -51,7 +51,7 @@
       var myChart = echarts.init(dom);
       var app = {};
       option = null;
-      app.title = 'Gender name';
+      app.title = 'Baseball Stats';
 
 
       var option = {
@@ -60,19 +60,21 @@
         formatter: "{a} <br/>{b}: {c} ({d}%)"
        },
        legend: {
+        show: false,
         orient: 'vertical',
-        x: 'left',
-        data: ['Male', 'Female']
+        x: 'right',
+        data: ['Hit', 'Run', 'Error']
        },
        series: [{
-        name: 'Gender name',
+        name: 'Baseball stats',
         type: 'pie',
         radius: ['50%', '70%'],
         avoidLabelOverlap: false,
         label: {
          normal: {
           show: false,
-          position: 'center'
+          position: 'center',
+          
          },
          emphasis: {
           show: true,
@@ -125,8 +127,8 @@
          formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
         legend: {
-         orient: 'vertical',
-         x: 'left',
+         orient: 'horizontal',
+         x: 'right',
          data: ['Male', 'Female']
         },
         series: [{
@@ -153,8 +155,8 @@
           }
          },
          data: [
-          { value: $scope.female, name: 'Female' },
-          { value: $scope.male, name: 'Male' }
+          { value: $scope.female, name: '% Female' },
+          { value: $scope.male, name:'% Male' }
          ]
         }]
        };
