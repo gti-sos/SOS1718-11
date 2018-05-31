@@ -100,11 +100,11 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/baseballStats/integrationGraphCors.html",
             controller: "integrationGraph2Ctrl"
         })
-         .when("/baseball-stats-apiext", {
+        .when("/baseball-stats-apiext", {
             templateUrl: "/baseballStats/apiext.html",
             controller: "BaseballApiExtCtrl"
         })
-         .when("/baseball-stats-apiext1", {
+        .when("/baseball-stats-apiext1", {
             templateUrl: "/baseballStats/apiext1.html",
             controller: "integrationGraph4Ctrl"
         })
@@ -147,6 +147,22 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats-footballintegration3", {
             templateUrl: "footballStats/footballintegration3.html",
             controller: "FootballIntegration3Ctrl"
+        })
+        .when("/football-stats-footballintegration4", {
+            templateUrl: "footballStats/footballintegration4.html",
+            controller: "FootballIntegration4Ctrl"
+        })
+        .when("/football-stats-footballintegration5", {
+            templateUrl: "footballStats/footballintegration5.html",
+            controller: "FootballIntegration5Ctrl"
+        })
+        .when("/football-stats-footballintegration6", {
+            templateUrl: "footballStats/footballintegration6.html",
+            controller: "FootballIntegration6Ctrl"
+        })
+        .when("/football-stats-footballintegration7", {
+            templateUrl: "footballStats/footballintegration7.html",
+            controller: "FootballIntegration7Ctrl"
         })
         .when("/commonGraph", {
             templateUrl: "commonGraph.html",
