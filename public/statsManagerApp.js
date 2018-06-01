@@ -10,8 +10,8 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/integrations", {
             templateUrl: "/integrations.html",
         })
-        .when("/videos", {
-            templateUrl: "/videos.html",
+        .when("/about", {
+            templateUrl: "/about.html",
         })
         .when("/basketball-stats", {
             templateUrl: "/basketballStats/list.html",
@@ -169,9 +169,17 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "footballStats/footballintegration7.html",
             controller: "FootballIntegration7Ctrl"
         })
+        .when("/football-stats-footballintegration8", {
+            templateUrl: "footballStats/footballintegration8.html",
+            controller: "FootballIntegration8Ctrl"
+        })
+        .when("/football-stats-footballintegration9", {
+            templateUrl: "footballStats/footballintegration9.html",
+            controller: "FootballIntegration9Ctrl"
+        })
         .when("/commonGraph", {
             templateUrl: "commonGraph.html",
             controller: "CommonGraphCtrl"
-        });
+        }) ;
     console.log("App initialized and configured");
 });
