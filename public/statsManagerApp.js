@@ -3,10 +3,15 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
     $routeProvider
         .when("/", {
             templateUrl: "main.html",
-        }).when("/analytics", {
+        })
+        .when("/analytics", {
             templateUrl: "/analytics.html",
-        }).when("/integrations", {
+        })
+        .when("/integrations", {
             templateUrl: "/integrations.html",
+        })
+        .when("/about", {
+            templateUrl: "/about.html",
         })
         .when("/basketball-stats", {
             templateUrl: "/basketballStats/list.html",
@@ -100,11 +105,11 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
             templateUrl: "/baseballStats/integrationGraphCors.html",
             controller: "integrationGraph2Ctrl"
         })
-         .when("/baseball-stats-apiext", {
+        .when("/baseball-stats-apiext", {
             templateUrl: "/baseballStats/apiext.html",
             controller: "BaseballApiExtCtrl"
         })
-         .when("/baseball-stats-apiext1", {
+        .when("/baseball-stats-apiext1", {
             templateUrl: "/baseballStats/apiext1.html",
             controller: "integrationGraph4Ctrl"
         })
@@ -171,6 +176,18 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         .when("/football-stats-footballintegration7", {
             templateUrl: "footballStats/footballintegration7.html",
             controller: "FootballIntegration7Ctrl"
-        });
+        })
+        .when("/football-stats-footballintegration8", {
+            templateUrl: "footballStats/footballintegration8.html",
+            controller: "FootballIntegration8Ctrl"
+        })
+        .when("/football-stats-footballintegration9", {
+            templateUrl: "footballStats/footballintegration9.html",
+            controller: "FootballIntegration9Ctrl"
+        })
+        .when("/commonGraph", {
+            templateUrl: "commonGraph.html",
+            controller: "CommonGraphCtrl"
+        }) ;
     console.log("App initialized and configured");
 });

@@ -1,0 +1,38 @@
+<h2>Basketball Stats External 4</h2>
+
+<div class="section">
+    <h5>Love Power Between Stadiums</h5>
+    <div class="section">
+        <div class="section" style="float:left">
+            <select class="browser-default" ng-model="name1">
+                <option value="" selected="">- Select Stadium -</option>
+                <option ng-repeat="name in basket" value={{name.stadium}}> {{name.stadium}} </option>
+            </select>
+        </div>
+
+        <div class="section" style="float:left">
+            <select class="browser-default" ng-model="name2">
+                <option value="" selected="">- Select Stadium -</option>
+                <option ng-repeat="name in basket" value={{name.stadium}}> {{name.stadium}} </option>
+            </select>
+        </div>
+
+        <div class="section" style="float:right">
+            <button class="btn waves-effect waves-light yellow darken-3 btn-sm" style="float:right" ng-click="refresh()">Calculate Love</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="section">
+    <h5>{{advice}}</h5>
+</div>
+<div class="section">
+
+    <div id="ext4"></div>
+</div>
+
+<div class="fixed-action-btn">
+    <a href="#!" class="btn-floating waves-effect waves-light blue"><i class="material-icons">arrow_back</i></a>
+</div>

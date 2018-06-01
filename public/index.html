@@ -49,8 +49,8 @@
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
     <script src="/socket.io/socket.io.js"></script>
-   
-   
+
+
 
 
     <script type="text/javascript" src="/bower_components/rgraph/RGraph.drawing.yaxis.js"></script>
@@ -58,38 +58,49 @@
     <script src="/bower_components/rgraph/RGraph.svg.rose.js"></script>
     <script src="/bower_components/rgraph/RGraph.svg.common.core.js"></script>
     <script src="/bower_components/rgraph/RGraph.common.core.js"></script>
-
     <script src="/bower_components/rgraph/RGraph.svg.common.tooltips.js"></script>
     <script src="/bower_components/rgraph/RGraph.svg.common.key.js"></script>
     <script type="text/javascript" src="/bower_components/rgraph/RGraph.common.core.js"></script>
     <script type="text/javascript" src="/bower_components/rgraph/RGraph.bar.js"></script>
 
-
+    <script src="/bower_components/rgraph/RGraph.svg.line.js"></script>
+    
     <script src="/bower_components/fusioncharts/fusioncharts.charts.js"></script>
     <script src="/bower_components/fusioncharts/fusioncharts.js"></script>
     <script src="/bower_components/fusioncharts/fusioncharts.theme.zune.js"></script>
-    
-    <script src="/bower_components/rgraph/RGraph.common.core.js"></script>
+
     <script src="/bower_components/rgraph/RGraph.common.dynamic.js"></script>
     <script src="/bower_components/rgraph/RGraph.meter.js"></script>
 
-    <script src= "https://cdn.zingchart.com/zingchart.min.js"></script>
-		<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-		ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script>
 
-    
+    <script>
+        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+    </script>
+
+
+
+    <script src="/bower_components/echarts/echarts.min.js"></script>
+    <!-- Load c3.css -->
+    <link href="/bower_components/c3/c3.css" rel="stylesheet">
+
+    <!-- Load d3.js and c3.js -->
+    <script src="/bower_components/d3/d3.min.js" charset="utf-8"></script>
+    <script src="/bower_components/c3/c3.min.js"></script>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>
     <script src="https://www.amcharts.com/lib/3/radar.js"></script>
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-    
+
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script src="https://www.amcharts.com/lib/3/pie.js"></script>
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <script src="https://www.amcharts.com/lib/3/gauge.js"></script>
     <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-venn.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-core.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-bullet.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-cartesian.min.js"></script>
@@ -101,14 +112,16 @@
     <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-tag-cloud.min.js"></script>
     <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/css/anychart-ui.min.css" />
     <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/fonts/css/anychart-font.min.css" />
-    
-    
-    
+
+
+
 
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="/bower_components/canvasjs/canvasjs.min.js"></script>
 
     <script src="statsManagerApp.js"></script>
+
+    <script src="/commonGraphCtrl.js"></script>
 
     <script src="/baseballStats/listCtrl.js"></script>
     <script src="/baseballStats/editCtrl.js"></script>
@@ -155,6 +168,8 @@
     <script src="/footballStats/footballintegration5.js"></script>
     <script src="/footballStats/footballintegration6.js"></script>
     <script src="/footballStats/footballintegration7.js"></script>
+    <script src="/footballStats/footballintegration8.js"></script>
+    <script src="/footballStats/footballintegration9.js"></script>
 
 
     <STYLE type="text/css">
@@ -179,12 +194,12 @@
         }
     </STYLE>
 
-<style>
-#chartdiv {
-  width: 100%;
-  height: 500px;
-}										
-</style>
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
 </head>
 
 <body style="background-color: #F5F1F0" style="  color:black">
@@ -196,15 +211,23 @@
 
         </ul>
         <ul id="dropdown-menu2" class="dropdown-content">
+
+            <li><a href="#!/commonGraph"><i class="material-icons left"></i>Common Graph</a></li>
+            <li>---------------------------</li>
+
+
             <li><a href="#!/basketball-stats-graph1"><i class="material-icons left"></i>BasketBall Stats Graph 1</a></li>
             <li><a href="#!/basketball-stats-graph2"><i class="material-icons left"></i>BasketBall Stats Graph 2</a></li>
             <li><a href="#!/basketball-stats-graph3"><i class="material-icons left"></i>BasketBall Stats Graph 3</a></li>
             <li><a href="#!/basketball-stats-socket"><i class="material-icons left"></i>BasketBall Stats SOCKET</a></li>
+            <li>---------------------------</li>
 
 
             <li><a href="#!/baseball-stats-graph1"><i class="material-icons left"></i>BaseBall Stats Graph 1</a></li>
             <li><a href="#!/baseball-stats-graph2"><i class="material-icons left"></i>BaseBall Stats Graph 2</a></li>
             <li><a href="#!/baseball-stats-graph3"><i class="material-icons left"></i>BaseBall Stats Graph 3</a></li>
+            <li>---------------------------</li>
+
 
             <li><a href="#!/football-stats-footballchart"><i class="material-icons left"></i>FootBall Stats Graph 1</a></li>
             <li><a href="#!/football-stats-footballgeo"><i class="material-icons left"></i>FootBall Stats Graph 2</a></li>
@@ -234,21 +257,23 @@
             <li><a href="#!/baseball-stats-apiext2"><i class="material-icons left"></i>BaseBall Stats External 1</a></li>
             <li><a href="#!/baseball-stats-apiext"><i class="material-icons left"></i>BaseBall Stats External 2</a></li>
             <li><a href="#!/baseball-stats-apiext3"><i class="material-icons left"></i>BaseBall Stats External 3</a></li>
-            <li><a href="#!/baseball-stats-apiext4"><i class="material-icons left"></i>BaseBall Stats External 3</a></li>
+            <li><a href="#!/baseball-stats-apiext4"><i class="material-icons left"></i>BaseBall Stats External 4</a></li>
             <li>---------------------------</li>
 
 
             <li><a href="#!/football-stats-footballintegration2"><i class="material-icons left"></i>FootBall Stats CORS</a></li>
 
             <li>---------------------------</li>
-            
+
             <li><a href="#!/football-stats-footballintegration1"><i class="material-icons left"></i>FootBall Stats PROXY</a></li>
             <li><a href="#!/football-stats-footballintegration2"><i class="material-icons left"></i>FootBall Stats CORS1</a></li>
             <li><a href="#!/football-stats-footballintegration3"><i class="material-icons left"></i>FootBall Stats CORS2</a></li>
             <li><a href="#!/football-stats-footballintegration4"><i class="material-icons left"></i>FootBall Stats CORS3</a></li>
-            <li><a href="#!/football-stats-footballintegration5"><i class="material-icons left"></i>FootBall Stats CORS4</a></li>
-            <li><a href="#!/football-stats-footballintegration6"><i class="material-icons left"></i>FootBall Stats CORS5</a></li>
+            <li><a href="#!/football-stats-footballintegration5"><i class="material-icons left"></i>FootBall Stats External4</a></li>
+            <li><a href="#!/football-stats-footballintegration6"><i class="material-icons left"></i>FootBall Stats External5</a></li>
             <li><a href="#!/football-stats-footballintegration7"><i class="material-icons left"></i>FootBall Stats CORS6</a></li>
+            <li><a href="#!/football-stats-footballintegration8"><i class="material-icons left"></i>FootBall Stats CORS7</a></li>
+            <li><a href="#!/football-stats-footballintegration9"><i class="material-icons left"></i>FootBall Stats CORS8</a></li>
 
         </ul>
         <nav>

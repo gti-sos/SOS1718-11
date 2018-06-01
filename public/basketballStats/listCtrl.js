@@ -54,6 +54,8 @@ angular
             $scope.totalPages = Math.ceil($scope.totalData / $scope.elementsPerPage);
             if ($scope.currentPage > $scope.totalPages)
                 $scope.currentPage = $scope.totalPages;
+            if ($scope.currentPage < 1)
+                $scope.currentPage = 1;
             if (isNaN($scope.totalPages))
                 $scope.totalPages = 1;
             else
@@ -93,7 +95,7 @@ angular
                     $scope.currentPage = $scope.totalPages;
                     $scope.offset = ($scope.currentPage - 1) * $scope.limit;
                 }
-                if ($scope.currentPage < 0) {
+                if ($scope.currentPage < 1) {
                     $scope.currentPage = 1;
                     $scope.offset = 0;
                 }
