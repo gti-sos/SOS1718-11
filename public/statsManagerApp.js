@@ -8,6 +8,9 @@ angular.module("StatsManagerApp", ["ngRoute"]).config(function($routeProvider) {
         }).when("/integrations", {
             templateUrl: "/integrations.html",
         })
+        .when("/about", {
+            templateUrl: "/about.html",
+        })
         .when("/basketball-stats", {
             templateUrl: "/basketballStats/list.html",
             controller: "ListBasketballStatsCtrl"
