@@ -102,7 +102,6 @@ angular
                 if (isNaN($scope.totalPages))
                     $scope.totalPages = 1;
                 if ($scope.offset < 0 || $scope.currentPage == 1) {
-                    console.log("entra");
                     $scope.offset = 0;
                 }
                 $scope.limit = $scope.elementsPerPage;

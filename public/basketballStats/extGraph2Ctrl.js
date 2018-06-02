@@ -14,11 +14,11 @@
             console.log(characters);
 
             var datos = [
-                ['Character', 'Comics', 'Series']
+                ['Character', 'Comics', 'Series', 'ID', 'size']
             ]
 
             characters.map(function(d) {
-                datos.push([d['name'], d['comics']['available'], d['series']['available']])
+                datos.push([d['name'], d['comics']['available'], d['series']['available'],(d['comics']['available']) + (d['series']['available']),  (d['comics']['available']) + (d['series']['available'])])
             });
 
             google.charts.load('current', {
