@@ -36,7 +36,8 @@
                     hAxis: { title: 'Comics' },
                     vAxis: { title: 'Series' },
                     bubble: { textStyle: { fontSize: 11 } },
-                    backgroundColor: '#F5F1F0'
+                    backgroundColor: '#F5F1F0',
+                    colorAxis: {colors: ['blue', 'black']}
 
                 };
 
