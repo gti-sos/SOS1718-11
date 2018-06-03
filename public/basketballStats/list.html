@@ -8,9 +8,13 @@
                     <div class=float-left>
                         <div class="form-group">
                             <label for="elementsPerPageForm">Go to page:</label>
-                            <input class="form-control" style="text-align:center" id="elementsPerPageForm" ng-model="currentPage" ng-change="goToPage()" placeholder="Page" />
+                            <input class="form-control" style="text-align:center" id="elementsPerPageForm" ng-model="currentPage" placeholder="Page" />
 
                         </div>
+                        
+                    </div>
+                    <div class="float-right">
+                            <button class="btn-floating waves-effect waves-light orange btn-sm" data-toggle="modal" ng-click="goToPage()"><i class="material-icons">chevron_right</i></button>
                     </div>
                 </div>
             </td>
