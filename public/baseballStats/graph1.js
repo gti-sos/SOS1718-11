@@ -32,6 +32,7 @@
              },
              series: [{
                  type: 'treemap',
+                 backgroundColor: '#F5F1F0',
                  layoutAlgorithm: 'squarified',
                  data: []
              }],

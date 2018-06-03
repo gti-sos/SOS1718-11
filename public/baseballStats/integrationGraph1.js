@@ -178,7 +178,8 @@
        Highcharts.chart('container', {
         chart: {
          type: 'scatter',
-         zoomType: 'xy'
+         zoomType: 'xy',
+         backgroundColor: '#F5F1F0'
         },
         title: {
          text: 'Hits & Sales'

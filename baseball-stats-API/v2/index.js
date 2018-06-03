@@ -286,7 +286,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
         console.log(Date() + " - PUT /baseball-stats/" + stadium + "/" + date);
         //|| Object.keys(baseballstat).length != 5
-        if (stadium != baseballstat.stadium || date != baseballstat.date || baseballstat.length !=4) {
+        if (stadium != baseballstat.stadium || date != baseballstat.date) {
             console.log("Bad request");
             res.sendStatus(400);
             return;
@@ -560,6 +560,8 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
         console.log("Method not allowed");
         res.sendStatus(405);
     });
+    
+    
 
 
     //DELETE a ruta base
@@ -675,7 +677,7 @@ baseballstatsAPI.register = function(app, dbbaseballstats, checkApiKey) {
 
         console.log(Date() + " - PUT /baseball-stats/" + stadium + date);
 
-        if (stadium != baseballstat.stadium || date != baseballstat.date || Object.keys(baseballstat).length != 5) {
+        if (stadium != baseballstat.stadium || date != baseballstat.date) {
             console.log("Bad request");
             res.sendStatus(400);
             return;

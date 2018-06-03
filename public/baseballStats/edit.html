@@ -1,32 +1,32 @@
-<div  style="background-color:#F5F1F0;color:grey" ng-controller="EditBaseballStatsCtrl">
-    
-<h1>Edit Baseball Stats</h1>
-    
-<table class="table">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Stadium</th>
-            <th>Hit</th>
-            <th>Run</th>
-            <th>Error</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{updatedBaseballStat.date}}</td>
-            <td>{{updatedBaseballStat.stadium}}</td>
-            <td><input class="form-control" ng-model="updatedBaseballStat.hit"></td>
-            <td><input class="form-control" ng-model="updatedBaseballStat.run"></td>
-            <td><input class="form-control" ng-model="updatedBaseballStat.error"></td>
-            <td><button type="button" class="btn btn-primary" ng-click="updateBaseballStat()">
+<div style="background-color:#F5F1F0;color:grey" ng-controller="EditBaseballStatsCtrl">
+
+    <h1>Edit Baseball Stats</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Stadium</th>
+                <th>Date</th>
+                <th>Hit</th>
+                <th>Run</th>
+                <th>Error</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{updatedBaseballStat.stadium}}</td>
+                <td>{{updatedBaseballStat.date}}</td>
+                <td><input class="form-control" ng-model="updatedBaseballStat.hit"></td>
+                <td><input class="form-control" ng-model="updatedBaseballStat.run"></td>
+                <td><input class="form-control" ng-model="updatedBaseballStat.error"></td>
+                <td><button type="button" class="btn btn-primary" ng-click="updateBaseballStat()">
                  Update
             </button></td>
-        </tr>
-    </tbody>
-</table>
+            </tr>
+        </tbody>
+    </table>
 
-<hr/>
-<h9><i>{{status}}</i></h9>
+    <hr/>
+    <h9><i>{{status}}</i></h9>
 </div>

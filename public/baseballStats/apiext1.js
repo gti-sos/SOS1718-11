@@ -61,6 +61,7 @@
                      FusionCharts.ready(function() {
                          var salesChart = new FusionCharts({
                                  type: 'msarea',
+                                 backgroundColor:'#F5F1F0',
                                  renderAt: 'chart-container',
                                  width: '1000',
                                  height: '500',
@@ -72,7 +73,7 @@
                                          "xAxisName": "Province & Stadium",
                                          "yAxisName": "Hits & Illiterate",
                                          "paletteColors": "#0075c2,#1aaf5d",
-                                         "bgColor": "#ffffff",
+                                         "bgColor": "#F5F1F0",
                                          "showBorder": "0",
                                          "showCanvasBorder": "0",
                                          "plotBorderAlpha": "10",
@@ -91,10 +92,10 @@
                                          "divLineDashLen": "1",
                                          "divLineGapLen": "1",
                                          "showAlternateHGridColor": "0",
-                                         "toolTipColor": "#ffffff",
+                                         "toolTipColor": "#F5F1F0",
                                          "toolTipBorderThickness": "0",
-                                         "toolTipBgColor": "#000000",
-                                         "toolTipBgAlpha": "80",
+                                         "toolTipBgColor": "#F5F1F0",
+                                         "toolTipBgAlpha": "#F5F1F0",
                                          "toolTipBorderRadius": "2",
                                          "toolTipPadding": "5",
                                      },
@@ -102,6 +103,7 @@
                                      "categories": [{
                                          "category": b
                                      }],
+                                     
 
                                      "dataset": [{
                                              "seriesname": "Illiterate",

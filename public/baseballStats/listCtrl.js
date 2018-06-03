@@ -10,7 +10,7 @@
      .controller("ListBaseballStatsCtrl", ["$scope", "$http", "$rootScope", function($scope, $http, $rootScope) {
 
          console.log("ListBaseballStatsCtrl initialized");
-         if (!$rootScope.apikey) $rootScope.apikey = "scraping";
+         $rootScope.apikey = "scraping";
 
 
          var api = "/api/v2/secure/baseball-stats";
@@ -175,12 +175,13 @@
 
          $('#apikeyModal').modal({
              complete: function() {
-                 console.log($rootScope.apikey)
-                 console.log($scope.apikey)
                  $rootScope.apikey = $scope.apikey;
-                 console.log($rootScope.apikey)
+                 offset = 0;
+                 $scope.currentPage = 1;
 
                  $scope.getBaseballStats();
+                 
+                Materialize.toast('<i class="material-icons">error_outline</i> Api Key changed suscessfully!', 2500);
                  console.log("Api key changed!");
              }
          });
@@ -247,7 +248,6 @@
 
 
 
-
              $http
                  .get(api + "/count" + "?apikey=" + $rootScope.apikey + properties)
                  .then(function(response) {
@@ -262,9 +262,9 @@
                      $http.get(api + "?apikey=" + $rootScope.apikey + "&limit=" + limit + "&offset=" + offset + properties)
                          .then(function(response) {
 
-
+                             $scope.status = "Status: " + response.status;
                              $scope.initialbaseballstats = response.data;
-                             dataCache = response.data;
+                             dataCache = $scope.initialbaseballstats;
 
 
                              if (dataCache == 0 && $scope.currentPage > 1) {
@@ -274,7 +274,33 @@
                              $scope.refresh();
                          });
 
-                 });
+
+                 }, function(response) {
+                             switch (response.status) {
+                                 case 400:
+                                     Materialize.toast('<i class="material-icons">error_outline</i> Make sure to set all atributes!', 2500);
+                                     break;
+                                 case 409:
+                                     Materialize.toast('<i class="material-icons">error_outline</i> Duplicated stat!', 2500);
+                                     $scope.refreshPage();
+                                     break;
+                                 case 401:
+                                     Materialize.toast('<i class="material-icons">error_outline</i> Error getting data - api key missing!', 2500);
+                                     $scope.initialbaseballstats = {};
+                                     $scope.refreshPage();
+                                     break;
+                                 case 403:
+                                     Materialize.toast('<i class="material-icons">error_outline</i> Error getting data - api key incorrect!', 2500);
+                                     $scope.initialbaseballstats = {};
+                                     $scope.refreshPage();
+                                     break;
+                                 default:
+                                     Materialize.toast('<i class="material-icons">error_outline</i> Error getting data!', 2500);
+                                     break;
+                             }
+                         });
+                 
+                 
          };
 
 

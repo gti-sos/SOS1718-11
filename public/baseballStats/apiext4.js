@@ -90,9 +90,9 @@
          }
         },
         data: [
-         { value: $scope.hit, name: 'Hit' },
-         { value: $scope.run, name: 'Run' },
-         { value: $scope.error, name: 'Error' }
+         { value: $scope.hit, name: $scope.hit + ' Hit'  },
+         { value: $scope.run, name:  $scope.run +' Run' },
+         { value: $scope.error, name:  $scope.error + ' Error' }
         ]
        }]
       };
@@ -155,8 +155,8 @@
           }
          },
          data: [
-          { value: $scope.female, name: '% Female' },
-          { value: $scope.male, name:'% Male' }
+          { value: $scope.female, name: $scope.female+ '% Female' },
+          { value: $scope.male, name:  $scope.male+ '% Male' }
          ]
         }]
        };
