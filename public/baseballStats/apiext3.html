@@ -12,24 +12,28 @@
   </div>
   
     <div id="input_button" class="section" style="width:700px; position:relative;">
-        <div style="float:left; width:500px">
-            <form ng-submit="submit()">
+        <div style="float:left; width:500px; ">
+            <form ng-submit="submit()" id="form1">
                 Submit a country :
-                <input style="float:left;" type="text" ng-model="name" name="name" />
+                <input id="input1" style="float:left;z-index: 1000;" type="text" ng-model="name" name="name" />
             </form>
-            <form ng-submit="submit()">
+            <form ng-submit="submit()" id="form2">
                 Submit a stadium :
-                <input style="float:left;" type="text" ng-model="stadium" name="stadium" />
+                <input id="input2" style="float:left;z-index: 1000;" type="text" ng-model="stadium" name="stadium" />
             </form>
         </div>
-         <div style="float:left;margin-left:30px; margin-top:20px">
+         <div style="float:left;margin-left:30px; margin-top:20px;">
             <button type="button" class="btn-floating btn-large blue" ng-click="submit()" id="submit">
               <i class="large material-icons">search</i>
+            </button>
+            <button type="button" class="btn-floating btn-large blue"  onclick="location.reload();" id="button_refresh">
+                <i class="large material-icons">refresh</i></a>
+              
             </button>
         </div>
     </div>
 
 
-    <div id="chartdiv"></div>			
+    <div id="chartdiv" style="margin-top:20px;"></div>			
 
 </div>
