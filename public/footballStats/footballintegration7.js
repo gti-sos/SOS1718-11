@@ -15,6 +15,7 @@ angular.module("StatsManagerApp").controller("FootballIntegration7Ctrl", ["$scop
     var sumagoles = 0;
     var sumacornes = 0;
     var sumafaltas = 0;
+    var sumascore=0;
     var uu = "500";
     var score = "";
 

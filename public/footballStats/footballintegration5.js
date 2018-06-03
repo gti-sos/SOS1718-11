@@ -26,48 +26,7 @@
 
 
            //Aqui mete las graficas
-           /*     window.onload = function ()
-    {
-        var meter = new RGraph.Meter({
-            id: 'cvs',
-            min: 0,
-            max: 100,
-            value: 75,
-            options: {
-                backgroundColor: 'black',
-                anglesStart: RGraph.PI - 0.55,
-                anglesEnd: RGraph.TWOPI + 0.5,
-                centery: 300,
-                textSize: 22,
-                textColor: 'white',
-                textValign: 'bottom',
-                greenColor: '#0a0',
-                segmentRadiusStart: 175,
-                border: 0,
-                tickmarksSmallNum: 0,
-                tickmarksBigNum: 0,
-                needleRadius: 250,
-                needleColor: '#ddd',
-                centerpinStroke: 'black',
-                centerpinFill: '#ddd',
-                textAccessible: false
-            }
-        }).on('beforedraw', function (obj)
-        {
-            RGraph.clear(obj.canvas, 'black');
-        }).draw()
 
-        meter.canvas.onclick = function (e)
-        {
-            var newvalue = meter.getValue(e);
-            
-            meter.value = newvalue;
-            meter.grow();
-        }
-    };
-
-
-*/
 
 
 
@@ -161,7 +120,7 @@ function randomValue() {
     
   var value = Math.round(Math.random() * 100);
   chart.arrows[0].setValue(sumatorio);
-  chart.axes[0].setTopText(sumatorio + " %");
+  chart.axes[0].setTopText(sumatorio);
   // adjust darker band to new value
   chart.axes[0].bands[1].setEndValue(sumatorio);
   

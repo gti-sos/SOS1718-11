@@ -27,13 +27,7 @@
             }
              footballData.map(function(d) {
                  conjunto.push({ stadium: d['stadium'], goal: d['goal'], transportedTraveler: 0 });
-                 // conjunto2.push([d['stadium'],d['goal'],0]);
-               //  for (var i = 0; i < footballData.length; i++) {
-                    // conjunto2.push([d.stadium,d.goal,0]);
-                     
-                     
-                     
-                // }
+             
              }); 
              univData.map(function(d) {
                  for (var i = 0; i < conjunto.length; i++) {
@@ -41,19 +35,8 @@
                      if (conjunto[i].stadium == d['community']) {
                          conjunto[i].transportedTraveler = parseInt(d['transportedTraveler'] / 100);
                      }
-                    /*  if (conjunto2[i].includes(d['community'])) {
-                     // console.log("jack hemos encontrado algo")
-                     conjunto2[i].splice(2, 1, parseInt(d['transportedTraveler']));
-                 }*/
+                    
                  }
-
-                 //Creamos el array
-
-
-
-
-                
-                 //  conjunto.push([d['community'],0,(parseInt(d['transportedTraveler']))]);
 
 
              });
@@ -67,8 +50,8 @@
 
              // create data set on our data
              chartData = {
-                 title: 'Average temperature in London',
-                 header: ['#', 'Day (max)', 'Night (min)'],
+                 title: 'transportedTraveler vs goal',
+                 header: ['#', 'Goal', 'transportedTraveler'],
                  rows: /*[
                      ['January', 8.1, 2.3],
                      ['February', 8.4, 2.1],

@@ -31,16 +31,16 @@
     }
    };
 
-   console.log(cadena);
+   
    $http.get(api + '?apikey=' + $rootScope.apikey).then(function(response) {
-    console.log(cadena);
+    
     var footballData = response.data;
    
    
     for (var i = 0; i < footballData.length; i++) {
      cadena.push(footballData[i].stadium)
     }
-    console.log(cadena);
+    
 
 
     $http(mashape).then(function(response) {
@@ -50,7 +50,7 @@
 
    
 
-     console.log(JSON.stringify(emailData));
+     
 
      if (emailData["isValid"]==true) {
       console.log("encontrado");
